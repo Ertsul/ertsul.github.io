@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang>
+
+
+
+
+
+
+
+<head>
+	
+	
+	<link rel="stylesheet" href="/css/allinone.min.css">
+
+	
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>DOM事件 | Ertsul</title>
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+	<meta name="generator" content="hexo">
+	<meta name="author" content="Ertsul">
+	<meta name="description" content>
+
+	
+	<meta name="keywords" content>
+	
+
+	
+	<link rel="shortcut icon" href="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1">
+	<link rel="apple-touch-icon" href="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1">
+	
+
+	
+	<meta name="theme-color" content="#3c484e">
+	<meta name="msapplication-TileColor" content="#3c484e">
+	
+
+	
+
+	
+
+	<meta property="og:site_name" content="Ertsul">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="DOM事件 | Ertsul">
+	<meta property="og:description" content>
+	<meta property="og:url" content="http://yoursite.com/2019/02/16/DOM事件/">
+
+	
+	<meta property="article:published_time" content="2019-02-16T23:02:00+08:00"> 
+	<meta property="article:author" content="Ertsul">
+	<meta property="article:published_first" content="Ertsul, /2019/02/16/DOM事件/">
+	
+</head>
+<body class="post-template">
+	<div class="site-wrapper">
+		
+
+
+
+
+<header class="site-header outer" style="z-index: 999">
+    <div class="inner">
+        
+<nav class="site-nav"> 
+    <div class="site-nav-left">
+        <ul class="nav">
+            <li>
+                
+                <a href="/" title="Home">HOME</a>
+                
+            </li>
+            
+            
+            <li>
+                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
+            </li>
+            
+            <li>
+                <a href="/about" title="ABOUT">ABOUT</a>
+            </li>
+            
+            
+        </ul> 
+    </div>
+    
+    <div class="search-button">
+        <a href="#search" class="subscribe-button" style="margin: 0 10px;">Search ...</a>
+    </div>
+     
+    <div class="site-nav-right">
+        
+        <a href="#search" class="subscribe-button" style="margin: 0 10px;">Search ...</a>
+         
+        
+<div class="social-links">
+    
+    
+    <a class="social-link" title="github" href="https://github.com/Ertsul" target="_blank" rel="noopener">
+        <svg viewbox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"/></svg>
+    </a>
+    
+    
+    
+    
+    
+    
+</div>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <header class="post-full-header">
+            <section class="post-full-meta">
+                <time class="post-full-meta-date" datetime="2019-02-16T15:56:55.000Z" itemprop="datePublished">
+                    2019-02-16
+                </time>
+                
+                <span class="date-divider">/</span>
+                
+                
+            </section>
+            <h1 class="post-full-title">DOM事件</h1>
+        </header>
+        <article class="post-full no-image">
+            
+            <section class="post-full-content">
+                <div id="lightgallery" class="markdown-body">
+                    <h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>事件就是用户或者浏览器进行的特定行为，比如：鼠标点击事件。</p>
+<h2 id="事件名称"><a href="#事件名称" class="headerlink" title="事件名称"></a>事件名称</h2><p>比如：click就是一个事件名。</p>
+<h2 id="事件流的执行过程"><a href="#事件流的执行过程" class="headerlink" title="事件流的执行过程"></a>事件流的执行过程</h2><p>事件流：指的是DOM事件流（多个事件按照一定顺序执行），DOM(文档对象模型)结构是一个树型结构，当一个HTML元素产生一个事件时，该事件会在元素节点与根结点之间的路径传播，路径所经过的结点都会收到该事件，这个传播过程可称为DOM事件流。<br>事件流的执行过程：从window开始，最后回到window。<br>事件流被分为三个阶段：事件捕获（1-5），事件触发（5-6），事件冒泡（6-10）。</p>
+<p>来自网上的图片：</p>
+<p><img alt="事件流.png" class="post-img b-lazy" href="http://upload-images.jianshu.io/upload_images/659084-eb2b449c3348c5d6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="http://upload-images.jianshu.io/upload_images/659084-eb2b449c3348c5d6?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h4 id="事件冒泡"><a href="#事件冒泡" class="headerlink" title="事件冒泡"></a><a href="#事件冒泡" title="事件冒泡"></a>事件冒泡</h4><p>来自百度的解释：</p>
+<blockquote>
+<p>当事件发生后，这个事件就要开始传播(从里到外或者从外向里)。为什么要传播呢？因为事件源本身（可能）并没有处理事件的能力，即处理事件的函数（方法）并未绑定在该事件源上。</p>
+</blockquote>
+<p>就比如：我们用button产生一个click事件，但是由于button按钮本身可能不能处理这个事件，就要开始传播出去这个事件。<br>实现事件冒泡的条件是：元素之间有嵌套，每个元素都有相同的事件，这样当最里层的事件触发时，这个事件就会一级一级向上传播，也就是”冒泡“。</p>
+<p>举个例子：在一个div里面嵌套另一个div，两个div都绑定了相同的事件监听函数click。这样，当里层点击事件触发时，外层的点击事件也会被触发。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;outer&quot;&gt;</span><br><span class="line"> &lt;div id=&quot;inner&quot;&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> window.onload = function () &#123;</span><br><span class="line">   let inner = document.getElementById(&apos;inner&apos;)</span><br><span class="line">   let outer = document.getElementById(&apos;outer&apos;)</span><br><span class="line">   inner.addEventListener(&apos;click&apos;, function (e) &#123;</span><br><span class="line">     console.log(&apos;inner&apos;);</span><br><span class="line">   &#125;)</span><br><span class="line">   outer.addEventListener(&apos;click&apos;, function () &#123; </span><br><span class="line">     console.log(&apos;outer&apos;);</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>结果为：<br><img alt="事件冒泡.gif" class="post-img b-lazy" href="http://upload-images.jianshu.io/upload_images/659084-be2355e585a26bc5?imageMogr2/auto-orient/strip" data-src="http://upload-images.jianshu.io/upload_images/659084-be2355e585a26bc5?imageMogr2/auto-orient/strip"></p>
+<h5 id="阻止事件冒泡"><a href="#阻止事件冒泡" class="headerlink" title="阻止事件冒泡"></a>阻止事件冒泡</h5><ul>
+<li>一般浏览器：event.stopPropagation()</li>
+<li>IE浏览器：event.cancelBubble = true</li>
+</ul>
+<h5 id="阻止默认事件"><a href="#阻止默认事件" class="headerlink" title="阻止默认事件"></a>阻止默认事件</h5><ul>
+<li>一般浏览器：event.preventDefault()</li>
+<li>IE浏览器：event.returnValue = false</li>
+</ul>
+<h2 id="addEventListener的第三个参数"><a href="#addEventListener的第三个参数" class="headerlink" title="addEventListener的第三个参数"></a>addEventListener的第三个参数</h2><p>addEventListener方法用于将事件和函数进行绑定，函数为：addEventListener(event, fn, useCapture)，这些参数分别是：事件名，事件处理函数，第三个参数 <strong>useCapture</strong> 是一个布尔值，用来设置该事件的执行是在哪个阶段发生的（默认是在冒泡阶段）。</p>
+<ul>
+<li>true：表示该事件是在“事件捕获阶段”触发的。（由外向内）</li>
+<li>false：表示该事件是在“事件冒泡阶段”触发的。（由内向外）</li>
+</ul>
+<p>举个例子：在一个div里面嵌套另一个div，两个div都绑定了相同的事件监听函数click。</p>
+<p>将第三个参数设置为true，事件在 <strong>捕获阶段</strong> 执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;outer&quot;&gt;</span><br><span class="line"> &lt;div id=&quot;inner&quot;&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> window.onload = function () &#123;</span><br><span class="line"> let inner = document.getElementById(&apos;inner&apos;)</span><br><span class="line"> let outer = document.getElementById(&apos;outer&apos;)</span><br><span class="line"> inner.addEventListener(&apos;click&apos;, function (e) &#123;</span><br><span class="line"> console.log(&apos;inner&apos;);</span><br><span class="line"> &#125;, true)</span><br><span class="line"> outer.addEventListener(&apos;click&apos;, function () &#123; </span><br><span class="line"> console.log(&apos;outer&apos;);</span><br><span class="line"> &#125;, true)</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>由于是 <strong>捕获阶段</strong> 执行，即：由外向内执行，所以结果为： outer inner。</p>
+<p>结果为：<br><img alt="image.png" class="post-img b-lazy" href="http://upload-images.jianshu.io/upload_images/659084-82bb228984257ae1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="http://upload-images.jianshu.io/upload_images/659084-82bb228984257ae1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>将第三个参数设置为false，事件在 <strong>冒泡阶段</strong> 执行，输出结果为： inner outer。<br><img alt="image.png" class="post-img b-lazy" href="http://upload-images.jianshu.io/upload_images/659084-1d1d0c25024cc18d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="http://upload-images.jianshu.io/upload_images/659084-1d1d0c25024cc18d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h2 id="事件处理函数-事件监听函数"><a href="#事件处理函数-事件监听函数" class="headerlink" title="事件处理函数/事件监听函数"></a>事件处理函数/事件监听函数</h2><p>事件触发后的处理函数。如：btn.onclick = fn，fn就是事件处理函数/事件监听函数。</p>
+<h4 id="HTML事件处理程序"><a href="#HTML事件处理程序" class="headerlink" title="HTML事件处理程序"></a>HTML事件处理程序</h4><p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick = &quot;fn()&quot;&gt;click&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<p>这种方式的缺点是：结构和行为耦合在一起。</p>
+<h4 id="DOM0级事件处理程序"><a href="#DOM0级事件处理程序" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h4><p>形式为：ele.on + ‘事件名称’ = 事件处理函数<br>例如： ele.onclick = function() {…}，this指向当前元素。</p>
+<h4 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h4><p>这种方式主要是通过这两个方法：addEventListener()，removeEventListener()<br>这种方式的优点就是：可以同一个事件处理程序绑定多个事件处理函数。</p>
+<h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><p>事件委托要处理的问题是：解决事件处理程序过多的问题。简单来说，就是将很多个事件处理程序委托给一个事件处理程序，通过这个事件处理程序来管理这么多个事件处理程序。<br>好处：减少对DOM的访问，提高性能；可以对后来添加进来的元素也能绑定委托事件。</p>
+<p>例如：在一个 ul 标签中有很多个 li 标签，我们的需求而是点击每一个 li 标签显示每一个 li 标签的内容。<br>如果没有使用事件委托，我们需要给每一个 li 标签都添加事件监听函数，很明显，这样的效率并不高，而且对整个网页的性能也会影响；如果我们使用事件委托，将这些 li 的事件委托给 ul 标签，这样就可以只用一个事件监听函数实现。</p>
+<p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=&quot;list&quot;&gt; </span><br><span class="line"> &lt;li&gt;111111&lt;/li&gt;</span><br><span class="line"> &lt;li&gt;222222&lt;/li&gt;</span><br><span class="line"> &lt;li&gt;333333&lt;/li&gt;</span><br><span class="line"> &lt;li&gt;444444&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> window.onload = function () &#123; </span><br><span class="line"> // 传统的方法</span><br><span class="line"> // let lis = document.getElementsByTagName(&apos;li&apos;)</span><br><span class="line"> // console.log(lis);</span><br><span class="line"> // for(let i = 0; i &lt; lis.length; i++)&#123;</span><br><span class="line"> //     lis[i].addEventListener(&apos;click&apos;, function () &#123; </span><br><span class="line"> //         console.log(this.innerHTML);</span><br><span class="line"> //     &#125;)</span><br><span class="line"> // &#125;</span><br><span class="line"> // 使用事件委托</span><br><span class="line"> let list = document.getElementById(&apos;list&apos;)</span><br><span class="line"> list.addEventListener(&apos;click&apos;, function (e) &#123; </span><br><span class="line">   let target = e.target</span><br><span class="line">   console.log(target.innerHTML);</span><br><span class="line"> &#125;, false)</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>事件委托一般使用的是 <strong>事件冒泡阶段</strong> 进行（虽然事件捕获阶段也可以），因为事件冒泡的事件流模型被所有的主流浏览器兼容，事件冒泡的兼容性更好。</p>
+
+                </div>
+            </section>
+        </article>
+    </div>
+
+    
+    <div style="height: 4vw;width: 100%"></div>
+    <nav id="gobottom" class="pagination">
+        
+        <a class="prev-post" title="3D立体骰子" href="/2019/02/16/3D立体骰子/">
+            ← 3D立体骰子
+        </a>
+        
+        <span class="prev-next-post">•</span>
+        
+        <a class="next-post" title="px/em/rem总结" href="/2019/02/16/px-em-rem总结/">
+            px/em/rem总结 →
+        </a>
+        
+    </nav>
+
+    
+</main>
+
+<div class="toc-bar">
+    <div class="toc-btn-bar">
+        <a href="#site-main" class="toc-btn">
+            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"/></svg>
+        </a>
+        <div class="toc-btn toc-switch">
+            <svg class="toc-open" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"/></svg>
+            <svg class="toc-close hide" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"/><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"/></svg>
+        </div>
+        <a href="#gobottom" class="toc-btn">
+            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"/></svg>
+        </a>
+    </div>
+    <div class="toc-main">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事件"><span class="toc-text">事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件名称"><span class="toc-text">事件名称</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件流的执行过程"><span class="toc-text">事件流的执行过程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#事件冒泡"><span class="toc-text">事件冒泡</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#阻止事件冒泡"><span class="toc-text">阻止事件冒泡</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#阻止默认事件"><span class="toc-text">阻止默认事件</span></a></li></ol></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#addEventListener的第三个参数"><span class="toc-text">addEventListener的第三个参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件处理函数-事件监听函数"><span class="toc-text">事件处理函数/事件监听函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#HTML事件处理程序"><span class="toc-text">HTML事件处理程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM0级事件处理程序"><span class="toc-text">DOM0级事件处理程序</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DOM2级事件处理程序"><span class="toc-text">DOM2级事件处理程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件委托"><span class="toc-text">事件委托</span></a></li>
+    </div>
+</div>
+
+
+
+	</div>
+	
+
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+  <header class="read-next-card-header">
+    <small class="read-next-card-header-sitetitle">&mdash; Ertsul &mdash;</small>
+    <h3 class="read-next-card-header-title">Recent Posts</h3>
+  </header>
+  <div class="read-next-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/>
+    </svg>
+  </div>
+  <div class="read-next-card-content">
+    <ul>
+      
+      
+      
+      <li>
+        <a href="/2019/02/16/3D立体骰子/">3D立体骰子</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2019/02/16/DOM事件/">DOM事件</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2019/02/16/px-em-rem总结/">px/em/rem总结</a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+  <footer class="read-next-card-footer">
+    <a href="/archives">  MORE  → </a>
+  </footer>
+</article>
+
+            
+            
+            
+
+
+            
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+	<header class="read-next-card-header" style="padding-bottom: 20px">
+		<h3 class="read-next-card-header-title">Tag Cloud</h3>
+	</header>
+	<div class="read-next-card-content-ext">
+		<a href="/tags/css/" style="font-size: 17.33px;">css</a> <a href="/tags/es6/" style="font-size: 14px;">es6</a> <a href="/tags/frontEnd/" style="font-size: 24px;">frontEnd</a> <a href="/tags/js/" style="font-size: 20.67px;">js</a> <a href="/tags/webpack/" style="font-size: 14px;">webpack</a>
+	</div>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+	
+
+
+
+
+<div id="search" class="search-overlay subscribe-overlay">
+    <div class="search-form">
+        
+        <img class="search-overlay-logo" src="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" alt="Ertsul">
+        
+        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="Search ...">
+        <a class="search-overlay-close" href="#"></a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<footer class="site-footer outer">
+	<div class="site-footer-content inner">
+		<section class="copyright">
+			<a href="/" title="Ertsul">Ertsul</a>
+			&copy; 2019
+		</section>
+		<nav class="site-footer-nav">
+			
+            <a href="https://hexo.io" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+            <a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="noopener">Casper</a>
+        </nav>
+    </div>
+</footer>
+	
+
+
+<script>
+    if(window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations()
+        .then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+<div class="floating-header">
+	<div class="floating-header-logo">
+        <a href="/" title="Ertsul">
+			
+                <img src="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" alt="Ertsul icon">
+			
+            <span>Ertsul</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">DOM事件</div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+
+<script src="/js/mix/post-lazy-local.min.js"></script>
+
+<script>;(function() {var bLazy = new Blazy()})();</script>
+
+
+
+
+<script src="/js/lightgallery.min.js"></script>
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<script>
+    lightGallery(document.getElementById('lightgallery'), {
+        selector: '.post-img'
+    });
+</script>
+
+
+
+
+
+
+
+
+
+<script>searchFunc("/")</script>
+
+
+
+
+
+</body>
+</html>

@@ -17,13 +17,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>hello-hexo | Ertsul</title>
+	<title>px/em/rem总结 | Ertsul</title>
 
 	<meta name="HandheldFriendly" content="True">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 	<meta name="generator" content="hexo">
 	<meta name="author" content="Ertsul">
-	<meta name="description" content="first hexo article.">
+	<meta name="description" content>
 
 	
 	<meta name="keywords" content>
@@ -45,14 +45,14 @@
 
 	<meta property="og:site_name" content="Ertsul">
 	<meta property="og:type" content="article">
-	<meta property="og:title" content="hello-hexo | Ertsul">
-	<meta property="og:description" content="first hexo article.">
-	<meta property="og:url" content="http://yoursite.com/2019/02/16/hello-hexo/">
+	<meta property="og:title" content="px/em/rem总结 | Ertsul">
+	<meta property="og:description" content>
+	<meta property="og:url" content="http://yoursite.com/2019/02/16/px-em-rem总结/">
 
 	
 	<meta property="article:published_time" content="2019-02-16T23:02:00+08:00"> 
 	<meta property="article:author" content="Ertsul">
-	<meta property="article:published_first" content="Ertsul, /2019/02/16/hello-hexo/">
+	<meta property="article:published_first" content="Ertsul, /2019/02/16/px-em-rem总结/">
 	
 </head>
 <body class="post-template">
@@ -119,7 +119,7 @@
     <div class="inner">
         <header class="post-full-header">
             <section class="post-full-meta">
-                <time class="post-full-meta-date" datetime="2019-02-16T15:15:09.000Z" itemprop="datePublished">
+                <time class="post-full-meta-date" datetime="2019-02-16T15:55:21.000Z" itemprop="datePublished">
                     2019-02-16
                 </time>
                 
@@ -127,13 +127,16 @@
                 
                 
             </section>
-            <h1 class="post-full-title">hello-hexo</h1>
+            <h1 class="post-full-title">px/em/rem总结</h1>
         </header>
         <article class="post-full no-image">
             
             <section class="post-full-content">
                 <div id="lightgallery" class="markdown-body">
-                    <h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><p>决定把简书的文章转移到 <strong>hexo</strong> 上。</p>
+                    <h2 id="px"><a href="#px" class="headerlink" title="px"></a>px</h2><p>对于<strong>px</strong>，大家都不陌生。它是一个相对于屏幕的相对长度单位。</p>
+<h2 id="em"><a href="#em" class="headerlink" title="em"></a>em</h2><p><strong>em</strong>也是一个相对长度单位，但它相对的是父级元素的字体大小。<br>对于em有一个推算过程：<br>如果没有定义自己的font-size，则：浏览器默认：<em>1em = 16px</em><br>所以：<br><em>12px = 0.75em</em><br><em>10px = 0.625em</em><br>但是如果每次都这样进行计算很麻烦，而且开发效率也很低，因此为了简化计算，我们将浏览器的font-size设置为<strong>62.5%</strong>，这样：<br><strong>1em = （16px * 62.5%） = 10px； 1.2em = 12px</strong><br>依次类推，要使用em这个相对长度单位，只要我们在body标签里面设置了font-size为62.5%，这样只要就可以得到计算公式：<strong>(n)px = (n \ 10)em</strong></p>
+<p>但是，em单位是相对的，不是固定的，是逐级继承的（一层一层向上计算），举个例子：<br>比如，一个div里面嵌套了一个div，这两个div都设置了font-size为1.2em，浏览器的font-size设置为62.5%，此时，最里层的div的font-size大小是：<strong>（1.2 * 1.2） = 1.44em</strong>。</p>
+<h2 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h2><p><strong>rem</strong>也是相对长度单位，从它的单位也可以看出，它跟<strong>em</strong>比较，多了个 <strong>r</strong> 字母，它的意思就是<strong>root（根）</strong>的意思。简单来说，就是它是相对于根节点（html标签）的font-size而言的。这样子，就消除了<strong>em</strong>单位逐级继承的缺点。<br>举个例子：<br>先将<strong>html</strong>标签设置为62.5%，这样，html里面的任何子标签都是继承于这个标签，也就是说相对于这个标签。所以，不论标签中有多少级的嵌套，最里层标签的font-size的计算公式永远是：<strong>(n)px = (n \ 10)rem</strong></p>
 
                 </div>
             </section>
@@ -144,11 +147,15 @@
     <div style="height: 4vw;width: 100%"></div>
     <nav id="gobottom" class="pagination">
         
-        <a class="prev-post" title="webpack学习笔记" href="/2019/02/16/webpack学习笔记/">
-            ← webpack学习笔记
+        <a class="prev-post" title="DOM事件" href="/2019/02/16/DOM事件/">
+            ← DOM事件
         </a>
         
         <span class="prev-next-post">•</span>
+        
+        <a class="next-post" title="js的原型和继承" href="/2019/02/16/js的原型和继承/">
+            js的原型和继承 →
+        </a>
         
     </nav>
 
@@ -169,7 +176,7 @@
         </a>
     </div>
     <div class="toc-main">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hello-Hexo"><span class="toc-text">Hello Hexo</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#px"><span class="toc-text">px</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#em"><span class="toc-text">em</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#rem"><span class="toc-text">rem</span></a></li></ol>
     </div>
 </div>
 
@@ -317,7 +324,7 @@
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">hello-hexo</div>
+    <div class="floating-header-title">px/em/rem总结</div>
     <progress class="progress" value="0">
         <div class="progress-container">
             <span class="progress-bar"></span>
