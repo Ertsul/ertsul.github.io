@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang>
+
+
+
+
+
+
+
+<head>
+	
+	
+	<link rel="stylesheet" href="/css/allinone.min.css">
+
+	
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<title>webpack学习笔记 | Ertsul</title>
+
+	<meta name="HandheldFriendly" content="True">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+	<meta name="generator" content="hexo">
+	<meta name="author" content="Ertsul">
+	<meta name="description" content="我的webpack学习笔记">
+
+	
+	<meta name="keywords" content="webpack">
+	
+
+	
+	<link rel="shortcut icon" href="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1">
+	<link rel="apple-touch-icon" href="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1">
+	
+
+	
+	<meta name="theme-color" content="#3c484e">
+	<meta name="msapplication-TileColor" content="#3c484e">
+	
+
+	
+
+	
+
+	<meta property="og:site_name" content="Ertsul">
+	<meta property="og:type" content="article">
+	<meta property="og:title" content="webpack学习笔记 | Ertsul">
+	<meta property="og:description" content="我的webpack学习笔记">
+	<meta property="og:url" content="http://yoursite.com/2019/02/16/webpack学习笔记/">
+
+	
+	<meta property="article:published_time" content="2019-02-16T23:02:00+08:00"> 
+	<meta property="article:author" content="Ertsul">
+	<meta property="article:published_first" content="Ertsul, /2019/02/16/webpack学习笔记/">
+	
+</head>
+<body class="post-template">
+	<div class="site-wrapper">
+		
+
+
+
+
+<header class="site-header outer" style="z-index: 999">
+    <div class="inner">
+        
+<nav class="site-nav"> 
+    <div class="site-nav-left">
+        <ul class="nav">
+            <li>
+                
+                <a href="/" title="Home">HOME</a>
+                
+            </li>
+            
+            
+            <li>
+                <a href="/archives" title="ARCHIVES">ARCHIVES</a>
+            </li>
+            
+            <li>
+                <a href="/about" title="ABOUT">ABOUT</a>
+            </li>
+            
+            
+        </ul> 
+    </div>
+    
+    <div class="search-button">
+        <a href="#search" class="subscribe-button" style="margin: 0 10px;">Search ...</a>
+    </div>
+     
+    <div class="site-nav-right">
+        
+        <a href="#search" class="subscribe-button" style="margin: 0 10px;">Search ...</a>
+         
+        
+<div class="social-links">
+    
+    
+    <a class="social-link" title="github" href="https://github.com/Ertsul" target="_blank" rel="noopener">
+        <svg viewbox="0 0 1049 1024" xmlns="http://www.w3.org/2000/svg"><path d="M524.979332 0C234.676191 0 0 234.676191 0 524.979332c0 232.068678 150.366597 428.501342 358.967656 498.035028 26.075132 5.215026 35.636014-11.299224 35.636014-25.205961 0-12.168395-0.869171-53.888607-0.869171-97.347161-146.020741 31.290159-176.441729-62.580318-176.441729-62.580318-23.467619-60.841976-58.234462-76.487055-58.234463-76.487055-47.804409-32.15933 3.476684-32.15933 3.476685-32.15933 53.019436 3.476684 80.83291 53.888607 80.83291 53.888607 46.935238 79.963739 122.553122 57.365291 152.97411 43.458554 4.345855-33.897672 18.252593-57.365291 33.028501-70.402857-116.468925-12.168395-239.022047-57.365291-239.022047-259.012982 0-57.365291 20.860106-104.300529 53.888607-140.805715-5.215026-13.037566-23.467619-66.926173 5.215027-139.067372 0 0 44.327725-13.906737 144.282399 53.888607 41.720212-11.299224 86.917108-17.383422 131.244833-17.383422s89.524621 6.084198 131.244833 17.383422C756.178839 203.386032 800.506564 217.29277 800.506564 217.29277c28.682646 72.1412 10.430053 126.029806 5.215026 139.067372 33.897672 36.505185 53.888607 83.440424 53.888607 140.805715 0 201.64769-122.553122 245.975415-239.891218 259.012982 19.121764 16.514251 35.636014 47.804409 35.636015 97.347161 0 70.402857-0.869171 126.898978-0.869172 144.282399 0 13.906737 9.560882 30.420988 35.636015 25.205961 208.601059-69.533686 358.967656-265.96635 358.967655-498.035028C1049.958663 234.676191 814.413301 0 524.979332 0z"/></svg>
+    </a>
+    
+    
+    
+    
+    
+    
+</div>
+    </div>
+</nav>
+    </div>
+</header>
+
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+        <header class="post-full-header">
+            <section class="post-full-meta">
+                <time class="post-full-meta-date" datetime="2019-02-16T15:20:58.000Z" itemprop="datePublished">
+                    2019-02-16
+                </time>
+                
+                <span class="date-divider">/</span>
+                
+                
+            </section>
+            <h1 class="post-full-title">webpack学习笔记</h1>
+        </header>
+        <article class="post-full no-image">
+            
+            <section class="post-full-content">
+                <div id="lightgallery" class="markdown-body">
+                    <h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><ul>
+<li>新建项目文件夹</li>
+<li>npm init</li>
+<li><p>设置项目目录结构，结构如下：<br><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-bd9163add73e9ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-bd9163add73e9ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+</li>
+<li><p><strong>build</strong> 目录是 webpack 打包后的生成目录，<strong>index.html</strong> 是打包后的 html 文件，bundle.hash.js 是打包后的 js 文件。</p>
+</li>
+<li><strong>src</strong> 目录是项目源文件，<strong>template.html</strong> 是 html 文件模板。</li>
+<li><strong>webpack.config.js</strong> 是配置 <strong>webpack</strong> 的总文件。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="模式-mode"><a href="#模式-mode" class="headerlink" title="模式 mode"></a>模式 mode</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mode: &quot;development&quot;, // development or production</span><br></pre></td></tr></table></figure>
+<h2 id="入口-entry"><a href="#入口-entry" class="headerlink" title="入口 entry"></a>入口 entry</h2><p>设置打包的入口文件, entry: filepath</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">entry: &quot;./src/index.js&quot;, // 入口</span><br></pre></td></tr></table></figure>
+<h2 id="输出-output"><a href="#输出-output" class="headerlink" title="输出 output"></a>输出 output</h2><p>设置打包后的输出文件，output: { … }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">output: &#123; // 输出</span><br><span class="line">  filename: &quot;bundle.[hash:8].js&quot;,</span><br><span class="line">  path: path.resolve(__dirname + &apos;/build&apos;),</span><br><span class="line">  // publicPath: &quot;http://&quot;, // 公共路径前缀</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>注：</p>
+<ul>
+<li><strong>path</strong> 后面应是绝对路径。</li>
+<li><strong>bundle.[hash:8].js</strong> 中的 <strong>[hash:8]</strong> 可以在每次打包后都在文件后面追加 hash 值。</li>
+</ul>
+<p>通过上面三项，可以实现一个简单的 <strong>webpack</strong> 打包配置。在 <strong>package.json</strong> 添加脚本或直接执行 <strong>./node_modules/.bin/webpack</strong> 即可实现打包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;build&quot;: &quot;./node_modules/.bin/webpack&quot;,</span><br></pre></td></tr></table></figure>
+<h2 id="webpack-dev-server"><a href="#webpack-dev-server" class="headerlink" title="webpack-dev-server"></a>webpack-dev-server</h2><p>webpack 开发服务器，用于开发时候的配置：</p>
+<ul>
+<li>yarn add taco –dev webpack-dev-server / npm install –save-dev webpack-dev-server</li>
+<li>基本配置如下：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123; // 开发服务器</span><br><span class="line">  port: 3001,</span><br><span class="line">  contentBase: path.resolve(__dirname + &apos;/build&apos;), // 本地服务器目录</span><br><span class="line">  progress: true, // 进度条</span><br><span class="line">  open: true, // 自动打开浏览器</span><br><span class="line">  compress: true, // 压缩</span><br><span class="line">  // 1. 代理</span><br><span class="line">  proxy: &#123;</span><br><span class="line">    &quot;/api&quot;: &#123;</span><br><span class="line">      target: &quot;&quot;,</span><br><span class="line">      pathRewrite: &#123;</span><br><span class="line">        &quot;/api&quot;: &quot;&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  // 2. 用 express 内置钩子模拟数据</span><br><span class="line">  before(app) &#123;</span><br><span class="line">    app.get(&quot;/api&quot;, (req, res) =&gt; &#123; ... &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  // 3. 在服务端中启动 webpack 服务，使用 webpack-dev-middleware 中间件</span><br><span class="line">&#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 <strong>package.json</strong> 添加脚本即可：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;dev&quot;: &quot;webpack-dev-server&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="source-map-amp-amp-eval-source-map-amp-amp-cheap-module-source-map-amp-amp-cheap-module-eval-source-map"><a href="#source-map-amp-amp-eval-source-map-amp-amp-cheap-module-source-map-amp-amp-cheap-module-eval-source-map" class="headerlink" title="source-map &amp;&amp; eval-source-map &amp;&amp; cheap-module-source-map &amp;&amp; cheap-module-eval-source-map"></a>source-map &amp;&amp; eval-source-map &amp;&amp; cheap-module-source-map &amp;&amp; cheap-module-eval-source-map</h2><p>作用：源码映射，报错时显示出错的位置。</p>
+<ul>
+<li>source-map：会单独生成一个 <strong>sourcemap</strong> 文件；会显示行列。</li>
+<li>eval-source-map：不会单独生成一个 <strong>sourcemap</strong> 文件，会将生成的 <strong>sourcemap</strong> 放到打包后的 <strong>html</strong> 文件；会显示行和列。</li>
+<li>cheap-module-source-map：会生成 <strong>sourcemap</strong> 文件，不会显示列。</li>
+<li>cheap-module-eval-source-map：不会生成 <strong>sourcemap</strong> 文件，集成在 <strong>html</strong> 文件中，不会显示列。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">devtool: &quot;source-map&quot;, // 源码映射</span><br></pre></td></tr></table></figure>
+<h2 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h2><p>作用：监控代码实时变化，进行编译打包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">watch: true, // 监控代码实时变化，进行编译打包</span><br><span class="line">watchOptions: &#123;</span><br><span class="line">  poll: 1000, // 多毫秒监控一次</span><br><span class="line">  aggreatement: 500, // 防抖</span><br><span class="line">  ignored: &quot;node_modules&quot; // 忽略文件夹</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h2><p>作用：解析第三方包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">resolve: &#123; // 解析 第三方包</span><br><span class="line">  modules: [</span><br><span class="line">    path.resolve(&quot;node_modules&quot;), // 在当前目录下查找模块 </span><br><span class="line">    path.resolve(&quot;other_modules&quot;), // 在其他目录下查找模块 </span><br><span class="line">  ],</span><br><span class="line">  // 自动添加扩展名，主要是 import 时候使用, 依次解析</span><br><span class="line">  extensions: [&quot;.js&quot;, &quot;.css&quot;, &quot;.json&quot;, &quot;.vue&quot;],</span><br><span class="line">  // 比如引用 bootstrap 的 css 样式</span><br><span class="line">  // 方式一： bootstrap 的主入口</span><br><span class="line">  mainFields: [&quot;style&quot;, &quot;main&quot;],</span><br><span class="line">  // 方式二：别名  </span><br><span class="line">  // alias: &#123;</span><br><span class="line">  //   bootstrap: &quot;bootstrap/dist/css/bootstrap.css&quot;</span><br><span class="line">  // &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>webpack 的插件配置是一个数组，里面存放着各种各样的插件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line"> new pluginName(...)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="html-webpack-plugin"><a href="#html-webpack-plugin" class="headerlink" title="html-webpack-plugin"></a>html-webpack-plugin</h4><p>插件作用：打包时候自动根据 <strong>html</strong> 模板生成目标 <strong>html</strong> 文件，自动生成目标打包目录；另外，可配置 <strong>html</strong> 的相关打包配置，如：压缩，去双引号等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">new HtmlWebpackPlugin(&#123;</span><br><span class="line">  filename: &quot;index.html&quot;, // 目标文件名称</span><br><span class="line">  template: path.resolve(__dirname + &apos;/src/template.html&apos;), // 模板文件</span><br><span class="line">  minify: &#123; // 压缩配置</span><br><span class="line">    removeAttributeQuotes: true, // 去双引号</span><br><span class="line">    collapseWhitespace: true, // 不换行</span><br><span class="line">  &#125;,</span><br><span class="line">  hash: true // 生成 hash 戳</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="mini-css-extract-plugin"><a href="#mini-css-extract-plugin" class="headerlink" title="mini-css-extract-plugin"></a>mini-css-extract-plugin</h4><p>作用：将生成的 <strong>css样式</strong> 抽离成一个 <strong>css文件</strong>，并将该样式文件引进目标 <strong>html</strong> 文件中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">plugins: [ // 插件</span><br><span class="line">  new MiniCssExtractPlugin(&#123;</span><br><span class="line">    filename: &quot;main.css&quot;,</span><br><span class="line">  &#125;)</span><br><span class="line">],</span><br><span class="line">module: &#123; // 模块</span><br><span class="line">  rules: [&#123;</span><br><span class="line">    test: /\.css$/,</span><br><span class="line">    use: [</span><br><span class="line">      // &#123;</span><br><span class="line">      //   loader: &quot;style-loader&quot;,</span><br><span class="line">      //   options: &#123;</span><br><span class="line">      //     insertAt: &quot;top&quot; // 插到 head 标签的顶部，更改优先级</span><br><span class="line">      //   &#125;</span><br><span class="line">      // &#125;,</span><br><span class="line">      MiniCssExtractPlugin.loader, // 注意 loader 的使用顺序</span><br><span class="line">      &quot;css-loader&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：这里抽离出来的 <strong>main.css</strong> 文件并没有压缩，要通过手动添加以下两个插件到优化项：</p>
+<ul>
+<li>optimize-css-assets-webpack-plugin</li>
+<li>uglifyjs-webpack-plugin</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">optimization: &#123; // 优化项</span><br><span class="line">  minimizer: [</span><br><span class="line">    new OptimizeCssAssetsWebpackPlugin(&#123;&#125;), // 压缩抽离的 css 文件</span><br><span class="line">    new UglifyjsWebpackPlugin(&#123;</span><br><span class="line">      cache: true,</span><br><span class="line">      parallel: true,</span><br><span class="line">    &#125;) // 使用了 optimize-css-assets-webpack-plugin 插件后，原先的 js 压缩不起作用，要手动重新配置</span><br><span class="line">  ]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="optimize-css-assets-webpack-plugin"><a href="#optimize-css-assets-webpack-plugin" class="headerlink" title="optimize-css-assets-webpack-plugin"></a>optimize-css-assets-webpack-plugin</h4><p>插件作用：压缩抽离出来的 <strong>main.css</strong> 文件。但是，使用了 <strong>optimize-css-assets-webpack-plugin</strong> 插件后，原先的 js 压缩不起作用，要手动重新配置优化项 <strong>uglifyjs-webpack-plugin</strong> 。</p>
+<h4 id="uglifyjs-webpack-plugin"><a href="#uglifyjs-webpack-plugin" class="headerlink" title="uglifyjs-webpack-plugin"></a>uglifyjs-webpack-plugin</h4><p>插件作用：压缩打包后的 <strong>js</strong> 文件。</p>
+<h4 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</h4><p>作用：清理文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line"> new CleanWebpackPlugin(&quot;./build&quot;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="copy-webpack-plugin"><a href="#copy-webpack-plugin" class="headerlink" title="copy-webpack-plugin"></a>copy-webpack-plugin</h4><p>作用：将某些文件拷贝到打包后的文件夹。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new CopyWebpackPlugin([</span><br><span class="line">  &#123;from: &quot;./copy&quot;, to: &quot;./&quot;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<h4 id="banner-plugin"><a href="#banner-plugin" class="headerlink" title="banner-plugin"></a>banner-plugin</h4><p>作用：版权声明，是 <strong>webpack</strong> 的内置模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">new webpack.BannerPlugin(&quot;@copyright by Ertsul&quot;)</span><br></pre></td></tr></table></figure>
+<h4 id="webpack-DefinePlugin-…"><a href="#webpack-DefinePlugin-…" class="headerlink" title="webpack.DefinePlugin({ … })"></a>webpack.DefinePlugin({ … })</h4><p>作用：定义环境变量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  new webpack.DefinePlugin(&#123;</span><br><span class="line">    DEV: JSON.stringify(&quot;development&quot;),</span><br><span class="line">    PRO: JSON.stringify(&quot;production&quot;)</span><br><span class="line">  &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h4 id="webpacfk-IgnorePlugin"><a href="#webpacfk-IgnorePlugin" class="headerlink" title="webpacfk.IgnorePlugin()"></a>webpacfk.IgnorePlugin()</h4><p>作用：忽略模块的引进</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  new webpack.IgnorePlugin(/\./locale/, /moment/)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>注：如果直接使用 <strong>DEV: ‘development’</strong> 的话，会把 <strong>DEV</strong> 直接替换为 <strong>引号内部的内容</strong>。如：<strong>console.log(DEV)</strong>，会变成 <strong>console.log(dev)</strong>，最后的结果是 <strong>undefined</strong>。所以，需要通过 <strong>JSON.stringfy()</strong> 进行转化。</p>
+<h2 id="模块-module"><a href="#模块-module" class="headerlink" title="模块 module"></a>模块 module</h2><p>模块主要是各种 <strong>loader</strong>，作用：解析各种类型的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">module: &#123; </span><br><span class="line"> rules: [</span><br><span class="line">   &#123;</span><br><span class="line">     test: regx,</span><br><span class="line">     use: [loadName]</span><br><span class="line">   &#125;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="css-loader-style-loader"><a href="#css-loader-style-loader" class="headerlink" title="css-loader / style-loader"></a>css-loader / style-loader</h4><ul>
+<li>css-loader：主要是用于解析在 <strong>css</strong> 文件中通过 <strong>@import</strong> 方式引进其他的 <strong>css</strong> 文件。</li>
+<li>style-loader: 主要是用于将 <strong>js</strong> 文件中通过 <strong>require</strong> 方式引进的 <strong>css</strong> 文件插入到目标 <strong>html</strong> 文件的 <strong>head</strong> 中（插到最后，层级最高）。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 数组方式</span><br><span class="line">module: &#123; // 模块</span><br><span class="line">  rules: [&#123;</span><br><span class="line">    test: /\.css$/, // 正则</span><br><span class="line">    use: [&quot;style-loader&quot;, &quot;css-loader&quot;] // loader 数组</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br><span class="line">// 对象方式</span><br><span class="line">module: &#123; // 模块</span><br><span class="line">  rules: [&#123;</span><br><span class="line">    test: /\.css$/, // 正则</span><br><span class="line">    use: [</span><br><span class="line">      &#123;</span><br><span class="line">        loader: &quot;style-loader&quot;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          insertAt: &quot;top&quot; // 插到 head 标签的顶部，更改优先级</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;, </span><br><span class="line">      &quot;css-loader&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：<strong>loader</strong> 是从右向左、从下到上的执行顺序，故：<strong>use: [“style-loader”, “css-loader”]</strong></p>
+<h4 id="postcss-loader-autoprefixer"><a href="#postcss-loader-autoprefixer" class="headerlink" title="postcss-loader + autoprefixer"></a>postcss-loader + autoprefixer</h4><p>这两个的配合使用可以自动添加 <strong>css</strong> 的浏览器前缀。</p>
+<ul>
+<li>autoprefixer：自动添加 <strong>css</strong> 的浏览器前缀。</li>
+<li>postcss-loader：loader 处理 autoprefixer。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 使用 postcss-loader </span><br><span class="line">module: &#123; // 模块</span><br><span class="line">  rules: [&#123;</span><br><span class="line">    test: /\.css$/,</span><br><span class="line">    use: [</span><br><span class="line">      // &#123;</span><br><span class="line">      //   loader: &quot;style-loader&quot;,</span><br><span class="line">      //   options: &#123;</span><br><span class="line">      //     insertAt: &quot;top&quot; // 插到 head 标签的顶部，更改优先级</span><br><span class="line">      //   &#125;</span><br><span class="line">      // &#125;,</span><br><span class="line">      MiniCssExtractPlugin.loader,</span><br><span class="line">      &quot;css-loader&quot;,</span><br><span class="line">      &quot;postcss-loader&quot; // 注意顺序</span><br><span class="line">    ]</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>根目录下新建 postcss.config.js 文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  plugins: [</span><br><span class="line">    require(&quot;autoprefixer&quot;)</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="babel-loader-babel-core-babel-preset-env"><a href="#babel-loader-babel-core-babel-preset-env" class="headerlink" title="babel-loader + @babel/core + @babel/preset-env"></a>babel-loader + @babel/core + @babel/preset-env</h4><p>作用：转化 es6 语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">module: &#123; // 模块</span><br><span class="line">  rules: [&#123;</span><br><span class="line">    test: /\.js$/,</span><br><span class="line">    use: &#123;</span><br><span class="line">      loader: &quot;babel-loader&quot;,</span><br><span class="line">      options: &#123; // 用 babel-loader 需要把 es6 转化为 es5</span><br><span class="line">        presets: [</span><br><span class="line">          &quot;@babel/preset-env&quot;, // 转化 js 语法，一个大的 babel 库，包含将 es6 转化为 es5 的模块</span><br><span class="line">        ],</span><br><span class="line">        // plugins: [...] // 其他的小插件</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="expose-loader"><a href="#expose-loader" class="headerlink" title="expose-loader"></a>expose-loader</h4><p>作用：暴露全局的 <strong>loader</strong>，暴露到 <strong>window</strong> 上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 一般情况</span><br><span class="line">import $ from &apos;jquery&apos;;</span><br><span class="line">console.log(window.$); // undefined</span><br><span class="line">// 内联 loader 方式</span><br><span class="line">import $ from &apos;expose-loader?$!jquery&apos;;</span><br><span class="line">console.log(window.$);</span><br><span class="line">// 其他方式：在每个模块中注入</span><br><span class="line">new webpack.ProvidePlugin(&#123;</span><br><span class="line">  $: &quot;jquery&quot;</span><br><span class="line">&#125;)</span><br><span class="line">console.log($);</span><br><span class="line">console.log(window.$); // undefined</span><br></pre></td></tr></table></figure>
+<h4 id="file-loader-amp-amp-url-loader-amp-amp-html-withimg-loader"><a href="#file-loader-amp-amp-url-loader-amp-amp-html-withimg-loader" class="headerlink" title="file-loader &amp;&amp; url-loader &amp;&amp; html-withimg-loader"></a>file-loader &amp;&amp; url-loader &amp;&amp; html-withimg-loader</h4><p>在 <strong>webpack</strong> 项目中不能直接使用相对路径的方式调用图片，不然打包后的图片路径会报错。</p>
+<ul>
+<li>file-loader：<strong>js</strong> 文件中通过 <strong>import</strong> 方式引进图片。</li>
+<li>html-withimg-loader：<strong>html</strong> 文件中通过 <strong>scr</strong> 方式引进图片。</li>
+<li>在 <strong>css</strong> 中使用图片，<strong>style-loader</strong> 已经做了处理。</li>
+<li>url-loader：将图片转化为 <strong>base64</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">  rules: [</span><br><span class="line">    &#123;</span><br><span class="line">      test: /\.(png|jpg|gif)$/,</span><br><span class="line">      use: &#123;</span><br><span class="line">        loader: &quot;url-loader&quot;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 200 * 1024, // 图片小于 200k，变成 base64，否则用 file-loader</span><br><span class="line">          // publicPath: &quot;http://&quot;, // 公共路径前缀</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      test: /\.html$/,</span><br><span class="line">      use: [&quot;html-withimg-loader&quot;]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>`</p>
+<h2 id="模块-module-–-noParse"><a href="#模块-module-–-noParse" class="headerlink" title="模块 module – noParse"></a>模块 module – noParse</h2><p>作用：不解析指定包的依赖关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">  noParse: /jquery/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="模块-module-–-exclude"><a href="#模块-module-–-exclude" class="headerlink" title="模块 module – exclude"></a>模块 module – exclude</h2><p>作用：排除</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">  exclude: /node_module/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="模块-module-–-include"><a href="#模块-module-–-include" class="headerlink" title="模块 module – include"></a>模块 module – include</h2><p>作用：包含</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">module: &#123;</span><br><span class="line">  include: /src/</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="区分不同环境，实现开发和生产配置的分离"><a href="#区分不同环境，实现开发和生产配置的分离" class="headerlink" title="区分不同环境，实现开发和生产配置的分离"></a>区分不同环境，实现开发和生产配置的分离</h2><p>将 <strong>webpack</strong> 的配置文件划分为以下文件：</p>
+<ul>
+<li>webpack.base.js：基本、共有的配置。</li>
+<li>webpack.dev.js：开发配置。</li>
+<li>webpack.prod.js：生产配置。</li>
+</ul>
+<p>使用 <strong>webpack-merger</strong> 插件：</p>
+<ul>
+<li>安装 <strong>webpack-merge</strong> 插件；</li>
+<li>引进目标模块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; smart &#125; from &quot;webpack-merge&quot;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const base = require(&quot;webpack.base.js);</span><br><span class="line"></span><br><span class="line">module.exports = smart(base, &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="webpack-自带优化"><a href="#webpack-自带优化" class="headerlink" title="webpack 自带优化"></a>webpack 自带优化</h2><ul>
+<li><strong>import</strong> 语法（生成环境），<strong>tree-shaking</strong> 自动删除没有用到的代码；</li>
+<li><strong>es6</strong> 模块会把语法放到 <strong>default</strong> 上；</li>
+<li>自动省略可以简化的代码；</li>
+<li><strong>scope hosting</strong>，作用域提升。</li>
+</ul>
+<h2 id="webpack-懒加载"><a href="#webpack-懒加载" class="headerlink" title="webpack 懒加载"></a>webpack 懒加载</h2><ul>
+<li>通过 <strong>import</strong> 实现（该语法内部由 <strong>jsonp</strong> 实现），返回的是一个 <strong>promise</strong>。</li>
+<li>要在 <strong>babel-loader</strong> 中添加 <strong>@babel/plugin-syntax-dynamic-import</strong> 插件。</li>
+<li><strong>vue</strong> 和 <strong>react</strong> 的l懒加载都是这样实现的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 模拟点击加载 source.js 的内容</span><br><span class="line">*/</span><br><span class="line">// 1</span><br><span class="line">&#123;</span><br><span class="line">  loader: &apos;babel-loader&apos;,</span><br><span class="line">  options: &#123;</span><br><span class="line">    presets: [</span><br><span class="line">      &apos;@babel/preset-env&apos;</span><br><span class="line">    ],</span><br><span class="line">    plugins: [</span><br><span class="line">      &apos;@babel/plugin-syntax-dynamic-import&apos;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line">// 2</span><br><span class="line">let btn = document.createElement(&apos;button&apos;);</span><br><span class="line">btn.innerHTML = &apos;btn&apos;;</span><br><span class="line">btn.addEventListener(&apos;click&apos;, function () &#123;</span><br><span class="line">  // 内部由 jsonp 实现动态加载文件</span><br><span class="line">  import(&apos;./source.js&apos;)</span><br><span class="line">    .then(data =&gt; &#123;</span><br><span class="line">      console.log(data);</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">document.body.appendChild(btn);</span><br></pre></td></tr></table></figure>
+<p>点击按钮后结果如下：<br><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-fa79ce43578285a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-fa79ce43578285a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h2 id="热更新-热替换-Hot-Module-Replacement-HMR"><a href="#热更新-热替换-Hot-Module-Replacement-HMR" class="headerlink" title="热更新 / 热替换 / Hot Module Replacement / HMR"></a>热更新 / 热替换 / Hot Module Replacement / HMR</h2><p>热更新：页面只更新改动的模块。</p>
+<ul>
+<li><strong>devServer</strong> 开始 <strong>hot</strong> 热更新模块。</li>
+<li>使用 <strong>webpack</strong> 内置热更新插件。<ul>
+<li>NamedModulesPlugin</li>
+<li>HotModuleReplacementPlugin</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// devServer 配置</span><br><span class="line">devServer: &#123;</span><br><span class="line">  port: 8089,</span><br><span class="line">  contentBase: path.resolve(__dirname + &apos;/dist/&apos;),</span><br><span class="line">  compress: true,</span><br><span class="line">  progress: true,</span><br><span class="line">  // open: true</span><br><span class="line">  hot: true, // 开启热更新，只更新更改的模块</span><br><span class="line">&#125;,</span><br><span class="line">// 添加插件</span><br><span class="line">plugins: [</span><br><span class="line">  new webpack.NamedModulesPlugin(), // 热更新打印更新的模块路径</span><br><span class="line">  new webpack.HotModuleReplacementPlugin(), // 热更新</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用热更新</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import source from &apos;./source.js&apos;;</span><br><span class="line"></span><br><span class="line">console.log(source);</span><br><span class="line"></span><br><span class="line">// 添加热更新操作，不然不会实现热更新</span><br><span class="line">if (module.hot) &#123;</span><br><span class="line">module.hot.accept(&apos;./source.js&apos;, () =&gt; &#123;</span><br><span class="line">  require(&apos;./source.js&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="多线程打包"><a href="#多线程打包" class="headerlink" title="多线程打包"></a>多线程打包</h2><p>使用 <strong>happypack</strong> 可以实现多线程打包。</p>
+<ul>
+<li>安装并引进 <strong>happypack</strong>;</li>
+<li>改写 <strong>module</strong>;</li>
+<li><strong>plugin</strong> 配置。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// 改写 module</span><br><span class="line">module: &#123;</span><br><span class="line">  rules: [</span><br><span class="line">    &#123;</span><br><span class="line">      test: /\.js$/,</span><br><span class="line">      // use: &#123;</span><br><span class="line">      //   loader: &apos;babel-loader&apos;,</span><br><span class="line">      //   options: &#123;</span><br><span class="line">      //     presets: [</span><br><span class="line">      //       &apos;@babel/preset-env&apos;</span><br><span class="line">      //     ]</span><br><span class="line">      //   &#125;</span><br><span class="line">      // &#125;</span><br><span class="line">      use: &#123;</span><br><span class="line">        loader: &apos;Happypack/loader?id=js&apos;,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">// plugin 配置</span><br><span class="line">plugins: [</span><br><span class="line">  new Happypack(&#123;</span><br><span class="line">    id: &apos;js&apos;,</span><br><span class="line">    use: [</span><br><span class="line">      &#123;</span><br><span class="line">        loader: &apos;babel-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          presets: [</span><br><span class="line">            &apos;@babel/preset-env&apos;</span><br><span class="line">          ]</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h2 id="多页面打包"><a href="#多页面打包" class="headerlink" title="多页面打包"></a>多页面打包</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&quot;path&quot;);</span><br><span class="line">const HtmlWebpackPlugin = require(&quot;html-webpack-plugin&quot;);</span><br><span class="line"></span><br><span class="line">module.exports = &#123;</span><br><span class="line">  mode: &quot;production&quot;,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    home: &quot;./src/home.js&quot;,</span><br><span class="line">    about: &quot;./src/about.js&quot;,</span><br><span class="line">    other: &quot;./src/other.js&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    path: path.resolve(__dirname + &quot;/build/&quot;),</span><br><span class="line">    filename: &quot;[name].js&quot;,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.resolve(__dirname + &quot;/src/template.html&quot;),</span><br><span class="line">      filename: &quot;home.html&quot;,</span><br><span class="line">      chunks: [&quot;home&quot;]</span><br><span class="line">    &#125;),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.resolve(__dirname + &quot;/src/template.html&quot;),</span><br><span class="line">      filename: &quot;other.html&quot;,</span><br><span class="line">      chunks: [&quot;other&quot;]</span><br><span class="line">    &#125;),</span><br><span class="line">    new HtmlWebpackPlugin(&#123;</span><br><span class="line">      template: path.resolve(__dirname + &quot;/src/template.html&quot;),</span><br><span class="line">      filename: &quot;about.html&quot;,</span><br><span class="line">      chunks: [&quot;about&quot;]</span><br><span class="line">    &#125;),</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多页面打包抽离公共代码块"><a href="#多页面打包抽离公共代码块" class="headerlink" title="多页面打包抽离公共代码块"></a>多页面打包抽离公共代码块</h2><p>打包 <strong>多页面</strong> 需要将公共的代码块抽离出来进行优化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">optimation: &#123;</span><br><span class="line">  splitChunks: &#123;  // 分割代码块</span><br><span class="line">    cacheGroups: &#123;  // 缓存组</span><br><span class="line">      common: &#123;  // 公共的模块</span><br><span class="line">        chunks: &apos;initial&apos;,  // 从哪里开始，initial 即：入口</span><br><span class="line">        miniSize: 0,  // 大小大于多少字节的时候抽离</span><br><span class="line">        miniChunks: 2  // 引用多少次的时候抽离</span><br><span class="line">      &#125;,</span><br><span class="line">      vender: &#123;  // 第三方模块</span><br><span class="line">        priority: 1,  // 设置权重，没有设置权重的话，代码默认从上到下执行，上面的公共代码会先将第三方模块抽离出来，达不到抽离第三方模块的作用</span><br><span class="line">        test: /node_modules/,  // 抽离出来</span><br><span class="line">        chunks: &apos;initial&apos;,  // 从哪里开始，initial 即：入口</span><br><span class="line">        miniSize: 0,  // 大小大于多少字节的时候抽离</span><br><span class="line">        miniChunks: 2  // 引用多少次的时候抽离</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Tapable"><a href="#Tapable" class="headerlink" title="Tapable"></a>Tapable</h2><p><strong>webpack</strong> 本质是事件流的机制，工作流程就是将各个插件串联起来，实现核心就是 <strong>Tapable</strong>，通过 <strong>Tapable</strong> 实现各种钩子（如同步钩子异步钩子）。而 <strong>Tapable</strong> 核心是依赖于 <strong>发布订阅者模式</strong>。</p>
+<ul>
+<li>同步钩子基本思路（发布订阅者模式）：将所有注册的函数存放到一个任务数组，发布的时候所有订阅者都会执行。使用 <strong>tap</strong> 注册。</li>
+</ul>
+<p>使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">const &#123; SyncHook &#125; = require(&apos;tapable&apos;);</span><br><span class="line"></span><br><span class="line">class Hook &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.hooks = &#123;</span><br><span class="line">      arch: new SyncHook([&apos;name&apos;])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  tap() &#123; // 注册监听事件</span><br><span class="line">    this.hooks.arch.tap(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">      console.log(&apos;vue&apos;, name);</span><br><span class="line">    &#125;)</span><br><span class="line">    this.hooks.arch.tap(&apos;react&apos;, (name) =&gt; &#123;</span><br><span class="line">      console.log(&apos;react&apos;, name);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  start() &#123; // 开始</span><br><span class="line">    this.hooks.arch.call(&apos;Ertsul&apos;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">let h = new Hook();</span><br><span class="line">h.tap();</span><br><span class="line">h.start();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>异步钩子基本思路（发布订阅者模式）：将所有注册的函数存放到一个任务数组，发布的时候所有订阅者都会执行。使用 <strong>tapAsync</strong> 注册。</li>
+</ul>
+<p>setTimeout()方式使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">const &#123; AsyncParallelHook &#125; = require(&apos;tapable&apos;);</span><br><span class="line"></span><br><span class="line">class AsyncHook &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.hooks = &#123;</span><br><span class="line">      arch: new AsyncParallelHook([&apos;name&apos;])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  tap() &#123;</span><br><span class="line">    this.hooks.arch.tapAsync(&apos;vue&apos;, (name, cb) =&gt; &#123;</span><br><span class="line">      setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;vue&apos;, name);</span><br><span class="line">        cb &amp;&amp; cb();</span><br><span class="line">      &#125;, 1000)</span><br><span class="line">    &#125;)</span><br><span class="line">    this.hooks.arch.tapAsync(&apos;react&apos;, (name, cb) =&gt; &#123;</span><br><span class="line">      setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;react&apos;, name);</span><br><span class="line">        cb &amp;&amp; cb();</span><br><span class="line">      &#125;, 1000)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  start() &#123;</span><br><span class="line">    this.hooks.arch.callAsync(&apos;Ertsul&apos;, () =&gt; &#123;</span><br><span class="line">      console.log(&apos;All finished!&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const a = new AsyncHook();</span><br><span class="line">a.tap();</span><br><span class="line">a.start();</span><br></pre></td></tr></table></figure>
+<p>Promise()方式使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">const &#123; AsyncParallelHook &#125; = require(&apos;tapable&apos;);</span><br><span class="line"></span><br><span class="line">class AsyncHook &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">    this.hooks = &#123;</span><br><span class="line">      arch: new AsyncParallelHook([&apos;name&apos;])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  tap() &#123;</span><br><span class="line">    this.hooks.arch.tapPromise(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">      return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">          console.log(&apos;vue&apos;, name);</span><br><span class="line">          resolve();</span><br><span class="line">        &#125;, 1000)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">    this.hooks.arch.tapPromise(&apos;react&apos;, (name) =&gt; &#123;</span><br><span class="line">      return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        setTimeout(() =&gt; &#123;</span><br><span class="line">          console.log(&apos;react&apos;, name);</span><br><span class="line">          resolve();</span><br><span class="line">        &#125;, 1000)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  start() &#123;</span><br><span class="line">    this.hooks.arch.promise(&apos;Ertsul&apos;).then(() =&gt; &#123;</span><br><span class="line">      console.log(&apos;hook all finished!&apos;);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const a = new AsyncHook();</span><br><span class="line">a.tap();</span><br><span class="line">a.start();</span><br></pre></td></tr></table></figure></p>
+<h4 id="Synchook-同步钩子"><a href="#Synchook-同步钩子" class="headerlink" title="Synchook 同步钩子"></a>Synchook 同步钩子</h4><p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Synchook &#123;</span><br><span class="line">  constructor(args) &#123; // args =&gt; [&apos;Synchook&apos;]</span><br><span class="line">    this.tasks = []; // 注册事件数组</span><br><span class="line">  &#125;</span><br><span class="line">  tap(name, task) &#123; //  注册事件</span><br><span class="line">    this.tasks.push(task);</span><br><span class="line">  &#125;</span><br><span class="line">  call(...args) &#123; // 发布事件</span><br><span class="line">    this.tasks.forEach(task =&gt; &#123;</span><br><span class="line">      task(...args);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let hook = new Synchook([&apos;Synchook&apos;]);</span><br><span class="line">hook.tap(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;vue&apos;, name);</span><br><span class="line">&#125;)</span><br><span class="line">hook.tap(&apos;react&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;react&apos;, name);</span><br><span class="line">&#125;)</span><br><span class="line">hook.call(&apos;Ertsul&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-1d12026d2f938c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-1d12026d2f938c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h4 id="SyncBailHook-同步熔断钩子"><a href="#SyncBailHook-同步熔断钩子" class="headerlink" title="SyncBailHook 同步熔断钩子"></a>SyncBailHook 同步熔断钩子</h4><p>Synchook 同步钩子在执行每个函数的时候会有一个返回值，undefined：执行成功，继续执行下一个函数，!= undefined：熔断执行，不执行下一个函数。</p>
+<p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// Syncbailhook 同步熔断执行，会判断返回是否等于 undefined 来执行下一个函数</span><br><span class="line">class Syncbailhook &#123;</span><br><span class="line">  constructor(args) &#123;</span><br><span class="line">    this.tasks = [];</span><br><span class="line">  &#125;</span><br><span class="line">  tap(name, task) &#123;</span><br><span class="line">    this.tasks.push(task);</span><br><span class="line">  &#125;</span><br><span class="line">  call(...args) &#123;</span><br><span class="line">    let ret = &apos;&apos;; // 当前函数的返回值</span><br><span class="line">    let index = 0; // 当前任务数组的索引</span><br><span class="line">    do &#123;</span><br><span class="line">      ret = this.tasks[index++](...args);</span><br><span class="line">    &#125; while (ret === undefined &amp;&amp; index &lt; this.tasks.length)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let hook = new Syncbailhook([&apos;Syncbailhook&apos;]);</span><br><span class="line">hook.tap(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;vue&apos;, name);</span><br><span class="line">&#125;)</span><br><span class="line">hook.tap(&apos;react&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;react&apos;, name);</span><br><span class="line">&#125;)</span><br><span class="line">hook.call(&apos;Ertsul&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-3a46a477c8b08d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-3a46a477c8b08d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h4 id="SyncWaterfallHook-同步瀑布钩子"><a href="#SyncWaterfallHook-同步瀑布钩子" class="headerlink" title="SyncWaterfallHook 同步瀑布钩子"></a>SyncWaterfallHook 同步瀑布钩子</h4><p>Syncwaterfallhook 同步瀑布执行，各个函数之间存在关系，上一个函数的执行返回结果在当前函数的输入。</p>
+<p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Syncwaterfallhook 同步瀑布执行，各个函数之间存在关系</span><br><span class="line"> * 上一个函数的执行返回结果在当前函数的输入</span><br><span class="line"> */</span><br><span class="line">class Syncwaterfallhook &#123;</span><br><span class="line">  constructor(args) &#123;</span><br><span class="line">    this.tasks = [];</span><br><span class="line">  &#125;</span><br><span class="line">  tap(name, task) &#123;</span><br><span class="line">    this.tasks.push(task);</span><br><span class="line">  &#125;</span><br><span class="line">  call(...args) &#123;</span><br><span class="line">    let [first, ...others] = this.tasks;</span><br><span class="line">    let ret = first(...args);</span><br><span class="line">    others.reduce((prev, current) =&gt; &#123;</span><br><span class="line">      return current(prev);</span><br><span class="line">    &#125;, ret)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let hook = new Syncwaterfallhook([&apos;Syncwaterfallhook&apos;]);</span><br><span class="line">hook.tap(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;vue&apos;, name);</span><br><span class="line">  return &apos;vue learnt&apos;;</span><br><span class="line">&#125;)</span><br><span class="line">hook.tap(&apos;react&apos;, (data) =&gt; &#123;</span><br><span class="line">  console.log(&apos;react&apos;, data);</span><br><span class="line">&#125;)</span><br><span class="line">hook.call(&apos;Ertsul&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-5ccbc856cac523cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-5ccbc856cac523cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h4 id="SyncLoopHook-同步循环钩子"><a href="#SyncLoopHook-同步循环钩子" class="headerlink" title="SyncLoopHook 同步循环钩子"></a>SyncLoopHook 同步循环钩子</h4><p>同步循环钩子回让某个函数执行一定的次数。</p>
+<p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">// Tapable Syncloophook 同步循环钩子</span><br><span class="line">class Syncloophook &#123;</span><br><span class="line">  constructor(args) &#123; // args =&gt; [&apos;Synchook&apos;]</span><br><span class="line">    this.tasks = []; // 注册事件数组</span><br><span class="line">  &#125;</span><br><span class="line">  tap(name, task) &#123; //  注册事件</span><br><span class="line">    this.tasks.push(task);</span><br><span class="line">  &#125;</span><br><span class="line">  call(...args) &#123; // 发布事件</span><br><span class="line">    this.tasks.forEach(task =&gt; &#123;</span><br><span class="line">      let ret = &apos;&apos;;</span><br><span class="line">      do &#123;</span><br><span class="line">        ret = task(...args);</span><br><span class="line">      &#125; while (ret != undefined);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let hook = new Syncloophook([&apos;Syncloophook&apos;]);</span><br><span class="line">const total = 3;</span><br><span class="line">let index = 0;</span><br><span class="line">hook.tap(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;vue&apos;, name);</span><br><span class="line">  return ++index === total ? undefined : &apos;continue&apos;;</span><br><span class="line">&#125;)</span><br><span class="line">hook.tap(&apos;react&apos;, (name) =&gt; &#123;</span><br><span class="line">  console.log(&apos;react&apos;, name);</span><br><span class="line">&#125;)</span><br><span class="line">hook.call(&apos;Ertsul&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-fd5d933715541d45.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-fd5d933715541d45.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h4 id="AsyncParallelHook-异步并发钩子-回调函数方式"><a href="#AsyncParallelHook-异步并发钩子-回调函数方式" class="headerlink" title="AsyncParallelHook 异步并发钩子 回调函数方式"></a>AsyncParallelHook 异步并发钩子 回调函数方式</h4><p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">// Tapable Asynchook 异步钩子</span><br><span class="line">class asyncparallelhook &#123;</span><br><span class="line">  constructor(args) &#123; // args =&gt; [&apos;Synchook&apos;]</span><br><span class="line">    this.tasks = []; // 注册事件数组</span><br><span class="line">  &#125;</span><br><span class="line">  tapAsync(name, task) &#123; //  注册事件</span><br><span class="line">    this.tasks.push(task);</span><br><span class="line">  &#125;</span><br><span class="line">  callAsync(...args) &#123; // 发布事件</span><br><span class="line">    let finalCallback = args.pop();</span><br><span class="line">    let index = 0;</span><br><span class="line">    const done = () =&gt; &#123;</span><br><span class="line">      index++;</span><br><span class="line">      if (index === this.tasks.length) &#123;</span><br><span class="line">        finalCallback();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    this.tasks.forEach(task =&gt; &#123;</span><br><span class="line">      task(...args, done);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let hook = new asyncparallelhook([&apos;asyncparallelhook&apos;]);</span><br><span class="line">hook.tapAsync(&apos;vue&apos;, (name, cb) =&gt; &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    console.log(&apos;vue&apos;, name);</span><br><span class="line">    cb &amp;&amp; cb();</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line">hook.tapAsync(&apos;react&apos;, (name, cb) =&gt; &#123;</span><br><span class="line">  setTimeout(() =&gt; &#123;</span><br><span class="line">    console.log(&apos;react&apos;, name);</span><br><span class="line">    cb &amp;&amp; cb();</span><br><span class="line">  &#125;, 1000)</span><br><span class="line">&#125;)</span><br><span class="line">hook.callAsync(&apos;Ertsul&apos;, () =&gt; &#123;</span><br><span class="line">  console.log(&apos;All hook finished!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="AsyncParallelHook-异步并发钩子-Promise方式"><a href="#AsyncParallelHook-异步并发钩子-Promise方式" class="headerlink" title="AsyncParallelHook 异步并发钩子 Promise方式"></a>AsyncParallelHook 异步并发钩子 Promise方式</h4><p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">// Tapable Asynchook 异步钩子</span><br><span class="line">class asyncparallelhook &#123;</span><br><span class="line">  constructor(args) &#123; // args =&gt; [&apos;Synchook&apos;]</span><br><span class="line">    this.tasks = []; // 注册事件数组</span><br><span class="line">  &#125;</span><br><span class="line">  tapPromise(name, task) &#123; //  注册事件</span><br><span class="line">    this.tasks.push(task);</span><br><span class="line">  &#125;</span><br><span class="line">  promise(...args) &#123; // 发布事件</span><br><span class="line">    let tasks = this.tasks.map(task =&gt; task(...args));</span><br><span class="line">    return Promise.all(tasks);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let hook = new asyncparallelhook([&apos;asyncparallelhook&apos;]);</span><br><span class="line">hook.tapPromise(&apos;vue&apos;, (name) =&gt; &#123;</span><br><span class="line">  return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      console.log(&apos;vue&apos;, name);</span><br><span class="line">      resolve();</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">hook.tapPromise(&apos;react&apos;, (name) =&gt; &#123;</span><br><span class="line">  return new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">      console.log(&apos;react&apos;, name);</span><br><span class="line">      resolve();</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">hook.promise(&apos;Ertsul&apos;).then(() =&gt; &#123;</span><br><span class="line">  console.log(&apos;All hooks finished!&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h4 id="AsyncSeriesHook-异步串行钩子"><a href="#AsyncSeriesHook-异步串行钩子" class="headerlink" title="AsyncSeriesHook 异步串行钩子"></a>AsyncSeriesHook 异步串行钩子</h4><h4 id="AsyncWaterfallHook-异步瀑布流钩子"><a href="#AsyncWaterfallHook-异步瀑布流钩子" class="headerlink" title="AsyncWaterfallHook 异步瀑布流钩子"></a>AsyncWaterfallHook 异步瀑布流钩子</h4>
+                </div>
+            </section>
+        </article>
+    </div>
+
+    
+    <div style="height: 4vw;width: 100%"></div>
+    <nav id="gobottom" class="pagination">
+        
+        <span class="prev-next-post">•</span>
+        
+        <a class="next-post" title="hello-hexo" href="/2019/02/16/hello-hexo/">
+            hello-hexo →
+        </a>
+        
+    </nav>
+
+    
+</main>
+
+<div class="toc-bar">
+    <div class="toc-btn-bar">
+        <a href="#site-main" class="toc-btn">
+            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M793.024 710.272a32 32 0 1 0 45.952-44.544l-310.304-320a32 32 0 0 0-46.4 0.48l-297.696 320a32 32 0 0 0 46.848 43.584l274.752-295.328 286.848 295.808z"/></svg>
+        </a>
+        <div class="toc-btn toc-switch">
+            <svg class="toc-open" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M779.776 480h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M779.776 672h-387.2a32 32 0 0 0 0 64h387.2a32 32 0 0 0 0-64M256 288a32 32 0 1 0 0 64 32 32 0 0 0 0-64M392.576 352h387.2a32 32 0 0 0 0-64h-387.2a32 32 0 0 0 0 64M256 480a32 32 0 1 0 0 64 32 32 0 0 0 0-64M256 672a32 32 0 1 0 0 64 32 32 0 0 0 0-64"/></svg>
+            <svg class="toc-close hide" viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M512 960c-247.039484 0-448-200.960516-448-448S264.960516 64 512 64 960 264.960516 960 512 759.039484 960 512 960zM512 128.287273c-211.584464 0-383.712727 172.128262-383.712727 383.712727 0 211.551781 172.128262 383.712727 383.712727 383.712727 211.551781 0 383.712727-172.159226 383.712727-383.712727C895.712727 300.415536 723.551781 128.287273 512 128.287273z"/><path d="M557.05545 513.376159l138.367639-136.864185c12.576374-12.416396 12.672705-32.671738 0.25631-45.248112s-32.704421-12.672705-45.248112-0.25631l-138.560301 137.024163-136.447897-136.864185c-12.512727-12.512727-32.735385-12.576374-45.248112-0.063647-12.512727 12.480043-12.54369 32.735385-0.063647 45.248112l136.255235 136.671523-137.376804 135.904314c-12.576374 12.447359-12.672705 32.671738-0.25631 45.248112 6.271845 6.335493 14.496116 9.504099 22.751351 9.504099 8.12794 0 16.25588-3.103239 22.496761-9.247789l137.567746-136.064292 138.687596 139.136568c6.240882 6.271845 14.432469 9.407768 22.65674 9.407768 8.191587 0 16.352211-3.135923 22.591372-9.34412 12.512727-12.480043 12.54369-32.704421 0.063647-45.248112L557.05545 513.376159z"/></svg>
+        </div>
+        <a href="#gobottom" class="toc-btn">
+            <svg viewbox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path d="M231.424 346.208a32 32 0 0 0-46.848 43.584l297.696 320a32 32 0 0 0 46.4 0.48l310.304-320a32 32 0 1 0-45.952-44.544l-286.848 295.808-274.752-295.36z"/></svg>
+        </a>
+    </div>
+    <div class="toc-main">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#项目构建"><span class="toc-text">项目构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模式-mode"><span class="toc-text">模式 mode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#入口-entry"><span class="toc-text">入口 entry</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出-output"><span class="toc-text">输出 output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-dev-server"><span class="toc-text">webpack-dev-server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#source-map-amp-amp-eval-source-map-amp-amp-cheap-module-source-map-amp-amp-cheap-module-eval-source-map"><span class="toc-text">source-map &amp;&amp; eval-source-map &amp;&amp; cheap-module-source-map &amp;&amp; cheap-module-eval-source-map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve"><span class="toc-text">resolve</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#html-webpack-plugin"><span class="toc-text">html-webpack-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#mini-css-extract-plugin"><span class="toc-text">mini-css-extract-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#optimize-css-assets-webpack-plugin"><span class="toc-text">optimize-css-assets-webpack-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#uglifyjs-webpack-plugin"><span class="toc-text">uglifyjs-webpack-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#clean-webpack-plugin"><span class="toc-text">clean-webpack-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#copy-webpack-plugin"><span class="toc-text">copy-webpack-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#banner-plugin"><span class="toc-text">banner-plugin</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpack-DefinePlugin-…"><span class="toc-text">webpack.DefinePlugin({ … })</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#webpacfk-IgnorePlugin"><span class="toc-text">webpacfk.IgnorePlugin()</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#模块-module"><span class="toc-text">模块 module</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#css-loader-style-loader"><span class="toc-text">css-loader / style-loader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#postcss-loader-autoprefixer"><span class="toc-text">postcss-loader + autoprefixer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#babel-loader-babel-core-babel-preset-env"><span class="toc-text">babel-loader + @babel/core + @babel/preset-env</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#expose-loader"><span class="toc-text">expose-loader</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#file-loader-amp-amp-url-loader-amp-amp-html-withimg-loader"><span class="toc-text">file-loader &amp;&amp; url-loader &amp;&amp; html-withimg-loader</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块-module-–-noParse"><span class="toc-text">模块 module – noParse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块-module-–-exclude"><span class="toc-text">模块 module – exclude</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块-module-–-include"><span class="toc-text">模块 module – include</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#区分不同环境，实现开发和生产配置的分离"><span class="toc-text">区分不同环境，实现开发和生产配置的分离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-自带优化"><span class="toc-text">webpack 自带优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack-懒加载"><span class="toc-text">webpack 懒加载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#热更新-热替换-Hot-Module-Replacement-HMR"><span class="toc-text">热更新 / 热替换 / Hot Module Replacement / HMR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多线程打包"><span class="toc-text">多线程打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多页面打包"><span class="toc-text">多页面打包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多页面打包抽离公共代码块"><span class="toc-text">多页面打包抽离公共代码块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tapable"><span class="toc-text">Tapable</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Synchook-同步钩子"><span class="toc-text">Synchook 同步钩子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SyncBailHook-同步熔断钩子"><span class="toc-text">SyncBailHook 同步熔断钩子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SyncWaterfallHook-同步瀑布钩子"><span class="toc-text">SyncWaterfallHook 同步瀑布钩子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SyncLoopHook-同步循环钩子"><span class="toc-text">SyncLoopHook 同步循环钩子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AsyncParallelHook-异步并发钩子-回调函数方式"><span class="toc-text">AsyncParallelHook 异步并发钩子 回调函数方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AsyncParallelHook-异步并发钩子-Promise方式"><span class="toc-text">AsyncParallelHook 异步并发钩子 Promise方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AsyncSeriesHook-异步串行钩子"><span class="toc-text">AsyncSeriesHook 异步串行钩子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#AsyncWaterfallHook-异步瀑布流钩子"><span class="toc-text">AsyncWaterfallHook 异步瀑布流钩子</span></a></li></ol></li>
+    </div>
+</div>
+
+
+
+	</div>
+	
+
+
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+  <header class="read-next-card-header">
+    <small class="read-next-card-header-sitetitle">&mdash; Ertsul &mdash;</small>
+    <h3 class="read-next-card-header-title">Recent Posts</h3>
+  </header>
+  <div class="read-next-divider">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+      <path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/>
+    </svg>
+  </div>
+  <div class="read-next-card-content">
+    <ul>
+      
+      
+      
+      <li>
+        <a href="/2019/02/16/webpack学习笔记/">webpack学习笔记</a>
+      </li>
+      
+      
+      
+      <li>
+        <a href="/2019/02/16/hello-hexo/">hello-hexo</a>
+      </li>
+      
+      
+    </ul>
+  </div>
+  <footer class="read-next-card-footer">
+    <a href="/archives">  MORE  → </a>
+  </footer>
+</article>
+
+            
+            
+            
+
+
+            
+            
+            
+
+<article class="read-next-card" style="background-image: url(https://i.loli.net/2017/11/26/5a19c56faa29f.jpg)">
+	<header class="read-next-card-header" style="padding-bottom: 20px">
+		<h3 class="read-next-card-header-title">Tag Cloud</h3>
+	</header>
+	<div class="read-next-card-content-ext">
+		<a href="/tags/frontEnd/" style="font-size: 14px;">frontEnd</a> <a href="/tags/webpack/" style="font-size: 14px;">webpack</a>
+	</div>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+	
+
+
+
+
+<div id="search" class="search-overlay subscribe-overlay">
+    <div class="search-form">
+        
+        <img class="search-overlay-logo" src="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" alt="Ertsul">
+        
+        <input id="local-search-input" class="search-input" type="text" name="search" placeholder="Search ...">
+        <a class="search-overlay-close" href="#"></a>
+    </div>
+    <div id="local-search-result"></div>
+</div>
+
+
+<footer class="site-footer outer">
+	<div class="site-footer-content inner">
+		<section class="copyright">
+			<a href="/" title="Ertsul">Ertsul</a>
+			&copy; 2019
+		</section>
+		<nav class="site-footer-nav">
+			
+            <a href="https://hexo.io" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+            <a href="https://github.com/xzhih/hexo-theme-casper" title="Casper" target="_blank" rel="noopener">Casper</a>
+        </nav>
+    </div>
+</footer>
+	
+
+
+<script>
+    if(window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations()
+        .then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+<div class="floating-header">
+	<div class="floating-header-logo">
+        <a href="/" title="Ertsul">
+			
+                <img src="https://user-gold-cdn.xitu.io/2018/5/6/1633460471fe2092?imageView2/1/w/100/h/100/q/85/format/webp/interlace/1" alt="Ertsul icon">
+			
+            <span>Ertsul</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">webpack学习笔记</div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+
+
+
+<script src="/js/mix/post-lazy-local.min.js"></script>
+
+<script>;(function() {var bLazy = new Blazy()})();</script>
+
+
+
+
+<script src="/js/lightgallery.min.js"></script>
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<script>
+    lightGallery(document.getElementById('lightgallery'), {
+        selector: '.post-img'
+    });
+</script>
+
+
+
+
+
+
+
+
+
+<script>searchFunc("/")</script>
+
+
+
+
+
+</body>
+</html>
