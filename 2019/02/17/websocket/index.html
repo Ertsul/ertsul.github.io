@@ -17,7 +17,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>用户认证小总结 | Ertsul</title>
+	<title>websocket | Ertsul</title>
 
 	<meta name="HandheldFriendly" content="True">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -45,14 +45,14 @@
 
 	<meta property="og:site_name" content="Ertsul">
 	<meta property="og:type" content="article">
-	<meta property="og:title" content="用户认证小总结 | Ertsul">
+	<meta property="og:title" content="websocket | Ertsul">
 	<meta property="og:description" content>
-	<meta property="og:url" content="http://yoursite.com/2019/02/17/用户认证小总结/">
+	<meta property="og:url" content="http://yoursite.com/2019/02/17/websocket/">
 
 	
 	<meta property="article:published_time" content="2019-02-17T21:02:00+08:00"> 
 	<meta property="article:author" content="Ertsul">
-	<meta property="article:published_first" content="Ertsul, /2019/02/17/用户认证小总结/">
+	<meta property="article:published_first" content="Ertsul, /2019/02/17/websocket/">
 	
 </head>
 <body class="post-template">
@@ -119,7 +119,7 @@
     <div class="inner">
         <header class="post-full-header">
             <section class="post-full-meta">
-                <time class="post-full-meta-date" datetime="2019-02-17T13:52:43.000Z" itemprop="datePublished">
+                <time class="post-full-meta-date" datetime="2019-02-17T13:57:39.000Z" itemprop="datePublished">
                     2019-02-17
                 </time>
                 
@@ -127,54 +127,54 @@
                 
                 
             </section>
-            <h1 class="post-full-title">用户认证小总结</h1>
+            <h1 class="post-full-title">websocket</h1>
         </header>
         <article class="post-full no-image">
             
             <section class="post-full-content">
                 <div id="lightgallery" class="markdown-body">
-                    <h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>一般的用户认证流程如下图：</p>
-<p><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-bdfa6d0008a02e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" data-src="https://upload-images.jianshu.io/upload_images/659084-bdfa6d0008a02e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800"></p>
-<p>但是，这种模式的扩展性不好。单个服务器没问题，如果多个服务器集群，要求共享 <strong>session</strong> ，每个服务器都能访问到 <strong>session</strong> 。</p>
+                    <h2 id="HTTP-HTTPS-协议"><a href="#HTTP-HTTPS-协议" class="headerlink" title="HTTP/HTTPS 协议"></a>HTTP/HTTPS 协议</h2><ul>
+<li>一个 <strong>request</strong> 对应一个 <strong>response</strong>。一般使用 <strong>轮询</strong> 机制获取信息。</li>
+<li>虽然后期有 <strong>keep-alive</strong>，可以一次连接中处理多个 <strong>request</strong> 合并发送，接收多个 <strong>response</strong>，对每个请求仍然需要单独发 <strong>header</strong>。</li>
+<li><strong>HTTP</strong> 的 <strong>response</strong> 是被动的，通信只能由客户端发起，做不到服务端主动向客户端推送信息。</li>
+<li><strong>HTTP</strong> 是无状态协议。</li>
+<li>需要三次握手。</li>
+<li>HTTP：TCP + HTTP</li>
+<li>HTTPS：TCP + HTTP + TLS</li>
+</ul>
+<h4 id="ajax-轮询"><a href="#ajax-轮询" class="headerlink" title="ajax 轮询"></a>ajax 轮询</h4><p><strong>ajax 轮询</strong> 是指客户端 <strong>不断</strong> 向服务器发送资源请求 <strong>request</strong>，服务端不管有无目标资源，都会返回 <strong>response</strong> 结果。这样就要求服务器拥有更好的处理速度。</p>
+<h4 id="long-poll-长轮询"><a href="#long-poll-长轮询" class="headerlink" title="long poll / 长轮询"></a>long poll / 长轮询</h4><p><strong>long poll</strong> 比 <strong>ajax 轮询</strong> 好点，<strong>不会不断</strong> 向服务器发送资源请求 <strong>request</strong>，一旦接受客户端的请求，有资源就返回；无资源就挂起，直到有资源才返回 <strong>response</strong> 结果（有且仅有返回一次）。高并发，需要服务器可以同时处理多个请求的能力。</p>
+<h2 id="websocket-协议"><a href="#websocket-协议" class="headerlink" title="websocket 协议"></a>websocket 协议</h2><ul>
+<li><strong>websocket</strong> 是 <strong>html5</strong> 出的协议。</li>
+<li><strong>websocket</strong> 是一个持久化的协议，<strong>websocket</strong> 只需要一次请求（一次 <strong>HTTP 握手</strong> ），就可以得到所需的资源。</li>
+<li>服务端可以 <strong>主动</strong> 向客户端推送信息，客户端也可以 <strong>主动</strong> 向服务端推送消息，实现“双向平等”，是属于服务器推送技术的一种。</li>
+<li>与 <strong>HTTP</strong> 有较好的兼容性，在握手阶段采用 <strong>HTTP</strong> 协议。</li>
+<li>默认端口 <strong>80</strong> and <strong>443</strong>。</li>
+<li>数据格式轻量，性能开销小，通信高效，可以发送文本，也可以二进制数据。</li>
+<li>没有同源策略。</li>
+<li>WS：TCP + WS</li>
+<li>WSS：TCP + WS + TLS</li>
+</ul>
+<h4 id="websocket-握手"><a href="#websocket-握手" class="headerlink" title="websocket 握手"></a>websocket 握手</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /chat HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: 13</span><br></pre></td></tr></table></figure>
 <ul>
-<li>解决方案一：<strong>session</strong> 数据持久化，写入数据库或者其他持久层。各个服务器收到请求后，向持久层发送数据请求。<ul>
-<li>缺点：工程量大。</li>
+<li>Upgrade/Connection：通知服务器发起的是 <strong>wesocket</strong> 协议。</li>
+<li>Sec-WebSocket-Key：浏览器随机生成的 <strong>Base64 encode</strong> 的值，用于验证服务器是不是 <strong>websocket 协议</strong>。</li>
+<li>Sec-WebSocket-Protocol：用户定义的字符串，用来区分 <strong>同 url</strong> 下，不同的服务所需要的协议。</li>
+<li>Sec-WebSocket-Version：协议版本。</li>
 </ul>
-</li>
-<li>解决方案二：服务器不保存 <strong>session</strong> 数据，所有的数据保存在客户端，每次请求都发回服务器。如：JWT(Json Web Token)。</li>
-</ul>
-<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p><strong>JWT</strong> 服务器不保存 <strong>session</strong> 数据，在服务器认证之后，返回一个 <strong>JSON</strong> 对象。格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;姓名&quot;: &quot;zero&quot;,</span><br><span class="line">    &quot;角色&quot;: &quot;管理员&quot;,</span><br><span class="line">    &quot;到期时间&quot;: &quot;2018年10月6日0点0分&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之后，客户端与服务器的用户认证都靠这个 <strong>JSON</strong> 对象，当然，这个对象后面会加上签名，保证数据不被篡改。</p>
-<h4 id="JWT-的数据结构"><a href="#JWT-的数据结构" class="headerlink" title="JWT 的数据结构"></a>JWT 的数据结构</h4><ul>
-<li><strong>JWT</strong> 是一个很长的字符串，中间用 <strong>.</strong> 分隔，内部没有换行。</li>
-<li>组成由三个部分：<strong>Header.Payload.Signature</strong><ul>
-<li>Header：头部。<strong>JSON</strong> 对象，描述 <strong>JWT</strong> 的元数据。</li>
-<li>Payload：负载。<strong>JSON</strong> 对象，存放实际需要传递的数据；不加密。</li>
-<li>Signature：签名。对 <strong>Header</strong> 和 <strong>Payload</strong> 的签名，防止数据被篡改。</li>
-</ul>
-</li>
-</ul>
-<p>Header 格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,   // 签名的算法</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;      // token 类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Payload 七个字段：</p>
+<h4 id="服务器返回"><a href="#服务器返回" class="headerlink" title="服务器返回"></a>服务器返回</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</span><br><span class="line">Sec-WebSocket-Protocol: chat</span><br></pre></td></tr></table></figure>
 <ul>
-<li>iss (issuer)：签发人</li>
-<li>exp (expiration time)：过期时间</li>
-<li>sub (subject)：主题</li>
-<li>aud (audience)：受众</li>
-<li>nbf (Not Before)：生效时间</li>
-<li>iat (Issued At)：签发时间</li>
-<li>jti (JWT ID)：编号</li>
+<li>Upgrade/Connection：通知客户端升级的是 <strong>websocket</strong> 协议。</li>
+<li>Sec-WebSocket-Accept：经服务器确认，加密后的 <strong>Sec-WebSocket-Key</strong>。</li>
+<li>Sec-WebSocket-Protocol：最终使用的协议。</li>
 </ul>
-<h4 id="JWT-的使用方式"><a href="#JWT-的使用方式" class="headerlink" title="JWT 的使用方式"></a>JWT 的使用方式</h4><ul>
-<li>存储在 <strong>cookie</strong> 中。</li>
-<li>存储在 <strong>localStorage</strong> 中。</li>
-<li>客户端每次与服务器进行通信的时候，都会带上 <strong>JWT</strong>。</li>
-</ul>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ws.addEventListener(&apos;open&apos;, function () &#123;</span><br><span class="line">    console.log(&apos;Open the websocket...&apos;);</span><br><span class="line">    ws.send(&apos;Hello websocket...&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">ws.addEventListener(&apos;message&apos;, function (e) &#123;</span><br><span class="line">    console.log(&apos;Ready state: &apos; + ws.readyState, &apos;Receive the websocket message...&apos; + e.data);</span><br><span class="line">    ws.close();</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;Ready state: &apos; + ws.readyState);</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">&#125;);</span><br><span class="line">ws.addEventListener(&apos;close&apos;, function () &#123;</span><br><span class="line">    console.log(&apos;Ready state: &apos; + ws.readyState, &apos;Close the websocket...&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>结果：<br><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-021a1bb1915811bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-021a1bb1915811bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
 <p>参考：</p>
+<p><img alt="image.png" class="post-img b-lazy" href="https://upload-images.jianshu.io/upload_images/659084-d06ed1bfe9c9fadb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" data-src="https://upload-images.jianshu.io/upload_images/659084-d06ed1bfe9c9fadb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
 <ul>
-<li><a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html</a></li>
+<li><a href="https://www.zhihu.com/search?type=content&amp;q=websocket" target="_blank" rel="noopener">https://www.zhihu.com/search?type=content&amp;q=websocket</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2017/05/websocket.html</a></li>
 </ul>
 
                 </div>
@@ -186,14 +186,10 @@
     <div style="height: 4vw;width: 100%"></div>
     <nav id="gobottom" class="pagination">
         
-        <a class="prev-post" title="websocket" href="/2019/02/17/websocket/">
-            ← websocket
-        </a>
-        
         <span class="prev-next-post">•</span>
         
-        <a class="next-post" title="web safe" href="/2019/02/17/web-safe/">
-            web safe →
+        <a class="next-post" title="用户认证小总结" href="/2019/02/17/用户认证小总结/">
+            用户认证小总结 →
         </a>
         
     </nav>
@@ -215,7 +211,7 @@
         </a>
     </div>
     <div class="toc-main">
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#用户认证"><span class="toc-text">用户认证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JWT"><span class="toc-text">JWT</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT-的数据结构"><span class="toc-text">JWT 的数据结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JWT-的使用方式"><span class="toc-text">JWT 的使用方式</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-HTTPS-协议"><span class="toc-text">HTTP/HTTPS 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ajax-轮询"><span class="toc-text">ajax 轮询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#long-poll-长轮询"><span class="toc-text">long poll / 长轮询</span></a></li></ol></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#websocket-协议"><span class="toc-text">websocket 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#websocket-握手"><span class="toc-text">websocket 握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器返回"><span class="toc-text">服务器返回</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li></ol></li>
     </div>
 </div>
 
@@ -371,7 +367,7 @@
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">用户认证小总结</div>
+    <div class="floating-header-title">websocket</div>
     <progress class="progress" value="0">
         <div class="progress-container">
             <span class="progress-bar"></span>
