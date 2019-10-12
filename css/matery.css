@@ -218,9 +218,11 @@ header nav .brand-span {
 }
 
 header .brand-logo .logo-img {
-    height: 45px;
+    height: 40px;
     vertical-align: middle;
-    padding-bottom: 6px;
+    /* padding-bottom: 6px; */
+    margin-bottom: 6px;
+    border-radius: 80px;
 }
 
 header .brand-logo .logo-span {
@@ -541,6 +543,7 @@ header .go-back i {
 
 .index-card .card .card-content {
     padding: 20px 40px;
+    display: none;
 }
 
 @media only screen and (min-width: 1418px) {
