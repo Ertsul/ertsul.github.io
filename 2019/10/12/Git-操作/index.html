@@ -29,12 +29,17 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -68,28 +73,6 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -106,28 +89,6 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -170,28 +131,6 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -208,28 +147,6 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -467,80 +384,87 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
 <ul>
 <li>安装（仅说明在 <em>Linux</em> 系统下的安装，若您是windows系统，直接官网下载安装就行~）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-1b4d4c825d3e9cf1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>sudo apt install git
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-1b4d4c825d3e9cf1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <p>由于我之前已经安装过了，所以这里升级等都是 <em>0</em>。</p>
 <ul>
 <li>查看是否安装成功</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-b029bb624636ebb1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>git
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-b029bb624636ebb1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <p>输入git命令后，出现一系列关于Git的参数和命令等，说明安装成功了。</p>
 <ul>
 <li>查看 <em>Git</em> 版本</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-d93c79710b9cfdfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>git --version
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-d93c79710b9cfdfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <h4 id="创建-Git-仓库"><a href="#创建-Git-仓库" class="headerlink" title="创建 Git 仓库"></a>创建 Git 仓库</h4><p>所谓 <em>Git</em> 仓库（<em>repository</em>），也叫版本库。简单理解，就是可以被 <em>Git</em> 管理（修改，删除等）的目录。</p>
 <ul>
 <li>新建本地目录，并切换到新目录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir gitFile</span><br><span class="line">cd gitFile</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-86edbf8888ce2c68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>mkdir gitFile
+cd gitFile
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-86edbf8888ce2c68.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <ul>
 <li>将本地目录初始化为 <em>Git</em> 仓库</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-c56d293f662bf4ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>git init
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-c56d293f662bf4ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <ul>
 <li>查看 <em>Git</em> 仓库的目录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-9af646e821d36e81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br>您会发现，这里多了一个 <em>.git</em> 的目录，作用是 <em>Git</em> 来跟踪管理 <em>Git</em> 仓库的；注意，如果输入的命令是 <em>ls</em> 是不会看到 <em>.git</em>，因为这个目录默认是隐藏的。</p>
+<pre><code>ls -al
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-9af646e821d36e81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br>您会发现，这里多了一个 <em>.git</em> 的目录，作用是 <em>Git</em> 来跟踪管理 <em>Git</em> 仓库的；注意，如果输入的命令是 <em>ls</em> 是不会看到 <em>.git</em>，因为这个目录默认是隐藏的。</p>
 <h4 id="将文件放到Git仓库（一定要在-git-init-的目录／子目录下）"><a href="#将文件放到Git仓库（一定要在-git-init-的目录／子目录下）" class="headerlink" title="将文件放到Git仓库（一定要在 git init 的目录／子目录下）"></a>将文件放到Git仓库（一定要在 <em>git init</em> 的目录／子目录下）</h4><ul>
 <li>新建 <em>test.txt</em> 文件并输入内容</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &gt; test.txt</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-838f0f3715084789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>cat &gt; test.txt
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-838f0f3715084789.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <ul>
 <li>将 <em>test.txt</em> 文件上传到Git仓库</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add test.txt</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git add test.txt 
+</code></pre><ul>
 <li>告知 <em>Git</em> 仓库提交了新文件，并添加标注信息</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;My first git.&quot;</span><br></pre></td></tr></table></figure>
-<p><em>-m</em> 后面是 <em>commit</em> 信息。<br>很简单吧～只需要两步，就可以将文件上传到Git仓库。</p>
+<pre><code>git commit -m &quot;My first git.&quot;
+
+</code></pre><p><em>-m</em> 后面是 <em>commit</em> 信息。<br>很简单吧～只需要两步，就可以将文件上传到Git仓库。</p>
 <ul>
 <li>查看 <em>Git</em> 仓库的当前状态</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-6e47af6a618c047d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br>倘若修改了文件，但没有提交，结果是这样的：<br><img src="http://upload-images.jianshu.io/upload_images/659084-0910cc6291dbadfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>git status
+
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-6e47af6a618c047d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br>倘若修改了文件，但没有提交，结果是这样的：<br><img src="http://upload-images.jianshu.io/upload_images/659084-0910cc6291dbadfc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <p>提交后的结果是这样的：<br><img src="http://upload-images.jianshu.io/upload_images/659084-07671c9d269aa1b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <ul>
 <li>查看文件修改内容<br>如果修改了文件，但还没提交，可以对比文件前后的修改内容。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff test.txt</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-3373c8bc3a0b6df4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>git diff test.txt
+
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-3373c8bc3a0b6df4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <p>可知，文件 <em>test.txt</em> 添加了新的一行 <em>This is the third line.</em></p>
 <h4 id="创建GitHub账号"><a href="#创建GitHub账号" class="headerlink" title="创建GitHub账号"></a>创建GitHub账号</h4><p>如果没有 <em>GitHub</em> 账号，得先到<a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>官网注册账号。注册登录为常规操作，不多说。</p>
 <h4 id="SSH设置"><a href="#SSH设置" class="headerlink" title="SSH设置"></a>SSH设置</h4><p>由于Git和GitHub之间是通过SSH加密传输的，所以需要进行SSH设置。</p>
 <ul>
 <li>创建SSH Key（用户主目录）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;你的邮箱&quot;</span><br></pre></td></tr></table></figure>
-<p>接下来回车默认就好了。</p>
+<pre><code>ssh-keygen -t rsa -C &quot;你的邮箱&quot;
+
+</code></pre><p>接下来回车默认就好了。</p>
 <ul>
 <li>在用户主目录下找到 <em>.ssh</em> 目录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al | find -name &quot;*.ssh&quot;</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-0d28f60589a3fe46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>ls -al | find -name &quot;*.ssh&quot;
+
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-0d28f60589a3fe46.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <ul>
 <li>发现存在 <em>.ssh</em> 目录，切换到 <em>.ssh</em> 目录，发现文件中秘钥有 <em>id_rsa</em>（私钥）和 <em>id_rsa.pub</em>（公钥），其中是 <em>id_rsa.pub</em> 是我们所需要的<br><img src="http://upload-images.jianshu.io/upload_images/659084-b56f8d1860d46e2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></li>
 <li>打开 <em>ip_rsa.pub</em> ，并复制</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ip_rsa.pub</span><br></pre></td></tr></table></figure>
-<h4 id="在-GitHub-中添加-SSH-Key"><a href="#在-GitHub-中添加-SSH-Key" class="headerlink" title="在 GitHub 中添加 SSH Key"></a>在 <em>GitHub</em> 中添加 <em>SSH Key</em></h4><ul>
+<pre><code>cat ip_rsa.pub
+
+</code></pre><h4 id="在-GitHub-中添加-SSH-Key"><a href="#在-GitHub-中添加-SSH-Key" class="headerlink" title="在 GitHub 中添加 SSH Key"></a>在 <em>GitHub</em> 中添加 <em>SSH Key</em></h4><ul>
 <li>Settings-&gt;SSH and GRG keys-&gt;new SSH key<br><img src="http://upload-images.jianshu.io/upload_images/659084-5c62e09650873795.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/659084-25987355f4a0e8cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/659084-313107faef8abb08.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/659084-382e08b98c30ba58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></li>
 <li>创建成功后，跳转页面中你会看到你新建的ssh key<br><img src="http://upload-images.jianshu.io/upload_images/659084-48ad323d9452d92a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></li>
 </ul>
@@ -551,19 +475,22 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
 <h4 id="Git-连接-GitHub，并推送本地文件到远程仓库"><a href="#Git-连接-GitHub，并推送本地文件到远程仓库" class="headerlink" title="Git 连接 GitHub，并推送本地文件到远程仓库"></a><em>Git</em> 连接 <em>GitHub</em>，并推送本地文件到远程仓库</h4><ul>
 <li>在本地仓库的目录 <em>gitFile</em> 下运行命令</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 仓库的SSH地址</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-955edfecc27bf5ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br>注意，这里的 <em>origin</em> 是远程仓库的名字（<em>Git</em>的默认叫法）</p>
+<pre><code>git remote add origin 仓库的SSH地址
+
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-955edfecc27bf5ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br>注意，这里的 <em>origin</em> 是远程仓库的名字（<em>Git</em>的默认叫法）</p>
 <ul>
 <li>将本地仓库 <em>Git</em> 的文件推送到远程仓库 <em>GitHub</em></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>不出意外，在GitHub的 <em>test</em> 仓库中会看到我们传送的文件<br><img src="http://upload-images.jianshu.io/upload_images/659084-3ceb742e8262ac94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
+<pre><code>git push -u origin master
+
+</code></pre><p>不出意外，在GitHub的 <em>test</em> 仓库中会看到我们传送的文件<br><img src="http://upload-images.jianshu.io/upload_images/659084-3ceb742e8262ac94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
 <h4 id="从-GitHub-中克隆文件到本地"><a href="#从-GitHub-中克隆文件到本地" class="headerlink" title="从 GitHub 中克隆文件到本地"></a>从 <em>GitHub</em> 中克隆文件到本地</h4><ul>
 <li>在 <em>GitHub</em> 中创建文件，并且复制<em>SSH</em> 地址<br><img src="http://upload-images.jianshu.io/upload_images/659084-8555c272dc15e144.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/659084-29aec05f56492874.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/659084-1e5de00c4bbe4477.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></li>
 <li>输入以下克隆命令</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone SSH地址</span><br></pre></td></tr></table></figure>
-<p>你会发现，<em>GitHub</em> 中的目录包括你刚才新建的文件都存在本地目录中了。</p>
+<pre><code>git clone SSH地址
+
+</code></pre><p>你会发现，<em>GitHub</em> 中的目录包括你刚才新建的文件都存在本地目录中了。</p>
 
             </div>
             <hr>
@@ -830,7 +757,9 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
 对于一些高频触发操作的场景，我们需要加防抖操作。比如：监听页面滚动、输入实时显示搜索结果等。这些都需要加防抖操作，不然对页面性能有很大的副作用。
 简单概括：防抖就是将高频操作优化为最后一次执行。
 
-实现：123456789101112
+实现：
+// 防抖
+const de
                         
                     </div>
                     <div class="publish-info">

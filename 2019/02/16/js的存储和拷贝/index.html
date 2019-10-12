@@ -32,12 +32,17 @@ Object
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -71,28 +76,6 @@ Object
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -109,28 +92,6 @@ Object
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -173,28 +134,6 @@ Object
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -211,28 +150,6 @@ Object
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -478,13 +395,30 @@ Object
 <li>每当定义一个基本数据类型的变量，会在 <strong>栈区</strong> 开辟一个内存空间，用于存放该变量。栈区的特点是：静态分配，大小固定。</li>
 <li>当一个变量通过直接复制的方式复制给另一个变量，系统会在 <strong>栈区</strong>  重新开辟一个内存空间；两个变量互不影响。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let num1 = 10;</span><br><span class="line">let num2 = num1;</span><br><span class="line">num2 = 20;</span><br><span class="line">console.log(num1);     // 10</span><br></pre></td></tr></table></figure>
-<h4 id="引用类型的存储方式"><a href="#引用类型的存储方式" class="headerlink" title="引用类型的存储方式"></a>引用类型的存储方式</h4><ul>
+<pre><code>let num1 = 10;
+let num2 = num1;
+num2 = 20;
+console.log(num1);     // 10 
+</code></pre><h4 id="引用类型的存储方式"><a href="#引用类型的存储方式" class="headerlink" title="引用类型的存储方式"></a>引用类型的存储方式</h4><ul>
 <li>每当定义一个引用类型，如：对象，会在 <strong>堆区</strong> 开辟一个内存空间；然后如果创建一个该对象的实例，会在 <strong>栈区</strong> 开辟一个内存存放该实例，该实例实际上是一个指向 <strong>堆内存</strong> 对象的指针。堆区的特点是：动态分配，大小不固定。</li>
 <li>当一个实例直接复制给另一个实例，系统会在 <strong>栈区</strong>  重新开辟一个内存空间，但是新实例同样也是一个指向  <strong>堆内存</strong> 对象的指针，所以，这样的操作，这样的修改都会对新旧实例产生影响。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">let obj1 = &#123;</span><br><span class="line">    name: &apos;zero&apos;,</span><br><span class="line">    age: 22,</span><br><span class="line">    num: [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//直接复制</span><br><span class="line">let obj2 = obj1;</span><br><span class="line"></span><br><span class="line">obj2.name = &apos;Ertsul&apos;;</span><br><span class="line">obj2.num[0] = &apos;一&apos;;</span><br><span class="line">console.log(obj1, obj2);</span><br><span class="line">// name:&quot;Ertsul&quot;</span><br><span class="line">// age:22</span><br><span class="line">// num:[&quot;一&quot;, &quot;2&quot;, &quot;3&quot;]</span><br></pre></td></tr></table></figure>
-<h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>两者的区别主要在于 <strong>复制层次</strong> 的不同：</p>
+<pre><code>let obj1 = {
+    name: &#39;zero&#39;,
+    age: 22,
+    num: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+}
+
+//直接复制
+let obj2 = obj1;
+
+obj2.name = &#39;Ertsul&#39;;
+obj2.num[0] = &#39;一&#39;;
+console.log(obj1, obj2);
+// name:&quot;Ertsul&quot;
+// age:22
+// num:[&quot;一&quot;, &quot;2&quot;, &quot;3&quot;]
+</code></pre><h2 id="浅拷贝和深拷贝"><a href="#浅拷贝和深拷贝" class="headerlink" title="浅拷贝和深拷贝"></a>浅拷贝和深拷贝</h2><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>两者的区别主要在于 <strong>复制层次</strong> 的不同：</p>
 <ul>
 <li>浅拷贝主要复制到对象属性这一层次，如果对象里面有子对象，则无法对子对象完成复制；之后对于子对象的修改 <strong>会</strong> 影响到原复制对象。</li>
 <li>深拷贝则是浅拷贝的 <strong>加强版</strong> ，可以实现对于子对象的拷贝；之后对于子对象的修改 <strong>不会</strong> 影响到原复制对象。主要实现方法有：<ul>
@@ -493,14 +427,72 @@ Object
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// 浅拷贝</span><br><span class="line">function shallowCopy(source) &#123;</span><br><span class="line">    let result = &#123;&#125;;</span><br><span class="line">    for(let key in source)&#123;</span><br><span class="line">        result[key] = source[key]</span><br><span class="line">    &#125;</span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br><span class="line">let obj1 = &#123;</span><br><span class="line">    name: &apos;zero&apos;,</span><br><span class="line">    age: 22,</span><br><span class="line">    num: [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let obj2 = &#123;&#125;;</span><br><span class="line">obj2 = shallowCopy(obj1);</span><br><span class="line"></span><br><span class="line">obj2.name = &apos;Ertsul&apos;;    // 不会产生影响</span><br><span class="line">obj2.num[0] = &apos;一&apos;;      // 产生影响</span><br><span class="line">console.log(&quot;obj1&quot;, obj1);</span><br><span class="line">console.log(&quot;obj2&quot;, obj2);</span><br></pre></td></tr></table></figure>
-<p>结果如图：</p>
+<pre><code>// 浅拷贝
+function shallowCopy(source) {
+    let result = {};
+    for(let key in source){
+        result[key] = source[key]
+    }
+    return result;
+}
+let obj1 = {
+    name: &#39;zero&#39;,
+    age: 22,
+    num: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+}
+
+let obj2 = {};
+obj2 = shallowCopy(obj1);
+
+obj2.name = &#39;Ertsul&#39;;    // 不会产生影响
+obj2.num[0] = &#39;一&#39;;      // 产生影响
+console.log(&quot;obj1&quot;, obj1);
+console.log(&quot;obj2&quot;, obj2);
+</code></pre><p>结果如图：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-2238425cd781911c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><h5 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// 递归实现深拷贝</span><br><span class="line">function deepCopy(source, res)&#123;</span><br><span class="line">    var res = res || &#123;&#125;;</span><br><span class="line">    for(let i in source)&#123;</span><br><span class="line">        if(typeof source[i] === &apos;object&apos;)&#123;</span><br><span class="line">            if(source[i].constructor === Array)&#123;</span><br><span class="line">                res[i] = []</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                res[i] = &#123;&#125;</span><br><span class="line">            &#125;</span><br><span class="line">            deepCopy(source[i], res[i]);   // 递归子对象属性</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            res[i] = source[i]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let obj1 = &#123;</span><br><span class="line">    name: &apos;zero&apos;,</span><br><span class="line">    age: 22,</span><br><span class="line">    num: [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let result = &#123;&#125;</span><br><span class="line">result = deepCopy(obj1, result);</span><br><span class="line">result.name = &apos;Ertsul&apos;;</span><br><span class="line">result.num[1] = &apos;二&apos;;</span><br><span class="line">console.log(&quot;result&quot;, result);</span><br><span class="line">console.log(&quot;obj1&quot;, obj1);</span><br></pre></td></tr></table></figure>
-<p>结果如图：</p>
+<h4 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a>深拷贝</h4><h5 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h5><pre><code>// 递归实现深拷贝
+function deepCopy(source, res){
+    var res = res || {};
+    for(let i in source){
+        if(typeof source[i] === &#39;object&#39;){
+            if(source[i].constructor === Array){
+                res[i] = []
+            }else {
+                res[i] = {}
+            }
+            deepCopy(source[i], res[i]);   // 递归子对象属性
+        }else{
+            res[i] = source[i]
+        }
+    }
+    return res;
+}
+
+let obj1 = {
+    name: &#39;zero&#39;,
+    age: 22,
+    num: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+}
+
+let result = {}
+result = deepCopy(obj1, result);
+result.name = &#39;Ertsul&#39;;
+result.num[1] = &#39;二&#39;;
+console.log(&quot;result&quot;, result);
+console.log(&quot;obj1&quot;, obj1);
+</code></pre><p>结果如图：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-522f00e896a05506.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h5 id="JSON解析"><a href="#JSON解析" class="headerlink" title="JSON解析"></a>JSON解析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// JSON实现深拷贝</span><br><span class="line">let obj1 = &#123;</span><br><span class="line">    name: &apos;zero&apos;,</span><br><span class="line">    age: 22,</span><br><span class="line">    num: [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;]</span><br><span class="line">&#125;</span><br><span class="line">let result1 = JSON.parse(JSON.stringify(obj1));</span><br><span class="line">result1.num[2] = &apos;三&apos;;</span><br><span class="line">console.log(&apos;result1&apos;, result1);</span><br><span class="line">console.log(&apos;obj1&apos;, obj1);</span><br></pre></td></tr></table></figure>
-<p>结果如图：<br><img src="https://upload-images.jianshu.io/upload_images/659084-b747df9bb831bf93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h5 id="JSON解析"><a href="#JSON解析" class="headerlink" title="JSON解析"></a>JSON解析</h5><pre><code>// JSON实现深拷贝
+let obj1 = {
+    name: &#39;zero&#39;,
+    age: 22,
+    num: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+}
+let result1 = JSON.parse(JSON.stringify(obj1));
+result1.num[2] = &#39;三&#39;;
+console.log(&#39;result1&#39;, result1);
+console.log(&#39;obj1&#39;, obj1);
+</code></pre><p>结果如图：<br><img src="https://upload-images.jianshu.io/upload_images/659084-b747df9bb831bf93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 
             </div>
             <hr>

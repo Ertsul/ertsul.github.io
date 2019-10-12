@@ -9,7 +9,9 @@
 对于一些高频触发操作的场景，我们需要加防抖操作。比如：监听页面滚动、输入实时显示搜索结果等。这些都需要加防抖操作，不然对页面性能有很大的副作用。
 简单概括：防抖就是将高频操作优化为最后一次执行。
 
-实现：123456789101112">
+实现：
+// 防抖
+const de">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -27,12 +29,17 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -66,28 +73,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -104,28 +89,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -168,28 +131,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -206,28 +147,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -465,9 +384,43 @@
 <li>对于一些高频触发操作的场景，我们需要加防抖操作。比如：监听页面滚动、输入实时显示搜索结果等。这些都需要加防抖操作，不然对页面性能有很大的副作用。</li>
 <li>简单概括：防抖就是将高频操作优化为最后一次执行。</li>
 </ul>
-<p>实现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 防抖</span><br><span class="line">const debounce = (fn, wait, immediate = false) =&gt; &#123;</span><br><span class="line">  let timer = null;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    let context = this,</span><br><span class="line">      args = arguments;</span><br><span class="line">    if (immediate &amp;&amp; !timer) &#123;</span><br><span class="line">      fn.apply(context, args);</span><br><span class="line">    &#125;</span><br><span class="line">    if (timer) &#123;</span><br><span class="line">      clearTimeout(timer);</span><br><span class="line">    &#125;</span><br><span class="line">    timer = setTimeout(() =&gt; &#123;</span><br><span class="line">      fn.apply(context, args);</span><br><span class="line">    &#125;, wait)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>每段时间后执行一次，将高频转化为低频。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// 节流</span><br><span class="line">const throttle = (fn, wait, immediate = false) =&gt; &#123;</span><br><span class="line">  let timer = null;</span><br><span class="line">  return function () &#123;</span><br><span class="line">    let context = this,</span><br><span class="line">      args = arguments;</span><br><span class="line">    if (immediate) &#123;</span><br><span class="line">      fn.apply(context, args);</span><br><span class="line">    &#125;</span><br><span class="line">    if (!timer) &#123;</span><br><span class="line">      timer = setTimeout(() =&gt; &#123;</span><br><span class="line">        fn.apply(context, args);</span><br><span class="line">        timer = null;</span><br><span class="line">      &#125;, wait)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现：</p>
+<pre><code>// 防抖
+const debounce = (fn, wait, immediate = false) =&gt; {
+  let timer = null;
+  return function () {
+    let context = this,
+      args = arguments;
+    if (immediate &amp;&amp; !timer) {
+      fn.apply(context, args);
+    }
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() =&gt; {
+      fn.apply(context, args);
+    }, wait)
+  }
+}
+</code></pre><h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>每段时间后执行一次，将高频转化为低频。</p>
+<pre><code>// 节流
+const throttle = (fn, wait, immediate = false) =&gt; {
+  let timer = null;
+  return function () {
+    let context = this,
+      args = arguments;
+    if (immediate) {
+      fn.apply(context, args);
+    }
+    if (!timer) {
+      timer = setTimeout(() =&gt; {
+        fn.apply(context, args);
+        timer = null;
+      }, wait)
+    }
+  }
+}
+</code></pre>
             </div>
             <hr>
 
@@ -736,15 +689,14 @@ Git是一个免费和开源的分布式版本控制系统，旨在快速和有�
                         
                             创建项目
 安装 vue3.0 脚手架
-1npm install -g @vue/cli
+npm install -g @vue/cli
 
 创建项目
-1vue create my_project
-
-
+vue create my_project
 一系列选择之后，可以保存你当前的选择配置，之后创建项目的时候就可以直接用了。
 
-安装依赖1
+安装依赖
+cd m
                         
                     </div>
                     <div class="publish-info">

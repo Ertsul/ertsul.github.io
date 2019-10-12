@@ -24,12 +24,17 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -63,28 +68,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -101,28 +84,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -165,28 +126,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -203,28 +142,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -464,7 +381,9 @@
 <li><em>cherry-pick</em> 待合并的 <em>commitID</em>。</li>
 </ul>
 <p>上面的情景，只需要：</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout master</span><br><span class="line">git cherry-pick <span class="number">8</span>f2aa26</span><br></pre></td></tr></table></figure>
+<pre><code class="powershell">git checkout master
+git cherry-pick 8f2aa26
+</code></pre>
 <p>结果如下：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-4c396adb0bb8588a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>不过，<em>cherry-pick</em> 只能合并单个指定的 <em>commit</em>。☞ <a href="https://git-scm.com/docs/git-cherry-pick" target="_blank" rel="noopener">cherry-pick 更多操作</a></p>
@@ -477,7 +396,10 @@
 <li>切换到 <em>master</em> 分支。</li>
 <li>执行 <em>merge</em> 操作。</li>
 </ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git rebase master</span><br><span class="line">git checkout master </span><br><span class="line">git merge --no-ff dev</span><br></pre></td></tr></table></figure>
+<pre><code class="powershell">git rebase master
+git checkout master 
+git merge --no-ff dev
+</code></pre>
 <p>最后结果如下：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-0417d63fc36aef1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570868576457.png"></p>
 <p>通过 <em>rebase</em> 合并分支跟 <em>merge</em> 合并是不一样的。☞ <a href="[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](https://git-scm.com/book/zh/v2/Git-分支-变基">点击查看区别</a>)</p>
@@ -490,7 +412,11 @@
 <li>切换到 <em>master</em> 分支。</li>
 <li><em>merge</em> <em>dev-temp</em> 分支到 <em>master</em> 分支。</li>
 </ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev-temp <span class="number">884</span>c858</span><br><span class="line">git rebase --onto master <span class="number">3</span>b0bfd7^</span><br><span class="line">git checkout master </span><br><span class="line">git merge --no-ff dev-temp</span><br></pre></td></tr></table></figure>
+<pre><code class="powershell">git checkout -b dev-temp 884c858
+git rebase --onto master 3b0bfd7^
+git checkout master 
+git merge --no-ff dev-temp
+</code></pre>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-e52de0c710b4437c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p><strong>情景3</strong>：<em>dev</em> 分支上有四个 <em>commit</em>，顺序分别是：创建 <em>i.txt</em> 文件 <em>commitI</em>、增加 <em>i.txt</em> 文件内容 <em>commitI1</em>、创建 <em>j.txt</em> 文件 <em>commitJ</em>、增加 <em>j.txt</em> 文件内容 <em>commitJ1</em>。现在只想要将 <em>dev</em> 分支上关于文件 <em>j.txt</em> 的所有操作合并到 <em>master</em> 分支。下面是 <em>dev</em> 分支的情况：（其实跟上面的情况和操作一样）</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-59f2f8f60f66ef93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
@@ -501,7 +427,11 @@
 <li>切换到 <em>master</em> 分支。</li>
 <li><em>merge</em> <em>dev-temp1</em> 分支到 <em>master</em> 分支。</li>
 </ul>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev-temp1 <span class="number">54</span>ea4bd</span><br><span class="line">git rebase --onto master e31249b^</span><br><span class="line">git checkout master </span><br><span class="line">git merge --no-ff dev-temp1</span><br></pre></td></tr></table></figure>
+<pre><code class="powershell">git checkout -b dev-temp1 54ea4bd
+git rebase --onto master e31249b^
+git checkout master 
+git merge --no-ff dev-temp1
+</code></pre>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-8507dd6818db90d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p><a href="[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](https://git-scm.com/book/zh/v2/Git-分支-变基">rebase更多操作</a>)</p>
 <h2 id="合并多个-commit-为一个-commit"><a href="#合并多个-commit-为一个-commit" class="headerlink" title="合并多个 commit 为一个 commit"></a>合并多个 commit 为一个 commit</h2><p>合并多个 <em>commit</em> 为一个 <em>commit</em> 同样需要 <em>rebase</em>。</p>
@@ -552,84 +482,106 @@
 <h2 id="其他基本操作"><a href="#其他基本操作" class="headerlink" title="其他基本操作"></a>其他基本操作</h2><ul>
 <li>生成本地的 <em>key</em>，并添加到远程仓库</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>ssh-keygen -t rsa
+</code></pre><ul>
 <li>初始化本地目录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git init
+</code></pre><ul>
 <li>添加到本地仓库</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add filename</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git add filename
+</code></pre><ul>
 <li>提交到仓库（<em>git</em> 提交的是修改）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;description&quot;</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git commit -m &quot;description&quot;
+</code></pre><ul>
 <li>查看仓库状态</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git status
+</code></pre><ul>
 <li>查看不同点</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff filename</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git diff filename
+</code></pre><ul>
 <li>版本回退</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git reset --hard
+</code></pre><ul>
 <li>第一分支 <em>master</em> 创建分支 <em>v1</em> （<em>HEAD</em> 指向当前分支）</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 创建并指向新分支</span><br><span class="line">git checkout -b v1 </span><br><span class="line">// 分步执行</span><br><span class="line">git branch v1</span><br><span class="line">git checkouut v1</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>// 创建并指向新分支
+git checkout -b v1 
+// 分步执行
+git branch v1
+git checkouut v1
+</code></pre><ul>
 <li>合并到当前分支</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge v1</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git merge v1
+</code></pre><ul>
 <li>删除指定分支</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d v1</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git branch -d v1
+</code></pre><ul>
 <li>指定分支将远程仓库的代码拉到本地</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone gitAddress -b branchName</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git clone gitAddress -b branchName
+</code></pre><ul>
 <li>将本地的代码提交到远程仓库</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git pull    //获取最新的更改</span><br><span class="line">git add modefied_filename</span><br><span class="line">git commit -m &quot;description&quot;</span><br><span class="line">git push  // 推送</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git pull    //获取最新的更改
+git add modefied_filename
+git commit -m &quot;description&quot;
+git push  // 推送
+</code></pre><ul>
 <li>冲突解决<br>可以用上面的方法解决就解决，不行的话就用下面的方法：<ul>
 <li>用远程仓库的代码完全覆盖本地代码。</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard // 版本回退</span><br><span class="line">git pull</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git reset --hard // 版本回退
+git pull
+
+</code></pre><ul>
 <li>修改 commit 提交的内容</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git commit --amend
+
+</code></pre><ul>
 <li>打印 log 数量</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log -p -3</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git log -p -3
+
+</code></pre><ul>
 <li>文件被添加到暂存区，撤销该文件到工作目录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD fliename</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git reset HEAD fliename
+
+</code></pre><ul>
 <li>工作目的删除文件后，还有在暂存区中删除该文件</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rm filename</span><br><span class="line">git rm filename</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>rm filename
+git rm filename
+
+</code></pre><ul>
 <li>撤销对当前文件的修改，恢复到上一次快照的状态</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- filename</span><br></pre></td></tr></table></figure>
-<ul>
+<pre><code>git checkout -- filename
+
+</code></pre><ul>
 <li><em>HEAD</em> 指针指向当前的分支，提交后都会快进（<em>fast-forward</em> ：指针右移）。</li>
 <li><em>rebase</em> 合并分支<br>变基是将一系列提交按照原有次序依次应用到另一分支上，而合并是把最终结果合在一起。使得提交历史更加整洁。 你在查看一个经过变基的分支的历史记录时会发现，尽管实际的开发工作是并行的，但它们看上去就像是串行的一样，提交历史是一条直线没有分叉。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br><span class="line">......修改......</span><br><span class="line">git add filename</span><br><span class="line">git commit -m &quot;......&quot;</span><br><span class="line">git rebase master</span><br><span class="line">git checkout master</span><br><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+<pre><code>git checkout dev
+......修改......
+git add filename
+git commit -m &quot;......&quot;
+git rebase master
+git checkout master
+git merge dev
 
+</code></pre>
             </div>
             <hr>
 

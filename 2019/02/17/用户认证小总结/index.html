@@ -27,12 +27,17 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -66,28 +71,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -104,28 +87,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -168,28 +129,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -206,28 +145,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -468,8 +385,12 @@
 <li>解决方案二：服务器不保存 <strong>session</strong> 数据，所有的数据保存在客户端，每次请求都发回服务器。如：JWT(Json Web Token)。</li>
 </ul>
 <h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p><strong>JWT</strong> 服务器不保存 <strong>session</strong> 数据，在服务器认证之后，返回一个 <strong>JSON</strong> 对象。格式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;姓名&quot;: &quot;zero&quot;,</span><br><span class="line">    &quot;角色&quot;: &quot;管理员&quot;,</span><br><span class="line">    &quot;到期时间&quot;: &quot;2018年10月6日0点0分&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>之后，客户端与服务器的用户认证都靠这个 <strong>JSON</strong> 对象，当然，这个对象后面会加上签名，保证数据不被篡改。</p>
+<pre><code>{
+    &quot;姓名&quot;: &quot;zero&quot;,
+    &quot;角色&quot;: &quot;管理员&quot;,
+    &quot;到期时间&quot;: &quot;2018年10月6日0点0分&quot;
+}
+</code></pre><p>之后，客户端与服务器的用户认证都靠这个 <strong>JSON</strong> 对象，当然，这个对象后面会加上签名，保证数据不被篡改。</p>
 <h4 id="JWT-的数据结构"><a href="#JWT-的数据结构" class="headerlink" title="JWT 的数据结构"></a>JWT 的数据结构</h4><ul>
 <li><strong>JWT</strong> 是一个很长的字符串，中间用 <strong>.</strong> 分隔，内部没有换行。</li>
 <li>组成由三个部分：<strong>Header.Payload.Signature</strong><ul>
@@ -480,8 +401,11 @@
 </li>
 </ul>
 <p>Header 格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;,   // 签名的算法</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;      // token 类型</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Payload 七个字段：</p>
+<pre><code>{
+  &quot;alg&quot;: &quot;HS256&quot;,   // 签名的算法
+  &quot;typ&quot;: &quot;JWT&quot;      // token 类型
+}
+</code></pre><p>Payload 七个字段：</p>
 <ul>
 <li>iss (issuer)：签发人</li>
 <li>exp (expiration time)：过期时间</li>

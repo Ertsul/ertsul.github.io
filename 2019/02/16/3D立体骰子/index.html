@@ -24,12 +24,17 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -63,28 +68,6 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -101,28 +84,6 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -165,28 +126,6 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -203,28 +142,6 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -459,8 +376,16 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>CSS3确实很强大，很多高大上的动画都可以实现，这里来实现下3D立方体，效果图如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-21400fd37137e37c.gif?imageMogr2/auto-orient/strip" alt="3D立方体.gif"></p>
-<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><p>其实，实现3D立方体需要的html十分简单，只需要一个ul标签里面包裹6个li标签，分别用来表示3D立方体的6个面[ 前，下，后，上，左，右 ]。具体代码如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;1&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;2&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;3&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;4&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;5&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;6&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
-<h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><h4 id="ul"><a href="#ul" class="headerlink" title="ul"></a>ul</h4><p>基本的宽高这些就不说了；作为整个3D立方体的父级元素，需要设置positiion属性为relative，还要最重要的是设置它的动画类型tranform-style为preserve-3d，这样就可以实现它的所有子元素都进行3d动画。</p>
+<h2 id="html"><a href="#html" class="headerlink" title="html"></a>html</h2><p>其实，实现3D立方体需要的html十分简单，只需要一个ul标签里面包裹6个li标签，分别用来表示3D立方体的6个面[ 前，下，后，上，左，右 ]。具体代码如下:</p>
+<pre><code>&lt;ul&gt;
+    &lt;li&gt;1&lt;/li&gt;
+    &lt;li&gt;2&lt;/li&gt;
+    &lt;li&gt;3&lt;/li&gt;
+    &lt;li&gt;4&lt;/li&gt;
+    &lt;li&gt;5&lt;/li&gt;
+    &lt;li&gt;6&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h2 id="CSS3"><a href="#CSS3" class="headerlink" title="CSS3"></a>CSS3</h2><h4 id="ul"><a href="#ul" class="headerlink" title="ul"></a>ul</h4><p>基本的宽高这些就不说了；作为整个3D立方体的父级元素，需要设置positiion属性为relative，还要最重要的是设置它的动画类型tranform-style为preserve-3d，这样就可以实现它的所有子元素都进行3d动画。</p>
 <h4 id="li"><a href="#li" class="headerlink" title="li"></a>li</h4><p>宽高设置为100%，position属性设置为absolute。</p>
 <ul>
 <li>前<br>设置背景，并且沿着Z轴移动50px，即宽高的一半(为什么得添加这个, 后面用动画进行解释说明)。</li>
@@ -468,7 +393,77 @@ html其实，实现3D立方体需要的html十分简单，只需要一个ul标�
 <li>后<br>设置背景，沿着<strong>X轴</strong>旋转-180deg，作为后面，同样，并且沿着Z轴移动50px。</li>
 <li>上<br>设置背景，沿着<strong>X轴</strong>旋转90deg，作为上面，同样，并且沿着Z轴移动50px。</li>
 <li>左<br>设置背景，沿着<strong>Y轴</strong>旋转-90deg，作为左面，同样，并且沿着Z轴移动50px。</li>
-<li>右<br>设置背景，沿着<strong>Y轴</strong>旋转90deg，作为右面，同样，并且沿着Z轴移动50px。<br><img src="http://upload-images.jianshu.io/upload_images/659084-133d15ade6726266.gif?imageMogr2/auto-orient/strip" alt="效果.gif"><h4 id="结尾说明"><a href="#结尾说明" class="headerlink" title="结尾说明"></a>结尾说明</h4>这里说明上面那个translate，先来看看如果不添加这个属性是怎样的效果：<br><img src="http://upload-images.jianshu.io/upload_images/659084-2e1633af2155afdb.gif?imageMogr2/auto-orient/strip" alt="动画.gif"><br>可见，所有的面都交集于立方体的中心点。由于未对6个面作任何动画处理的时候，所有的面都集合在一起。所以在面作旋转的同时需要对其进行Z轴的位移处理。<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">    * &#123;</span><br><span class="line">        margin: 0;</span><br><span class="line">        padding: 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    body &#123;</span><br><span class="line">        background-color: black;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ul &#123;</span><br><span class="line">        list-style: none;</span><br><span class="line">        width: 100px;</span><br><span class="line">        height: 100px;</span><br><span class="line">        position: relative;</span><br><span class="line">        cursor: pointer;</span><br><span class="line">        margin: 150px auto;</span><br><span class="line"></span><br><span class="line">        transition: 1s;    /* 设置过渡时间 */</span><br><span class="line">        transform-style: preserve-3d;   /* 设置所有的子元素实现3D动画 */</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /* 设置鼠标悬停的动画 */</span><br><span class="line">    ul:hover &#123;</span><br><span class="line">        transform: rotateX(120deg) rotateY(120deg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ul li &#123;</span><br><span class="line">        width: 100%;</span><br><span class="line">        height: 100%;</span><br><span class="line">        text-align: center;</span><br><span class="line">        line-height: 100px;</span><br><span class="line">        font-size: 40px;</span><br><span class="line">        font-weight: 700;</span><br><span class="line">        position: absolute;</span><br><span class="line">        top: 0px;</span><br><span class="line">    &#125;</span><br><span class="line">    /* 前 */</span><br><span class="line">    ul li:nth-child(1) &#123;</span><br><span class="line">        background-color: rgba(225, 0, 0, .4);</span><br><span class="line">        transform: rotateX(0deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    /* 下 */</span><br><span class="line">    ul li:nth-child(2) &#123;</span><br><span class="line">        background-color: rgba(0, 255, 0, .4);</span><br><span class="line">        transform: rotateX(-90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    /* 后 */</span><br><span class="line">    ul li:nth-child(3) &#123;</span><br><span class="line">        background-color: rgba(0, 0, 255, .4);</span><br><span class="line">        transform: rotateX(-180deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    /* 上 */</span><br><span class="line">    ul li:nth-child(4) &#123;</span><br><span class="line">        background-color: rgba(125, 125, 0, .4);</span><br><span class="line">        transform: rotateX(90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    /* 左 */</span><br><span class="line">    ul li:nth-child(5) &#123;</span><br><span class="line">        background-color: rgba(0, 125, 125, .4);</span><br><span class="line">        transform: rotateY(-90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">    /* 右 */</span><br><span class="line">    ul li:nth-child(6) &#123;</span><br><span class="line">        background-color: rgba(10, 45, 36, .4);</span><br><span class="line">        transform: rotateY(90deg) translateZ(50px);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>右<br>设置背景，沿着<strong>Y轴</strong>旋转90deg，作为右面，同样，并且沿着Z轴移动50px。<br><img src="http://upload-images.jianshu.io/upload_images/659084-133d15ade6726266.gif?imageMogr2/auto-orient/strip" alt="效果.gif"></p>
+<h4 id="结尾说明"><a href="#结尾说明" class="headerlink" title="结尾说明"></a>结尾说明</h4><p>这里说明上面那个translate，先来看看如果不添加这个属性是怎样的效果：<br><img src="http://upload-images.jianshu.io/upload_images/659084-2e1633af2155afdb.gif?imageMogr2/auto-orient/strip" alt="动画.gif"><br>可见，所有的面都交集于立方体的中心点。由于未对6个面作任何动画处理的时候，所有的面都集合在一起。所以在面作旋转的同时需要对其进行Z轴的位移处理。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>&lt;style&gt;
+  * {
+      margin: 0;
+      padding: 0;
+  }
+
+  body {
+      background-color: black;
+  }
+
+  ul {
+      list-style: none;
+      width: 100px;
+      height: 100px;
+      position: relative;
+      cursor: pointer;
+      margin: 150px auto;
+
+      transition: 1s;    /* 设置过渡时间 */
+      transform-style: preserve-3d;   /* 设置所有的子元素实现3D动画 */
+  }
+
+  /* 设置鼠标悬停的动画 */
+  ul:hover {
+      transform: rotateX(120deg) rotateY(120deg);
+  }
+
+  ul li {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: 100px;
+      font-size: 40px;
+      font-weight: 700;
+      position: absolute;
+      top: 0px;
+  }
+  /* 前 */
+  ul li:nth-child(1) {
+      background-color: rgba(225, 0, 0, .4);
+      transform: rotateX(0deg) translateZ(50px);
+  }
+  /* 下 */
+  ul li:nth-child(2) {
+      background-color: rgba(0, 255, 0, .4);
+      transform: rotateX(-90deg) translateZ(50px);
+  }
+  /* 后 */
+  ul li:nth-child(3) {
+      background-color: rgba(0, 0, 255, .4);
+      transform: rotateX(-180deg) translateZ(50px);
+  }
+  /* 上 */
+  ul li:nth-child(4) {
+      background-color: rgba(125, 125, 0, .4);
+      transform: rotateX(90deg) translateZ(50px);
+  }
+  /* 左 */
+  ul li:nth-child(5) {
+      background-color: rgba(0, 125, 125, .4);
+      transform: rotateY(-90deg) translateZ(50px);
+  }
+  /* 右 */
+  ul li:nth-child(6) {
+      background-color: rgba(10, 45, 36, .4);
+      transform: rotateY(90deg) translateZ(50px);
+  }
+&lt;/style&gt;
+</code></pre></li>
 </ul>
 
             </div>

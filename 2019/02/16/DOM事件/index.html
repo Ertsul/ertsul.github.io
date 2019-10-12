@@ -25,12 +25,17 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -64,28 +69,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -102,28 +85,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -166,28 +127,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -204,28 +143,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -470,8 +387,24 @@
 </blockquote>
 <p>就比如：我们用button产生一个click事件，但是由于button按钮本身可能不能处理这个事件，就要开始传播出去这个事件。<br>实现事件冒泡的条件是：元素之间有嵌套，每个元素都有相同的事件，这样当最里层的事件触发时，这个事件就会一级一级向上传播，也就是”冒泡“。</p>
 <p>举个例子：在一个div里面嵌套另一个div，两个div都绑定了相同的事件监听函数click。这样，当里层点击事件触发时，外层的点击事件也会被触发。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;outer&quot;&gt;</span><br><span class="line"> &lt;div id=&quot;inner&quot;&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> window.onload = function () &#123;</span><br><span class="line">   let inner = document.getElementById(&apos;inner&apos;)</span><br><span class="line">   let outer = document.getElementById(&apos;outer&apos;)</span><br><span class="line">   inner.addEventListener(&apos;click&apos;, function (e) &#123;</span><br><span class="line">     console.log(&apos;inner&apos;);</span><br><span class="line">   &#125;)</span><br><span class="line">   outer.addEventListener(&apos;click&apos;, function () &#123; </span><br><span class="line">     console.log(&apos;outer&apos;);</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>结果为：<br><img src="http://upload-images.jianshu.io/upload_images/659084-be2355e585a26bc5?imageMogr2/auto-orient/strip" alt="事件冒泡.gif"></p>
+<pre><code>&lt;div id=&quot;outer&quot;&gt;
+ &lt;div id=&quot;inner&quot;&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+ window.onload = function () {
+   let inner = document.getElementById(&#39;inner&#39;)
+   let outer = document.getElementById(&#39;outer&#39;)
+   inner.addEventListener(&#39;click&#39;, function (e) {
+     console.log(&#39;inner&#39;);
+   })
+   outer.addEventListener(&#39;click&#39;, function () { 
+     console.log(&#39;outer&#39;);
+   })
+ }
+&lt;/script&gt;
+</code></pre><p>结果为：<br><img src="http://upload-images.jianshu.io/upload_images/659084-be2355e585a26bc5?imageMogr2/auto-orient/strip" alt="事件冒泡.gif"></p>
 <h5 id="阻止事件冒泡"><a href="#阻止事件冒泡" class="headerlink" title="阻止事件冒泡"></a>阻止事件冒泡</h5><ul>
 <li>一般浏览器：event.stopPropagation()</li>
 <li>IE浏览器：event.cancelBubble = true</li>
@@ -487,21 +420,61 @@
 </ul>
 <p>举个例子：在一个div里面嵌套另一个div，两个div都绑定了相同的事件监听函数click。</p>
 <p>将第三个参数设置为true，事件在 <strong>捕获阶段</strong> 执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;outer&quot;&gt;</span><br><span class="line"> &lt;div id=&quot;inner&quot;&gt;</span><br><span class="line"> &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> window.onload = function () &#123;</span><br><span class="line"> let inner = document.getElementById(&apos;inner&apos;)</span><br><span class="line"> let outer = document.getElementById(&apos;outer&apos;)</span><br><span class="line"> inner.addEventListener(&apos;click&apos;, function (e) &#123;</span><br><span class="line"> console.log(&apos;inner&apos;);</span><br><span class="line"> &#125;, true)</span><br><span class="line"> outer.addEventListener(&apos;click&apos;, function () &#123; </span><br><span class="line"> console.log(&apos;outer&apos;);</span><br><span class="line"> &#125;, true)</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>由于是 <strong>捕获阶段</strong> 执行，即：由外向内执行，所以结果为： outer inner。</p>
+<pre><code>&lt;div id=&quot;outer&quot;&gt;
+ &lt;div id=&quot;inner&quot;&gt;
+ &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+ window.onload = function () {
+ let inner = document.getElementById(&#39;inner&#39;)
+ let outer = document.getElementById(&#39;outer&#39;)
+ inner.addEventListener(&#39;click&#39;, function (e) {
+ console.log(&#39;inner&#39;);
+ }, true)
+ outer.addEventListener(&#39;click&#39;, function () { 
+ console.log(&#39;outer&#39;);
+ }, true)
+ }
+&lt;/script&gt;
+</code></pre><p>由于是 <strong>捕获阶段</strong> 执行，即：由外向内执行，所以结果为： outer inner。</p>
 <p>结果为：<br><img src="http://upload-images.jianshu.io/upload_images/659084-82bb228984257ae1?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>将第三个参数设置为false，事件在 <strong>冒泡阶段</strong> 执行，输出结果为： inner outer。<br><img src="http://upload-images.jianshu.io/upload_images/659084-1d1d0c25024cc18d?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h2 id="事件处理函数-事件监听函数"><a href="#事件处理函数-事件监听函数" class="headerlink" title="事件处理函数/事件监听函数"></a>事件处理函数/事件监听函数</h2><p>事件触发后的处理函数。如：btn.onclick = fn，fn就是事件处理函数/事件监听函数。</p>
 <h4 id="HTML事件处理程序"><a href="#HTML事件处理程序" class="headerlink" title="HTML事件处理程序"></a>HTML事件处理程序</h4><p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button onclick = &quot;fn()&quot;&gt;click&lt;/button&gt;</span><br></pre></td></tr></table></figure>
-<p>这种方式的缺点是：结构和行为耦合在一起。</p>
+<pre><code>&lt;button onclick = &quot;fn()&quot;&gt;click&lt;/button&gt;
+</code></pre><p>这种方式的缺点是：结构和行为耦合在一起。</p>
 <h4 id="DOM0级事件处理程序"><a href="#DOM0级事件处理程序" class="headerlink" title="DOM0级事件处理程序"></a>DOM0级事件处理程序</h4><p>形式为：ele.on + ‘事件名称’ = 事件处理函数<br>例如： ele.onclick = function() {…}，this指向当前元素。</p>
 <h4 id="DOM2级事件处理程序"><a href="#DOM2级事件处理程序" class="headerlink" title="DOM2级事件处理程序"></a>DOM2级事件处理程序</h4><p>这种方式主要是通过这两个方法：addEventListener()，removeEventListener()<br>这种方式的优点就是：可以同一个事件处理程序绑定多个事件处理函数。</p>
 <h2 id="事件委托"><a href="#事件委托" class="headerlink" title="事件委托"></a>事件委托</h2><p>事件委托要处理的问题是：解决事件处理程序过多的问题。简单来说，就是将很多个事件处理程序委托给一个事件处理程序，通过这个事件处理程序来管理这么多个事件处理程序。<br>好处：减少对DOM的访问，提高性能；可以对后来添加进来的元素也能绑定委托事件。</p>
 <p>例如：在一个 ul 标签中有很多个 li 标签，我们的需求而是点击每一个 li 标签显示每一个 li 标签的内容。<br>如果没有使用事件委托，我们需要给每一个 li 标签都添加事件监听函数，很明显，这样的效率并不高，而且对整个网页的性能也会影响；如果我们使用事件委托，将这些 li 的事件委托给 ul 标签，这样就可以只用一个事件监听函数实现。</p>
 <p>代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul id=&quot;list&quot;&gt; </span><br><span class="line"> &lt;li&gt;111111&lt;/li&gt;</span><br><span class="line"> &lt;li&gt;222222&lt;/li&gt;</span><br><span class="line"> &lt;li&gt;333333&lt;/li&gt;</span><br><span class="line"> &lt;li&gt;444444&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"> window.onload = function () &#123; </span><br><span class="line"> // 传统的方法</span><br><span class="line"> // let lis = document.getElementsByTagName(&apos;li&apos;)</span><br><span class="line"> // console.log(lis);</span><br><span class="line"> // for(let i = 0; i &lt; lis.length; i++)&#123;</span><br><span class="line"> //     lis[i].addEventListener(&apos;click&apos;, function () &#123; </span><br><span class="line"> //         console.log(this.innerHTML);</span><br><span class="line"> //     &#125;)</span><br><span class="line"> // &#125;</span><br><span class="line"> // 使用事件委托</span><br><span class="line"> let list = document.getElementById(&apos;list&apos;)</span><br><span class="line"> list.addEventListener(&apos;click&apos;, function (e) &#123; </span><br><span class="line">   let target = e.target</span><br><span class="line">   console.log(target.innerHTML);</span><br><span class="line"> &#125;, false)</span><br><span class="line"> &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>事件委托一般使用的是 <strong>事件冒泡阶段</strong> 进行（虽然事件捕获阶段也可以），因为事件冒泡的事件流模型被所有的主流浏览器兼容，事件冒泡的兼容性更好。</p>
+<pre><code>&lt;ul id=&quot;list&quot;&gt; 
+ &lt;li&gt;111111&lt;/li&gt;
+ &lt;li&gt;222222&lt;/li&gt;
+ &lt;li&gt;333333&lt;/li&gt;
+ &lt;li&gt;444444&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+ window.onload = function () { 
+ // 传统的方法
+ // let lis = document.getElementsByTagName(&#39;li&#39;)
+ // console.log(lis);
+ // for(let i = 0; i &lt; lis.length; i++){
+ //     lis[i].addEventListener(&#39;click&#39;, function () { 
+ //         console.log(this.innerHTML);
+ //     })
+ // }
+ // 使用事件委托
+ let list = document.getElementById(&#39;list&#39;)
+ list.addEventListener(&#39;click&#39;, function (e) { 
+   let target = e.target
+   console.log(target.innerHTML);
+ }, false)
+ }
+&lt;/script&gt;
+</code></pre><p>事件委托一般使用的是 <strong>事件冒泡阶段</strong> 进行（虽然事件捕获阶段也可以），因为事件冒泡的事件流模型被所有的主流浏览器兼容，事件冒泡的兼容性更好。</p>
 
             </div>
             <hr>

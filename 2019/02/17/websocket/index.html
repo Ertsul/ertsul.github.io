@@ -25,12 +25,17 @@
     <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
     <link rel="stylesheet" type="text/css" href="/css/matery.css">
     <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/styles/vs2015.min.css">
     <style type="text/css">
         
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
-    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js">
+    </script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script>
 </head>
 
 
@@ -64,28 +69,6 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
     <a href="/archives" class="waves-effect waves-light">
       
       <i class="fas fa-archive" style="zoom: 0.6;"></i>
@@ -102,28 +85,6 @@
       <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
       
       <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/contact" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
     </a>
     
   </li>
@@ -166,28 +127,6 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
 		<a href="/archives" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-archive"></i>
@@ -204,28 +143,6 @@
 			    <i class="fa-fw fas fa-user-circle"></i>
 			
 			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/contact" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			Contact
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
 		</a>
           
         </li>
@@ -477,21 +394,44 @@
 <li>WS：TCP + WS</li>
 <li>WSS：TCP + WS + TLS</li>
 </ul>
-<h4 id="websocket-握手"><a href="#websocket-握手" class="headerlink" title="websocket 握手"></a>websocket 握手</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /chat HTTP/1.1</span><br><span class="line">Host: server.example.com</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: 13</span><br></pre></td></tr></table></figure>
-<ul>
+<h4 id="websocket-握手"><a href="#websocket-握手" class="headerlink" title="websocket 握手"></a>websocket 握手</h4><pre><code>GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13
+</code></pre><ul>
 <li>Upgrade/Connection：通知服务器发起的是 <strong>wesocket</strong> 协议。</li>
 <li>Sec-WebSocket-Key：浏览器随机生成的 <strong>Base64 encode</strong> 的值，用于验证服务器是不是 <strong>websocket 协议</strong>。</li>
 <li>Sec-WebSocket-Protocol：用户定义的字符串，用来区分 <strong>同 url</strong> 下，不同的服务所需要的协议。</li>
 <li>Sec-WebSocket-Version：协议版本。</li>
 </ul>
-<h4 id="服务器返回"><a href="#服务器返回" class="headerlink" title="服务器返回"></a>服务器返回</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 101 Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</span><br><span class="line">Sec-WebSocket-Protocol: chat</span><br></pre></td></tr></table></figure>
-<ul>
+<h4 id="服务器返回"><a href="#服务器返回" class="headerlink" title="服务器返回"></a>服务器返回</h4><pre><code>HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+Sec-WebSocket-Protocol: chat
+</code></pre><ul>
 <li>Upgrade/Connection：通知客户端升级的是 <strong>websocket</strong> 协议。</li>
 <li>Sec-WebSocket-Accept：经服务器确认，加密后的 <strong>Sec-WebSocket-Key</strong>。</li>
 <li>Sec-WebSocket-Protocol：最终使用的协议。</li>
 </ul>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ws.addEventListener(&apos;open&apos;, function () &#123;</span><br><span class="line">    console.log(&apos;Open the websocket...&apos;);</span><br><span class="line">    ws.send(&apos;Hello websocket...&apos;);</span><br><span class="line">&#125;);</span><br><span class="line">ws.addEventListener(&apos;message&apos;, function (e) &#123;</span><br><span class="line">    console.log(&apos;Ready state: &apos; + ws.readyState, &apos;Receive the websocket message...&apos; + e.data);</span><br><span class="line">    ws.close();</span><br><span class="line">    setTimeout(() =&gt; &#123;</span><br><span class="line">        console.log(&apos;Ready state: &apos; + ws.readyState);</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">&#125;);</span><br><span class="line">ws.addEventListener(&apos;close&apos;, function () &#123;</span><br><span class="line">    console.log(&apos;Ready state: &apos; + ws.readyState, &apos;Close the websocket...&apos;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/659084-021a1bb1915811bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>ws.addEventListener(&#39;open&#39;, function () {
+    console.log(&#39;Open the websocket...&#39;);
+    ws.send(&#39;Hello websocket...&#39;);
+});
+ws.addEventListener(&#39;message&#39;, function (e) {
+    console.log(&#39;Ready state: &#39; + ws.readyState, &#39;Receive the websocket message...&#39; + e.data);
+    ws.close();
+    setTimeout(() =&gt; {
+        console.log(&#39;Ready state: &#39; + ws.readyState);
+    }, 1000)
+});
+ws.addEventListener(&#39;close&#39;, function () {
+    console.log(&#39;Ready state: &#39; + ws.readyState, &#39;Close the websocket...&#39;);
+})
+</code></pre><p>结果：<br><img src="https://upload-images.jianshu.io/upload_images/659084-021a1bb1915811bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>参考：</p>
 <p><img src="https://upload-images.jianshu.io/upload_images/659084-d06ed1bfe9c9fadb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <ul>
@@ -716,15 +656,14 @@
                         
                             创建项目
 安装 vue3.0 脚手架
-1npm install -g @vue/cli
+npm install -g @vue/cli
 
 创建项目
-1vue create my_project
-
-
+vue create my_project
 一系列选择之后，可以保存你当前的选择配置，之后创建项目的时候就可以直接用了。
 
-安装依赖1
+安装依赖
+cd m
                         
                     </div>
                     <div class="publish-info">
