@@ -373,8 +373,8 @@
             <div id="articleContent">
                 <h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><p><em>cherry-pick</em> 可以将分支 <em>B</em> 的任何<strong>一个</strong> <em>commit</em> 合并到分支 <em>A</em>。</p>
 <p><strong>情景</strong>：<em>dev</em> 分支有两个 <em>commit</em>，分别是：创建 <em>b.txt</em> 文件 <em>commitB</em>、创建 <em>c.txt</em> 文件 <em>commitC</em>。现在我们只想要合并 <em>commitAB 到 </em>master<em> 分支。下面是 </em>master<em> 和 </em>dev* 两个分支的情况：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-049b7c95c62a3131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-d46ecad032fee3ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-049b7c95c62a3131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-d46ecad032fee3ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>如果直接用 <em>git merge</em> 会将 <em>commitC</em> 也合并到 <em>master</em>，这不是我们想要的结果。这时候，<em>cherry-pick</em> 就派上用场了。用法如下：</p>
 <ul>
 <li>切换到目标分支。</li>
@@ -385,11 +385,11 @@
 git cherry-pick 8f2aa26
 </code></pre>
 <p>结果如下：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-4c396adb0bb8588a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>不过，<em>cherry-pick</em> 只能合并单个指定的 <em>commit</em>。☞ <a href="https://git-scm.com/docs/git-cherry-pick" target="_blank" rel="noopener">cherry-pick 更多操作</a></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-4c396adb0bb8588a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>不过，<em>cherry-pick</em> 只能合并单个指定的 <em>commit</em>。☞ <a href="http://git-scm.com/docs/git-cherry-pick" target="_blank" rel="noopener">cherry-pick 更多操作</a></p>
 <h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p><em>rebase变基</em> 是 <em>Git</em> 中整合来自不同分支修改的一种操作。（另一种是 <em>merge</em>）</p>
 <p><strong>情景1</strong>：<em>dev</em> 分支有两个 <em>commit</em> ，分别是：创建 <em>d.txt</em> 文件 <em>commitD</em>、创建 <em>e.txt</em> 文件 <em>commitE</em>。现在我们想要将 <em>dev</em> 分支的所有 <em>commit</em> 合并到 <em>master</em>。下面是 <em>dev</em> 分支的情况：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-293e36b78fb47d5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-293e36b78fb47d5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>想要通过 <em>rebase</em> 变基将 <em>commit</em> 合并到 <em>master</em>，只需要：</p>
 <ul>
 <li>将 <em>dev</em> 分支变基到 <em>master</em> 分支。</li>
@@ -401,10 +401,10 @@ git checkout master
 git merge --no-ff dev
 </code></pre>
 <p>最后结果如下：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-0417d63fc36aef1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570868576457.png"></p>
-<p>通过 <em>rebase</em> 合并分支跟 <em>merge</em> 合并是不一样的。☞ <a href="[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](https://git-scm.com/book/zh/v2/Git-分支-变基">点击查看区别</a>)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-0417d63fc36aef1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570868576457.png"></p>
+<p>通过 <em>rebase</em> 合并分支跟 <em>merge</em> 合并是不一样的。☞ <a href="[http://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](http://git-scm.com/book/zh/v2/Git-分支-变基">点击查看区别</a>)</p>
 <p><strong>情景2</strong>：<em>dev</em> 分支上有四个 <em>commit</em>，顺序分别是：创建 <em>f.txt</em> 文件 <em>commitF</em>、增加 <em>f.txt</em> 文件内容 <em>commitF1</em>、创建 <em>g.txt</em> 文件 <em>commitG</em>、增加 <em>g.txt</em> 文件内容 <em>commitG1</em>。现在只想要将 <em>dev</em> 分支上关于文件 <em>f.txt</em> 的所有操作合并到 <em>master</em> 分支。下面是 <em>dev</em> 分支的情况：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-b9f954b059404b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-b9f954b059404b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>现在只想要将 <em>dev</em> 分支上关于文件 <em>f.txt</em> 的所有操作合并到 <em>master</em> 分支，需要：</p>
 <ul>
 <li>以 <em>f.txt</em> 的最后一个修改的 <em>commitID</em> 新建一个分支 <em>dev-temp</em>。</li>
@@ -417,9 +417,9 @@ git rebase --onto master 3b0bfd7^
 git checkout master 
 git merge --no-ff dev-temp
 </code></pre>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-e52de0c710b4437c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-e52de0c710b4437c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p><strong>情景3</strong>：<em>dev</em> 分支上有四个 <em>commit</em>，顺序分别是：创建 <em>i.txt</em> 文件 <em>commitI</em>、增加 <em>i.txt</em> 文件内容 <em>commitI1</em>、创建 <em>j.txt</em> 文件 <em>commitJ</em>、增加 <em>j.txt</em> 文件内容 <em>commitJ1</em>。现在只想要将 <em>dev</em> 分支上关于文件 <em>j.txt</em> 的所有操作合并到 <em>master</em> 分支。下面是 <em>dev</em> 分支的情况：（其实跟上面的情况和操作一样）</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-59f2f8f60f66ef93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-59f2f8f60f66ef93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>现在只想要将 <em>dev</em> 分支上关于文件 <em>j.txt</em> 的所有操作合并到 <em>master</em> 分支，需要：</p>
 <ul>
 <li>以 <em>j.txt</em> 的最后一个修改的 <em>commitID</em> 新建一个分支 <em>dev-temp1</em>。</li>
@@ -432,8 +432,8 @@ git rebase --onto master e31249b^
 git checkout master 
 git merge --no-ff dev-temp1
 </code></pre>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-8507dd6818db90d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><a href="[https://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](https://git-scm.com/book/zh/v2/Git-分支-变基">rebase更多操作</a>)</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-8507dd6818db90d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><a href="[http://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](http://git-scm.com/book/zh/v2/Git-分支-变基">rebase更多操作</a>)</p>
 <h2 id="合并多个-commit-为一个-commit"><a href="#合并多个-commit-为一个-commit" class="headerlink" title="合并多个 commit 为一个 commit"></a>合并多个 commit 为一个 commit</h2><p>合并多个 <em>commit</em> 为一个 <em>commit</em> 同样需要 <em>rebase</em>。</p>
 <p>如下图：要将最新的两个 <em>commit</em> 合并为一个 <em>commit</em>。具体操作如下：</p>
 <ul>
@@ -448,11 +448,11 @@ git merge --no-ff dev-temp1
 <li><p>之后会进入 <em>vi</em> 编辑 <em>commit</em> 信息。只需要将原先的 <em>commit</em> 信息注释，在顶部添加新的 <em>commit</em> 信息。</p>
 </li>
 <li><p>完成。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-a8a97ecd1b5c4901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-5528059b7ca9273d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-d173423d001b4e65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-d7e5d016bfa4b80b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-cb502bcc195b4fba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-a8a97ecd1b5c4901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-5528059b7ca9273d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-d173423d001b4e65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-d7e5d016bfa4b80b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-cb502bcc195b4fba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 </li>
 </ul>
 <h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><p>删除分支包括删除本地分支和远程分支：</p>
@@ -468,15 +468,15 @@ git merge --no-ff dev-temp1
 </li>
 </ul>
 <h2 id="恢复分支"><a href="#恢复分支" class="headerlink" title="恢复分支"></a>恢复分支</h2><p>恢复分支，我们只需要以之前分支的 <em>commitID</em> 新开一个分支即可。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-a2e8638e3cc8a3ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-a2e8638e3cc8a3ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>如果不记得 <em>commitID</em>，可以通过 <em>git reflog</em> 进行查看。</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-ba394e5b699ff0f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570871432663.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-ba394e5b699ff0f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570871432663.png"></p>
 <h2 id="撤销本地修改"><a href="#撤销本地修改" class="headerlink" title="撤销本地修改"></a>撤销本地修改</h2><ul>
 <li><p>撤销指定本地文件的修改（未提交状态）：<code>git checkout -- fileName</code></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-75f7a0a74ac422d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-75f7a0a74ac422d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 </li>
 <li><p>撤销本地的所有修改（未提交状态）：<code>git reset --hard</code></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-0359a8aee6d9ae94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-0359a8aee6d9ae94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 </li>
 </ul>
 <h2 id="其他基本操作"><a href="#其他基本操作" class="headerlink" title="其他基本操作"></a>其他基本操作</h2><ul>
