@@ -433,7 +433,7 @@ xhr.open(&#39;GET&#39;, url, true)
 // xhr.setRequestHeader(&#39;Content-Text&#39;, &#39;application/x-www-form-urlencoded&#39;)
 xhr.send(null);
 }
-</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/659084-b5b344a3944ba224.gif?imageMogr2/auto-orient/strip" alt="异步1.gif"></p>
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-b5b344a3944ba224.gif?imageMogr2/auto-orient/strip" alt="异步1.gif"></p>
 <p>但是，由于在<strong>同源策略</strong>的作用下，浏览器只能同源的其他域的资源，先看看什么是同源策略～</p>
 <h2 id="同源策略-SOP（Same-origin-policy）"><a href="#同源策略-SOP（Same-origin-policy）" class="headerlink" title="同源策略/SOP（Same origin policy）"></a>同源策略/SOP（Same origin policy）</h2><p>来自百度的解释：</p>
 <blockquote>
@@ -466,7 +466,7 @@ window.onload = function () {
         document.getElementsByTagName(&#39;body&#39;)[0].appendChild(scriptTag)  // 将动态创建的script标签添加到html页面中
     })
 }
-</code></pre><p>注意：数据处理的函数名要跟跨域返回的函数名一样，这样我们通过JSONP请求数据的时候，服务器才能返回数据。<br>最终结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/659084-df752a8458c616ff.gif?imageMogr2/auto-orient/strip" alt="跨域1.gif"></p>
+</code></pre><p>注意：数据处理的函数名要跟跨域返回的函数名一样，这样我们通过JSONP请求数据的时候，服务器才能返回数据。<br>最终结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-df752a8458c616ff.gif?imageMogr2/auto-orient/strip" alt="跨域1.gif"></p>
 <p>再句一个例子：<br>请求地址是<a href="http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice" target="_blank" rel="noopener">http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice</a></p>
 <pre><code>function refreshPrice(data) { 
 console.log(data);
@@ -505,7 +505,7 @@ window.onload = function () {
         })
     })
 })
-</code></pre><p>实现结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/659084-b1fcb9ed574a8a24.gif?imageMogr2/auto-orient/strip" alt="异步2.gif"></p>
+</code></pre><p>实现结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-b1fcb9ed574a8a24.gif?imageMogr2/auto-orient/strip" alt="异步2.gif"></p>
 <p>用JQuery实现非同源的JSONP跨域请求：</p>
 <pre><code>$(function () {  
 $(&#39;button&#39;).on(&#39;click&#39;, function () {  
@@ -526,7 +526,7 @@ $(&#39;button&#39;).on(&#39;click&#39;, function () {
     })
 })
 })
-</code></pre><p>实现结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/659084-14e8fc745c21ab00.gif?imageMogr2/auto-orient/strip" alt="跨域2.gif"></p>
+</code></pre><p>实现结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-14e8fc745c21ab00.gif?imageMogr2/auto-orient/strip" alt="跨域2.gif"></p>
 
             </div>
             <hr>

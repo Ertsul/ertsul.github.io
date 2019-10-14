@@ -375,7 +375,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>一般的用户认证流程如下图：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-bdfa6d0008a02e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-bdfa6d0008a02e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="image.png"></p>
 <p>但是，这种模式的扩展性不好。单个服务器没问题，如果多个服务器集群，要求共享 <strong>session</strong> ，每个服务器都能访问到 <strong>session</strong> 。</p>
 <ul>
 <li>解决方案一：<strong>session</strong> 数据持久化，写入数据库或者其他持久层。各个服务器收到请求后，向持久层发送数据请求。<ul>

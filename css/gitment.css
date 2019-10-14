@@ -266,7 +266,7 @@ table tr:nth-child(2n), thead {
 }
 
 .gitment-markdown pre {
-    padding: 1.2em;
+    /* padding: 1.2em; */
     margin: .5em 0;
     background: #272822;
     overflow: auto;

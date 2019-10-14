@@ -384,7 +384,7 @@ s">
                 <h2 id="项目构建"><a href="#项目构建" class="headerlink" title="项目构建"></a>项目构建</h2><ul>
 <li>新建项目文件夹</li>
 <li>npm init</li>
-<li><p>设置项目目录结构，结构如下：<br><img src="https://upload-images.jianshu.io/upload_images/659084-bd9163add73e9ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<li><p>设置项目目录结构，结构如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-bd9163add73e9ea0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 </li>
 <li><p><strong>build</strong> 目录是 webpack 打包后的生成目录，<strong>index.html</strong> 是打包后的 html 文件，bundle.hash.js 是打包后的 js 文件。</p>
 </li>
@@ -733,7 +733,7 @@ btn.addEventListener(&#39;click&#39;, function () {
 })
 document.body.appendChild(btn);
 
-</code></pre><p>点击按钮后结果如下：<br><img src="https://upload-images.jianshu.io/upload_images/659084-fa79ce43578285a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</code></pre><p>点击按钮后结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-fa79ce43578285a0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h2 id="热更新-热替换-Hot-Module-Replacement-HMR"><a href="#热更新-热替换-Hot-Module-Replacement-HMR" class="headerlink" title="热更新 / 热替换 / Hot Module Replacement / HMR"></a>热更新 / 热替换 / Hot Module Replacement / HMR</h2><p>热更新：页面只更新改动的模块。</p>
 <ul>
 <li><strong>devServer</strong> 开始 <strong>hot</strong> 热更新模块。</li>
@@ -985,7 +985,7 @@ hook.tap(&#39;react&#39;, (name) =&gt; {
   console.log(&#39;react&#39;, name);
 })
 hook.call(&#39;Ertsul&#39;);
-</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/659084-1d12026d2f938c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-1d12026d2f938c58.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="SyncBailHook-同步熔断钩子"><a href="#SyncBailHook-同步熔断钩子" class="headerlink" title="SyncBailHook 同步熔断钩子"></a>SyncBailHook 同步熔断钩子</h4><p>Synchook 同步钩子在执行每个函数的时候会有一个返回值，undefined：执行成功，继续执行下一个函数，!= undefined：熔断执行，不执行下一个函数。</p>
 <p>实现：</p>
 <pre><code>// Syncbailhook 同步熔断执行，会判断返回是否等于 undefined 来执行下一个函数
@@ -1013,7 +1013,7 @@ hook.tap(&#39;react&#39;, (name) =&gt; {
   console.log(&#39;react&#39;, name);
 })
 hook.call(&#39;Ertsul&#39;);
-</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/659084-3a46a477c8b08d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-3a46a477c8b08d40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="SyncWaterfallHook-同步瀑布钩子"><a href="#SyncWaterfallHook-同步瀑布钩子" class="headerlink" title="SyncWaterfallHook 同步瀑布钩子"></a>SyncWaterfallHook 同步瀑布钩子</h4><p>Syncwaterfallhook 同步瀑布执行，各个函数之间存在关系，上一个函数的执行返回结果在当前函数的输入。</p>
 <p>实现：</p>
 <pre><code>/**
@@ -1045,7 +1045,7 @@ hook.tap(&#39;react&#39;, (data) =&gt; {
   console.log(&#39;react&#39;, data);
 })
 hook.call(&#39;Ertsul&#39;);
-</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/659084-5ccbc856cac523cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-5ccbc856cac523cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="SyncLoopHook-同步循环钩子"><a href="#SyncLoopHook-同步循环钩子" class="headerlink" title="SyncLoopHook 同步循环钩子"></a>SyncLoopHook 同步循环钩子</h4><p>同步循环钩子回让某个函数执行一定的次数。</p>
 <p>实现：</p>
 <pre><code>// Tapable Syncloophook 同步循环钩子
@@ -1077,7 +1077,7 @@ hook.tap(&#39;react&#39;, (name) =&gt; {
   console.log(&#39;react&#39;, name);
 })
 hook.call(&#39;Ertsul&#39;);
-</code></pre><p><img src="https://upload-images.jianshu.io/upload_images/659084-fd5d933715541d45.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-fd5d933715541d45.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="AsyncParallelHook-异步并发钩子-回调函数方式"><a href="#AsyncParallelHook-异步并发钩子-回调函数方式" class="headerlink" title="AsyncParallelHook 异步并发钩子 回调函数方式"></a>AsyncParallelHook 异步并发钩子 回调函数方式</h4><p>实现：</p>
 <pre><code>// Tapable Asynchook 异步钩子
 class asyncparallelhook {
@@ -1283,23 +1283,29 @@ arr3 = Array.prototype.slice.call(arr1, ar
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2019/02/16/hello-hexo/">
+                <a href="/2019/02/16/webpack学习笔记/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="hello-hexo">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="webpack学习笔记">
                         
-                        <span class="card-title">hello-hexo</span>
+                        <span class="card-title">webpack学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Hello Hexo决定把简书的文章转移到 hexo 上。
+                            项目构建
+新建项目文件夹
+npm init
+设置项目目录结构，结构如下：
 
+build 目录是 webpack 打包后的生成目录，index.html 是打包后的 html 文件，bundle.hash.js 是打包后的 js 文件。
+
+s
                         
                     </div>
                     <div class="publish-info">
@@ -1313,6 +1319,19 @@ arr3 = Array.prototype.slice.call(arr1, ar
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/frontEnd/">
+                        <span class="chip bg-color">frontEnd</span>
+                    </a>
+                    
+                    <a href="/tags/webpack/">
+                        <span class="chip bg-color">webpack</span>
+                    </a>
+                    
                 </div>
                 
             </div>

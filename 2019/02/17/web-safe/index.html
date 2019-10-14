@@ -375,7 +375,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="CSRF-Cross-Site-Request-Forgery"><a href="#CSRF-Cross-Site-Request-Forgery" class="headerlink" title="CSRF : Cross Site Request Forgery"></a>CSRF : Cross Site Request Forgery</h2><p><strong>CSRF</strong> 跨站请求伪造。<br>是一种劫持受信任用户向服务器发送非预期请求的攻击方式。简而言之：用户在登录的情况下访问了钓鱼网站，钓鱼网站通过用户向其他网站发送请求，这样就达到了模拟用户的目的。具体实现如下图：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/659084-9ce93c3bff5d427b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/659084-9ce93c3bff5d427b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <h4 id="防御手段"><a href="#防御手段" class="headerlink" title="防御手段"></a>防御手段</h4><ul>
 <li>验证码实现用户验证。验证码强制用户必须与应用进行交互，才能完成最终的请求。</li>
 <li>通过 referer 实现用户验证。根据 <strong>HTTP</strong> 协议，在 <strong>HTTP</strong> 头中有一个字段叫 <strong>Referer</strong>，它记录了该 <strong>HTTP</strong> 请求的 <strong>来源地址</strong>。通过 <strong>Referer Check</strong>，可以检查请求是否来自合法的”源”。</li>
