@@ -4,9 +4,16 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Git 操作（补充）, Ertsul">
-    <meta name="description" content="cherry-pickcherry-pick 可以将分支 B 的任何一个 commit 合并到分支 A。
-情景：dev 分支有两个 commit，分别是：创建 b.txt 文件 commitB、创建 c.txt 文件 commitC。现在我">
+    <meta name="keywords" content="小程序工程化, Ertsul">
+    <meta name="description" content="gulp👉官方文档传送门
+gulp 编译项目日常进行小程序开发，遇到的问题有：
+
+如果在微信开发者工具进行开发的话，效率低；
+不支持 less css预编译器 ；
+autoprefixer ；
+…
+
+考虑到小程序是多页面应用，我们只要在 ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +21,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Git 操作（补充） | Ertsul</title>
+    <title>小程序工程化 | Ertsul</title>
     <link rel="icon" type="image/jpeg" href="/medias/logo1.jpg">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -222,13 +229,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Git 操作（补充）
+                        小程序工程化
                     </div>
                 </div>
             </div>
@@ -340,8 +347,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Git/">
-                                <span class="chip bg-color">Git</span>
+                            <a href="/tags/minapp/">
+                                <span class="chip bg-color">minapp</span>
                             </a>
                         
                     </div>
@@ -355,7 +362,7 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-12
+                    2019-11-05
                 </div>
 
                 
@@ -371,217 +378,301 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="cherry-pick"><a href="#cherry-pick" class="headerlink" title="cherry-pick"></a>cherry-pick</h2><p><em>cherry-pick</em> 可以将分支 <em>B</em> 的任何<strong>一个</strong> <em>commit</em> 合并到分支 <em>A</em>。</p>
-<p><strong>情景</strong>：<em>dev</em> 分支有两个 <em>commit</em>，分别是：创建 <em>b.txt</em> 文件 <em>commitB</em>、创建 <em>c.txt</em> 文件 <em>commitC</em>。现在我们只想要合并 <em>commitAB 到 </em>master<em> 分支。下面是 </em>master<em> 和 </em>dev* 两个分支的情况：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-049b7c95c62a3131.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-d46ecad032fee3ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>如果直接用 <em>git merge</em> 会将 <em>commitC</em> 也合并到 <em>master</em>，这不是我们想要的结果。这时候，<em>cherry-pick</em> 就派上用场了。用法如下：</p>
+                <h2 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a><em>gulp</em></h2><p><a href="https://www.gulpjs.com.cn/" target="_blank" rel="noopener">👉官方文档传送门</a></p>
+<h2 id="gulp-编译项目"><a href="#gulp-编译项目" class="headerlink" title="gulp 编译项目"></a><em>gulp</em> 编译项目</h2><p>日常进行小程序开发，遇到的问题有：</p>
 <ul>
-<li>切换到目标分支。</li>
-<li><em>cherry-pick</em> 待合并的 <em>commitID</em>。</li>
+<li>如果在微信开发者工具进行开发的话，效率低；</li>
+<li>不支持 <em>less</em> css预编译器 ；</li>
+<li><em>autoprefixer</em> ；</li>
+<li>…</li>
 </ul>
-<p>上面的情景，只需要：</p>
-<pre><code class="powershell">git checkout master
-git cherry-pick 8f2aa26
+<p>考虑到小程序是多页面应用，我们只要在 <em>src</em> 目录添加小程序初始化时所需要的相关配置文件，然后通过 <em>gulp</em> 将 <em>src</em> 下的代码搬移到 <em>dist</em> 打包目录即可。</p>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><pre><code>└───gulpTask 目录：主要存放 gulp 代码逻辑
+|     └───baseConfig.js // gulp 路径和 blob 配置信息
+|     └───clean.js // 清理 dist nodejs 脚本文件
+|     └───taskControler.js // gulp 任务定义
+|───src
+|     └───common // 公共代码
+|         └───less
+|             └───...
+|         └───js
+|             └───...
+|     └───components // 组件
+|             └───...
+|     └───pages // 页面
+|             └───...
+|    └───app.js
+|    └───app.json
+|    └───project.config.json
+|    └───sitemap.json
+└───.eslintrc // eslint 配置
+└───.gitignore // git 配置
+└───gulpfile.js // gulp 主入口
+└───package.json
+└───README.md
+</code></pre><h3 id="gulp-配置文件-baseConfig-js"><a href="#gulp-配置文件-baseConfig-js" class="headerlink" title="gulp 配置文件 baseConfig.js"></a><em>gulp</em> 配置文件 <em>baseConfig.js</em></h3><p>将 <em>gulp</em> 相关路径和 <em>blob</em> 配置信息统一在 <em>baseConfig.js</em> 中进行配置。</p>
+<pre><code class="javascript">const path = require(&quot;path&quot;);
+
+const srcPath = path.resolve(__dirname, &quot;../src&quot;);
+const distPath = path.resolve(__dirname, &quot;../dist&quot;);
+const isDev = process.argv.includes(&quot;--development&quot;);
+
+module.exports = {
+  isDev, // 当前环境
+  srcPath, // src 源路径
+  distPath, // dist 编译目标路径
+  basePath: [
+    srcPath
+  ],
+  otherPath: [
+    srcPath,
+    `!${srcPath}/**/**/*.less`,
+    `!${srcPath}/**/**/*.wxml`,
+    `!${srcPath}/**/**/*.json`,
+    `!${srcPath}/**/**/*.js`,
+    `!${srcPath}/static/icons/*.jpg`,
+    `!${srcPath}/static/icons/*.png`,
+    `!${srcPath}/static/images/*.jpg`,
+    `!${srcPath}/static/images/*.png`,
+  ],
+  lessPath: [ // less blob
+    `${srcPath}/**/**/*.less`,
+  ],
+  jsPath: [ // js blob
+    `${srcPath}/**/**/*.js`,
+  ],
+  wxmlPath: [ // wxml blob
+    `${srcPath}/**/**/*.wxml`,
+  ],
+  jsonPath: [ // json blob
+    `${srcPath}/**/**/*.json`,
+  ],
+  lessImportPath: [
+    `${srcPath}/common/less/*.less`
+  ],
+  iconPath: [
+    `${srcPath}/static/icons/*.jpg`,
+    `${srcPath}/static/icons/*.png`
+  ],
+  imagePath: [
+    `${srcPath}/static/images/*.jpg`,
+    `${srcPath}/static/images/*.gif`,
+    `${srcPath}/static/images/*.png`
+  ]
+}
 </code></pre>
-<p>结果如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-4c396adb0bb8588a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>不过，<em>cherry-pick</em> 只能合并单个指定的 <em>commit</em>。☞ <a href="http://git-scm.com/docs/git-cherry-pick" target="_blank" rel="noopener">cherry-pick 更多操作</a></p>
-<h2 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h2><p><em>rebase变基</em> 是 <em>Git</em> 中整合来自不同分支修改的一种操作。（另一种是 <em>merge</em>）</p>
-<p><strong>情景1</strong>：<em>dev</em> 分支有两个 <em>commit</em> ，分别是：创建 <em>d.txt</em> 文件 <em>commitD</em>、创建 <em>e.txt</em> 文件 <em>commitE</em>。现在我们想要将 <em>dev</em> 分支的所有 <em>commit</em> 合并到 <em>master</em>。下面是 <em>dev</em> 分支的情况：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-293e36b78fb47d5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>想要通过 <em>rebase</em> 变基将 <em>commit</em> 合并到 <em>master</em>，只需要：</p>
-<ul>
-<li>将 <em>dev</em> 分支变基到 <em>master</em> 分支。</li>
-<li>切换到 <em>master</em> 分支。</li>
-<li>执行 <em>merge</em> 操作。</li>
-</ul>
-<pre><code class="powershell">git rebase master
-git checkout master 
-git merge --no-ff dev
+<h3 id="gulp-开发流程"><a href="#gulp-开发流程" class="headerlink" title="gulp 开发流程"></a><em>gulp</em> 开发流程</h3><p>主要流程如下：</p>
+<p><img src="https://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png" alt="image-20191105174239088.png"></p>
+<h4 id="gulp-的各个任务如下：（taskControler-js-文件）"><a href="#gulp-的各个任务如下：（taskControler-js-文件）" class="headerlink" title="gulp 的各个任务如下：（taskControler.js 文件）"></a><em>gulp</em> 的各个任务如下：（<em>taskControler.js</em> 文件）</h4><ul>
+<li><p>每次进行 <em>gulp</em> 任务前都要清空 <em>dist</em> 打包后的目录。主要代码如下：</p>
+<pre><code class="javascript">task(&quot;clean:dist&quot;, done =&gt; {
+    // console.log(&quot;:::: clean:dist&quot;);
+
+    src(baseConfig.distPath, {
+        read: true,
+        allowEmpty: true,
+    })
+        .pipe(clean())
+
+    done();
+})
 </code></pre>
-<p>最后结果如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-0417d63fc36aef1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570868576457.png"></p>
-<p>通过 <em>rebase</em> 合并分支跟 <em>merge</em> 合并是不一样的。☞ <a href="[http://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](http://git-scm.com/book/zh/v2/Git-分支-变基">点击查看区别</a>)</p>
-<p><strong>情景2</strong>：<em>dev</em> 分支上有四个 <em>commit</em>，顺序分别是：创建 <em>f.txt</em> 文件 <em>commitF</em>、增加 <em>f.txt</em> 文件内容 <em>commitF1</em>、创建 <em>g.txt</em> 文件 <em>commitG</em>、增加 <em>g.txt</em> 文件内容 <em>commitG1</em>。现在只想要将 <em>dev</em> 分支上关于文件 <em>f.txt</em> 的所有操作合并到 <em>master</em> 分支。下面是 <em>dev</em> 分支的情况：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-b9f954b059404b15.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>现在只想要将 <em>dev</em> 分支上关于文件 <em>f.txt</em> 的所有操作合并到 <em>master</em> 分支，需要：</p>
-<ul>
-<li>以 <em>f.txt</em> 的最后一个修改的 <em>commitID</em> 新建一个分支 <em>dev-temp</em>。</li>
-<li>将以 <em>dev-temp</em> 分支上关于 <em>f.txt</em> 的第一个修改的 <em>commitID</em> <em>rabase</em> 变基到 <em>master</em> 分支。</li>
-<li>切换到 <em>master</em> 分支。</li>
-<li><em>merge</em> <em>dev-temp</em> 分支到 <em>master</em> 分支。</li>
-</ul>
-<pre><code class="powershell">git checkout -b dev-temp 884c858
-git rebase --onto master 3b0bfd7^
-git checkout master 
-git merge --no-ff dev-temp
+<p>但是，上面这样处理会有问题：第二次运行 <em>gulp</em> 命名的时候会有文件权限等问题。故：<em>dist</em> 文件的处理通过 <em>nodejs</em> 进行处理。</p>
+<pre><code class="javascript">// gulp-clean 清空 dist 命令会有权限等一系列问题，故：直接用 node 进行删除 dist
+const path = require(&quot;path&quot;);
+const chalk = require(&quot;chalk&quot;);
+const rimraf = require(&quot;rimraf&quot;);
+
+const distPath = path.resolve(__dirname, &#39;../dist&#39;);
+rimraf(distPath, err =&gt; {
+  if (err) {
+    console.log(chalk.red(err));
+  }
+})
 </code></pre>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-e52de0c710b4437c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><strong>情景3</strong>：<em>dev</em> 分支上有四个 <em>commit</em>，顺序分别是：创建 <em>i.txt</em> 文件 <em>commitI</em>、增加 <em>i.txt</em> 文件内容 <em>commitI1</em>、创建 <em>j.txt</em> 文件 <em>commitJ</em>、增加 <em>j.txt</em> 文件内容 <em>commitJ1</em>。现在只想要将 <em>dev</em> 分支上关于文件 <em>j.txt</em> 的所有操作合并到 <em>master</em> 分支。下面是 <em>dev</em> 分支的情况：（其实跟上面的情况和操作一样）</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-59f2f8f60f66ef93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>现在只想要将 <em>dev</em> 分支上关于文件 <em>j.txt</em> 的所有操作合并到 <em>master</em> 分支，需要：</p>
-<ul>
-<li>以 <em>j.txt</em> 的最后一个修改的 <em>commitID</em> 新建一个分支 <em>dev-temp1</em>。</li>
-<li>将以 <em>dev-temp1</em> 分支上关于 <em>j.txt</em> 的第一个修改的 <em>commitID</em> <em>rabase</em> 变基到 <em>master</em> 分支。</li>
-<li>切换到 <em>master</em> 分支。</li>
-<li><em>merge</em> <em>dev-temp1</em> 分支到 <em>master</em> 分支。</li>
-</ul>
-<pre><code class="powershell">git checkout -b dev-temp1 54ea4bd
-git rebase --onto master e31249b^
-git checkout master 
-git merge --no-ff dev-temp1
+<p>然后在 <em>package.json</em> 中配置脚本命令：</p>
+<pre><code class="json">&quot;scripts&quot;: {
+    &quot;build:dev&quot;: &quot;node gulpTask/clean.js &amp;&amp; gulp dev --development&quot;,
+    &quot;build:prod&quot;: &quot;node gulpTask/clean.js &amp;&amp; gulp prod --production&quot;
+},
 </code></pre>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-8507dd6818db90d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><a href="[http://git-scm.com/book/zh/v2/Git-%E5%88%86%E6%94%AF-%E5%8F%98%E5%9F%BA](http://git-scm.com/book/zh/v2/Git-分支-变基">rebase更多操作</a>)</p>
-<h2 id="合并多个-commit-为一个-commit"><a href="#合并多个-commit-为一个-commit" class="headerlink" title="合并多个 commit 为一个 commit"></a>合并多个 commit 为一个 commit</h2><p>合并多个 <em>commit</em> 为一个 <em>commit</em> 同样需要 <em>rebase</em>。</p>
-<p>如下图：要将最新的两个 <em>commit</em> 合并为一个 <em>commit</em>。具体操作如下：</p>
+<p>这样每次执行 <em>gulp</em> 命令前都会删除 <em>dist</em> 目录。</p>
+</li>
+<li><p>处理 <em>less</em> 文件。需要解决的问题有：</p>
 <ul>
-<li><p>找到这三个 <em>commit</em> 的前一个 <em>commit</em> 的 <em>commitID</em>，执行 <code>git rebase -i commitID</code></p>
-</li>
-<li><p>这时候会进入 <em>vi</em> 编辑。</p>
-<ul>
-<li><code>pick</code> 的意思是要会执行这个 <em>commit</em></li>
-<li><code>squash</code> 的意思是这个 commit 会被合并到前一个 <em>commit</em></li>
+<li>开发环境不压缩代码，生产环境压缩代码；</li>
+<li>自动添加属性前缀，<em>autoperfixer</em>；</li>
+<li>将 <em>less</em> 文件的后缀更改为 <em>wxss</em>；</li>
+<li>将 <em>less</em> 文件内部的 <em>@import</em> 引用文件的后缀更改为 <em>wxss</em>。</li>
 </ul>
-</li>
-<li><p>之后会进入 <em>vi</em> 编辑 <em>commit</em> 信息。只需要将原先的 <em>commit</em> 信息注释，在顶部添加新的 <em>commit</em> 信息。</p>
-</li>
-<li><p>完成。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-a8a97ecd1b5c4901.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-5528059b7ca9273d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-d173423d001b4e65.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-d7e5d016bfa4b80b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-cb502bcc195b4fba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-</li>
-</ul>
-<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><p>删除分支包括删除本地分支和远程分支：</p>
-<ul>
-<li>删除本地分支<ul>
-<li>如本地分支不是打开状态，则：<code>git branch -d branchName</code></li>
-<li>如本地分支是打开状态，则：<code>git branch -D branchName</code></li>
-</ul>
-</li>
-<li>删除远程分支<ul>
-<li><code>git push origin --delete branchName</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="恢复分支"><a href="#恢复分支" class="headerlink" title="恢复分支"></a>恢复分支</h2><p>恢复分支，我们只需要以之前分支的 <em>commitID</em> 新开一个分支即可。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-a2e8638e3cc8a3ac.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>如果不记得 <em>commitID</em>，可以通过 <em>git reflog</em> 进行查看。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-ba394e5b699ff0f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1570871432663.png"></p>
-<h2 id="撤销本地修改"><a href="#撤销本地修改" class="headerlink" title="撤销本地修改"></a>撤销本地修改</h2><ul>
-<li><p>撤销指定本地文件的修改（未提交状态）：<code>git checkout -- fileName</code></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-75f7a0a74ac422d1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-</li>
-<li><p>撤销本地的所有修改（未提交状态）：<code>git reset --hard</code></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-0359a8aee6d9ae94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-</li>
-</ul>
-<h2 id="其他基本操作"><a href="#其他基本操作" class="headerlink" title="其他基本操作"></a>其他基本操作</h2><ul>
-<li>生成本地的 <em>key</em>，并添加到远程仓库</li>
-</ul>
-<pre><code>ssh-keygen -t rsa
-</code></pre><ul>
-<li>初始化本地目录</li>
-</ul>
-<pre><code>git init
-</code></pre><ul>
-<li>添加到本地仓库</li>
-</ul>
-<pre><code>git add filename
-</code></pre><ul>
-<li>提交到仓库（<em>git</em> 提交的是修改）</li>
-</ul>
-<pre><code>git commit -m &quot;description&quot;
-</code></pre><ul>
-<li>查看仓库状态</li>
-</ul>
-<pre><code>git status
-</code></pre><ul>
-<li>查看不同点</li>
-</ul>
-<pre><code>git diff filename
-</code></pre><ul>
-<li>版本回退</li>
-</ul>
-<pre><code>git reset --hard
-</code></pre><ul>
-<li>第一分支 <em>master</em> 创建分支 <em>v1</em> （<em>HEAD</em> 指向当前分支）</li>
-</ul>
-<pre><code>// 创建并指向新分支
-git checkout -b v1 
-// 分步执行
-git branch v1
-git checkouut v1
-</code></pre><ul>
-<li>合并到当前分支</li>
-</ul>
-<pre><code>git merge v1
-</code></pre><ul>
-<li>删除指定分支</li>
-</ul>
-<pre><code>git branch -d v1
-</code></pre><ul>
-<li>指定分支将远程仓库的代码拉到本地</li>
-</ul>
-<pre><code>git clone gitAddress -b branchName
-</code></pre><ul>
-<li>将本地的代码提交到远程仓库</li>
-</ul>
-<pre><code>git pull    //获取最新的更改
-git add modefied_filename
-git commit -m &quot;description&quot;
-git push  // 推送
-</code></pre><ul>
-<li>冲突解决<br>可以用上面的方法解决就解决，不行的话就用下面的方法：<ul>
-<li>用远程仓库的代码完全覆盖本地代码。</li>
-</ul>
-</li>
-</ul>
-<pre><code>git reset --hard // 版本回退
-git pull
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;compile:less&quot;, done =&gt; {
+    // console.log(&quot;:::: compile:less&quot;);
 
-</code></pre><ul>
-<li>修改 commit 提交的内容</li>
-</ul>
-<pre><code>git commit --amend
+    src(baseConfig.lessPath, {
+        base: &quot;src&quot;
+    })
+        .pipe(changed(baseConfig.distPath))
+        .pipe(gulpif(!this.isDev, cleanCss()))
+        .pipe(autoprefixer())
+    // .pipe(less({
+    //   paths: baseConfig.lessImportPath,
+    //   plugins: [autoprefix]
+    // }))
+        .pipe(rename(function (path) { // 更改 .less 文件后缀为 .wxss
+        path.extname = &quot;.wxss&quot;;
+    }))
+        .pipe(replace(/\.less/g, &quot;.wxss&quot;)) // 修改 less 文件内部的引用 .less 文件后缀为 .wxss
+        .pipe(dest(baseConfig.distPath));
 
-</code></pre><ul>
-<li>打印 log 数量</li>
-</ul>
-<pre><code>git log -p -3
-
-</code></pre><ul>
-<li>文件被添加到暂存区，撤销该文件到工作目录</li>
-</ul>
-<pre><code>git reset HEAD fliename
-
-</code></pre><ul>
-<li>工作目的删除文件后，还有在暂存区中删除该文件</li>
-</ul>
-<pre><code>rm filename
-git rm filename
-
-</code></pre><ul>
-<li>撤销对当前文件的修改，恢复到上一次快照的状态</li>
-</ul>
-<pre><code>git checkout -- filename
-
-</code></pre><ul>
-<li><em>HEAD</em> 指针指向当前的分支，提交后都会快进（<em>fast-forward</em> ：指针右移）。</li>
-<li><em>rebase</em> 合并分支<br>变基是将一系列提交按照原有次序依次应用到另一分支上，而合并是把最终结果合在一起。使得提交历史更加整洁。 你在查看一个经过变基的分支的历史记录时会发现，尽管实际的开发工作是并行的，但它们看上去就像是串行的一样，提交历史是一条直线没有分叉。</li>
-</ul>
-<pre><code>git checkout dev
-......修改......
-git add filename
-git commit -m &quot;......&quot;
-git rebase master
-git checkout master
-git merge dev
-
+    done();
+})
 </code></pre>
+<p>这里遇到一个坑，用 l<em>ess-plugin-autoprefix @import</em> 会有问题，<em>@import</em> 语句会被删除。后面改用 <em>gulp-autoprefixer</em>。</p>
+</li>
+<li><p>处理 <em>js</em> 文件。需要解决的问题有：</p>
+<ul>
+<li><em>eslint</em> 代码格式检查；</li>
+<li>开发环境不压缩代码，生产环境压缩代码；</li>
+</ul>
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;compile:js&quot;, done =&gt; {
+  // console.log(&quot;:::: compile:js&quot;);
+
+  src(baseConfig.jsPath, {
+      base: &quot;src&quot;
+    })
+    .pipe(changed(baseConfig.distPath))
+    // .pipe(babel({ // 先通过 babel 转化语法然后才能进行压缩 --&gt; 微信开发者工具有 es6 转 es5 功能
+    //   presets: [&quot;@babel/env&quot;]
+    // }))
+    .pipe(eslint())
+    // .pipe(eslint.format())
+    .pipe(gulpif(!this.isDev, uglify()))
+    .pipe(dest(baseConfig.distPath));
+
+  done();
+})
+</code></pre>
+<p>这里原本加了 <em>babel</em> 进行 <em>es6</em> 到 <em>es5</em> 的转化，但是微信开发者工具本身就有这个功能，故去除。另一个坑是，用 <em>gulp-uglify</em> 不能进行 <em>es6</em> 代码的压缩，要用 <em>gulp-uglify-es</em> 。</p>
+</li>
+<li><p>处理 <em>wxml</em> 文件。需要解决的问题有：</p>
+<ul>
+<li>开发环境不压缩代码，生产环境压缩代码；</li>
+</ul>
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;compile:wxml&quot;, done =&gt; {
+  // console.log(&quot;:::: compile:wxml&quot;);
+
+  src(baseConfig.wxmlPath, {
+      base: &quot;src&quot;
+    })
+    .pipe(changed(baseConfig.distPath))
+    .pipe(gulpif(!this.isDev, htmlmin({
+      collapseWhitespace: true
+    })))
+    .pipe(dest(baseConfig.distPath));
+
+  done();
+})
+</code></pre>
+</li>
+<li><p>处理 <em>json</em> 文件。需要解决的问题有：</p>
+<ul>
+<li>开发环境不压缩代码，生产环境压缩代码；</li>
+</ul>
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;compile:json&quot;, done =&gt; {
+  // console.log(&quot;:::: compile:json&quot;);
+
+  src(baseConfig.jsonPath, {
+      base: &quot;src&quot;
+    })
+    .pipe(changed(baseConfig.distPath))
+    .pipe(gulpif(!this.isDev, prettyData({
+      type: &quot;minify&quot;,
+      preserveComments: true,
+      extensions: {
+        &quot;json&quot;: &quot;json&quot;,
+      }
+    })))
+    .pipe(dest(baseConfig.distPath));
+
+  done();
+})
+</code></pre>
+</li>
+<li><p>其他所有文件。</p>
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;compile:other&quot;, done =&gt; {
+      // console.log(&quot;:::: compile:other&quot;);
+
+      src(baseConfig.otherPath, {
+          base: &quot;src&quot;
+        })
+        .pipe(changed(baseConfig.distPath))
+        .pipe(dest(baseConfig.distPath));
+
+      done();
+    })
+</code></pre>
+</li>
+<li><p>图片压缩。</p>
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;minify:image&quot;, async done =&gt; {
+  // console.log(&quot;:::: minify:image&quot;);
+
+  src(baseConfig.imagePath, {
+      base: &quot;src&quot;
+    })
+    .pipe(imagemin([imagemin.optipng(), imagemin.gifsicle(), imagemin.jpegtran()]))
+    .pipe(dest(baseConfig.distPath))
+
+  done();
+})
+</code></pre>
+</li>
+<li><p>开发环境开启监控 <em>watch</em>。</p>
+<p>主要代码如下：</p>
+<pre><code class="javascript">task(&quot;watch&quot;, done =&gt; {
+  // console.log(&quot;:::: compile:other&quot;);
+
+  watch(baseConfig.basePath, {
+    base: &quot;src&quot;
+  }, series(&quot;compile:less&quot;, &quot;compile:js&quot;, &quot;compile:wxml&quot;, &quot;compile:json&quot;, &quot;compile:other&quot;, &quot;minify:image&quot;))
+
+  done();
+})
+</code></pre>
+</li>
+<li><p>最后，将任务进行 <em>id</em> 绑定处理，还有不同环境的区分。主要代码如下：</p>
+<pre><code class="javascript">task(&quot;default&quot;, parallel(&quot;compile:less&quot;, &quot;compile:js&quot;, &quot;compile:wxml&quot;, &quot;compile:json&quot;, &quot;compile:other&quot;, &quot;minify:image&quot;));
+task(`dev-${id}`, series(&quot;default&quot;, &quot;watch&quot;));
+task(`prod-${id}`, series(&quot;default&quot;));
+</code></pre>
+</li>
+</ul>
+<h4 id="gulpfile-js-gulp-入口文件处理："><a href="#gulpfile-js-gulp-入口文件处理：" class="headerlink" title="gulpfile.js gulp 入口文件处理："></a><em>gulpfile.js</em> <em>gulp</em> 入口文件处理：</h4><p>主要是对不同环境的区分，还有 <em>taskControler.js</em> 定义的各个任务进行引用。主要代码如下：</p>
+<pre><code class="javascript">const {
+  task,
+  series
+} = require(&quot;gulp&quot;);
+const TaskControler = require(&quot;./gulpTask/taskControler&quot;);
+// 项目 ID
+const id = require(&quot;./package.json&quot;).name || &quot;min-program&quot;;
+
+new TaskControler(id);
+
+/*---------- 相关的 gulp 任务 ----------*/
+
+// dev 开发环境任务
+task(&quot;dev&quot;, series(`dev-${id}`));
+
+// prod 生产环境任务
+task(&quot;prod&quot;, series(`prod-${id}`));
+</code></pre>
+<p>接着，只需要执行 <code>npm run build:dev</code>或 <code>npm run build:prod</code>，然后将生成的 <em>dist</em> 目录丢到微信开发者工具即可。</p>
+
             </div>
             <hr>
 
@@ -612,8 +703,8 @@ git merge dev
                 </a>
             </div>
             <br>
-            <a href="/2019/10/12/Git-操作（补充）/">
-                    《Git 操作（补充）》
+            <a href="/2019/11/05/小程序工程化/">
+                    《小程序工程化》
             </a> 由
             <a href="https://ertsul.github.io">
                 Ertsul
@@ -656,7 +747,8 @@ git merge dev
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/11/05/小程序工程化/">
                     <div class="card-image">
@@ -682,9 +774,9 @@ autoprefixer ；
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2019-11-05
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-11-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -693,6 +785,7 @@ autoprefixer ；
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -711,24 +804,20 @@ autoprefixer ；
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/12/Git-操作/">
+                <a href="/2019/10/12/Git-操作（补充）/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Git 操作">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="Git 操作（补充）">
                         
-                        <span class="card-title">Git 操作</span>
+                        <span class="card-title">Git 操作（补充）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            想必每个开发者对Git并不陌生，先来看看官方对于Git的定义：
-
-Git是一个免费和开源的分布式版本控制系统，旨在快速和有效率地处理从大到小的项目。
-
-安装 Git 和查看 Git 版本
-安装（仅说明在 Linux 系统下的安装，若您是wi
+                            cherry-pickcherry-pick 可以将分支 B 的任何一个 commit 合并到分支 A。
+情景：dev 分支有两个 commit，分别是：创建 b.txt 文件 commitB、创建 c.txt 文件 commitC。现在我
                         
                     </div>
                     <div class="publish-info">
