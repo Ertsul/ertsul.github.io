@@ -346,302 +346,23 @@
       
         
           
-            <h2 id="gulp"><a href="#gulp" class="headerlink" title="gulp"></a><em>gulp</em></h2><p><a href="https://www.gulpjs.com.cn/" target="_blank" rel="noopener">👉官方文档传送门</a></p>
-<h2 id="gulp-编译项目"><a href="#gulp-编译项目" class="headerlink" title="gulp 编译项目"></a><em>gulp</em> 编译项目</h2><p>日常进行小程序开发，遇到的问题有：</p>
-<ul>
-<li>如果在微信开发者工具进行开发的话，效率低；</li>
-<li>不支持 <em>less</em> css预编译器；</li>
-<li><em>autoprefixer</em>；</li>
-<li>…</li>
-</ul>
-<p>考虑到小程序是多页面应用，我们只要在 <em>src</em> 目录添加小程序初始化时所需要的相关配置文件，然后通过 <em>gulp</em> 将 <em>src</em> 下的代码搬移到 <em>dist</em> 打包目录即可。</p>
-<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><pre><code>└───gulpTask 目录：主要存放 gulp 代码逻辑
-|     └───baseConfig.js // gulp 路径和 blob 配置信息
-|     └───clean.js // 清理 dist nodejs 脚本文件
-|     └───taskControler.js // gulp 任务定义
-|───src
-|     └───common // 公共代码
-|         └───less
-|             └───...
-|         └───js
-|             └───...
-|     └───components // 组件
-|             └───...
-|     └───pages // 页面
-|             └───...
-|    └───app.js
-|    └───app.json
-|    └───project.config.json
-|    └───sitemap.json
-└───.eslintrc // eslint 配置
-└───.gitignore // git 配置
-└───gulpfile.js // gulp 主入口
-└───package.json
-└───README.md
-</code></pre><h3 id="gulp-配置文件-baseConfig-js"><a href="#gulp-配置文件-baseConfig-js" class="headerlink" title="gulp 配置文件 baseConfig.js"></a><em>gulp</em> 配置文件 <em>baseConfig.js</em></h3><p>将 <em>gulp</em> 相关路径和 <em>blob</em> 配置信息统一在 <em>baseConfig.js</em> 中进行配置。</p>
-<pre><code class="javascript">const path = require(&quot;path&quot;);
+          gulp👉官方文档传送门
+gulp 编译项目日常进行小程序开发，遇到的问题有：
 
-const srcPath = path.resolve(__dirname, &quot;../src&quot;);
-const distPath = path.resolve(__dirname, &quot;../dist&quot;);
-const isDev = process.argv.includes(&quot;--development&quot;);
+如果在微信开发者工具进行开发的话，效率低；
+不支持 less css预编译器；
+autoprefixer；
+…
 
-module.exports = {
-  isDev, // 当前环境
-  srcPath, // src 源路径
-  distPath, // dist 编译目标路径
-  basePath: [
-    srcPath
-  ],
-  otherPath: [
-    srcPath,
-    `!${srcPath}/**/**/*.less`,
-    `!${srcPath}/**/**/*.wxml`,
-    `!${srcPath}/**/**/*.json`,
-    `!${srcPath}/**/**/*.js`,
-    `!${srcPath}/static/icons/*.jpg`,
-    `!${srcPath}/static/icons/*.png`,
-    `!${srcPath}/static/images/*.jpg`,
-    `!${srcPath}/static/images/*.png`,
-  ],
-  lessPath: [ // less blob
-    `${srcPath}/**/**/*.less`,
-  ],
-  jsPath: [ // js blob
-    `${srcPath}/**/**/*.js`,
-  ],
-  wxmlPath: [ // wxml blob
-    `${srcPath}/**/**/*.wxml`,
-  ],
-  jsonPath: [ // json blob
-    `${srcPath}/**/**/*.json`,
-  ],
-  lessImportPath: [
-    `${srcPath}/common/less/*.less`
-  ],
-  iconPath: [
-    `${srcPath}/static/icons/*.jpg`,
-    `${srcPath}/static/icons/*.png`
-  ],
-  imagePath: [
-    `${srcPath}/static/images/*.jpg`,
-    `${srcPath}/static/images/*.gif`,
-    `${srcPath}/static/images/*.png`
-  ]
-}
-</code></pre>
-<h3 id="gulp-开发流程"><a href="#gulp-开发流程" class="headerlink" title="gulp 开发流程"></a><em>gulp</em> 开发流程</h3><p>主要流程如下：</p>
-<p><img src="http://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png" alt="image-20191105174239088.png"></p>
-<h4 id="gulp-的各个任务如下：（taskControler-js-文件）"><a href="#gulp-的各个任务如下：（taskControler-js-文件）" class="headerlink" title="gulp 的各个任务如下：（taskControler.js 文件）"></a><em>gulp</em> 的各个任务如下：（<em>taskControler.js</em> 文件）</h4><ul>
-<li><p>每次进行 <em>gulp</em> 任务前都要清空 <em>dist</em> 打包后的目录。主要代码如下：</p>
-<pre><code class="javascript">task(&quot;clean:dist&quot;, done =&gt; {
-    // console.log(&quot;:::: clean:dist&quot;);
-
-    src(baseConfig.distPath, {
-        read: true,
-        allowEmpty: true,
-    })
-        .pipe(clean())
-
-    done();
-})
-</code></pre>
-<p>但是，上面这样处理会有问题：第二次运行 <em>gulp</em> 命名的时候会有文件权限等问题。故：<em>dist</em> 文件的处理通过 <em>nodejs</em> 进行处理。</p>
-<pre><code class="javascript">// gulp-clean 清空 dist 命令会有权限等一系列问题，故：直接用 node 进行删除 dist
-const path = require(&quot;path&quot;);
-const chalk = require(&quot;chalk&quot;);
-const rimraf = require(&quot;rimraf&quot;);
-
-const distPath = path.resolve(__dirname, &#39;../dist&#39;);
-rimraf(distPath, err =&gt; {
-  if (err) {
-    console.log(chalk.red(err));
-  }
-})
-</code></pre>
-<p>然后在 <em>package.json</em> 中配置脚本命令：</p>
-<pre><code class="json">&quot;scripts&quot;: {
-    &quot;build:dev&quot;: &quot;node gulpTask/clean.js &amp;&amp; gulp dev --development&quot;,
-    &quot;build:prod&quot;: &quot;node gulpTask/clean.js &amp;&amp; gulp prod --production&quot;
-},
-</code></pre>
-<p>这样每次执行 <em>gulp</em> 命令前都会删除 <em>dist</em> 目录。</p>
-</li>
-<li><p>处理 <em>less</em> 文件。需要解决的问题有：</p>
-<ul>
-<li>开发环境不压缩代码，生产环境压缩代码；</li>
-<li>自动添加属性前缀，<em>autoperfixer</em>；</li>
-<li>将 <em>less</em> 文件的后缀更改为 <em>wxss</em>；</li>
-<li>将 <em>less</em> 文件内部的 <em>@import</em> 引用文件的后缀更改为 <em>wxss</em>。</li>
-</ul>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;compile:less&quot;, done =&gt; {
-    // console.log(&quot;:::: compile:less&quot;);
-
-    src(baseConfig.lessPath, {
-        base: &quot;src&quot;
-    })
-        .pipe(changed(baseConfig.distPath))
-        .pipe(gulpif(!this.isDev, cleanCss()))
-        .pipe(autoprefixer())
-    // .pipe(less({
-    //   paths: baseConfig.lessImportPath,
-    //   plugins: [autoprefix]
-    // }))
-        .pipe(rename(function (path) { // 更改 .less 文件后缀为 .wxss
-        path.extname = &quot;.wxss&quot;;
-    }))
-        .pipe(replace(/\.less/g, &quot;.wxss&quot;)) // 修改 less 文件内部的引用 .less 文件后缀为 .wxss
-        .pipe(dest(baseConfig.distPath));
-
-    done();
-})
-</code></pre>
-<p>这里遇到一个坑，用 l<em>ess-plugin-autoprefix @import</em> 会有问题，<em>@import</em> 语句会被删除。后面改用 <em>gulp-autoprefixer</em>。</p>
-</li>
-<li><p>处理 <em>js</em> 文件。需要解决的问题有：</p>
-<ul>
-<li><em>eslint</em> 代码格式检查；</li>
-<li>开发环境不压缩代码，生产环境压缩代码；</li>
-</ul>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;compile:js&quot;, done =&gt; {
-  // console.log(&quot;:::: compile:js&quot;);
-
-  src(baseConfig.jsPath, {
-      base: &quot;src&quot;
-    })
-    .pipe(changed(baseConfig.distPath))
-    // .pipe(babel({ // 先通过 babel 转化语法然后才能进行压缩 --&gt; 微信开发者工具有 es6 转 es5 功能
-    //   presets: [&quot;@babel/env&quot;]
-    // }))
-    .pipe(eslint())
-    // .pipe(eslint.format())
-    .pipe(gulpif(!this.isDev, uglify()))
-    .pipe(dest(baseConfig.distPath));
-
-  done();
-})
-</code></pre>
-<p>这里原本加了 <em>babel</em> 进行 <em>es6</em> 到 <em>es5</em> 的转化，但是微信开发者工具本身就有这个功能，故去除。另一个坑是，用 <em>gulp-uglify</em> 不能进行 <em>es6</em> 代码的压缩，要用 <em>gulp-uglify-es</em> 。</p>
-</li>
-<li><p>处理 <em>wxml</em> 文件。需要解决的问题有：</p>
-<ul>
-<li>开发环境不压缩代码，生产环境压缩代码；</li>
-</ul>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;compile:wxml&quot;, done =&gt; {
-  // console.log(&quot;:::: compile:wxml&quot;);
-
-  src(baseConfig.wxmlPath, {
-      base: &quot;src&quot;
-    })
-    .pipe(changed(baseConfig.distPath))
-    .pipe(gulpif(!this.isDev, htmlmin({
-      collapseWhitespace: true
-    })))
-    .pipe(dest(baseConfig.distPath));
-
-  done();
-})
-</code></pre>
-</li>
-<li><p>处理 <em>json</em> 文件。需要解决的问题有：</p>
-<ul>
-<li>开发环境不压缩代码，生产环境压缩代码；</li>
-</ul>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;compile:json&quot;, done =&gt; {
-  // console.log(&quot;:::: compile:json&quot;);
-
-  src(baseConfig.jsonPath, {
-      base: &quot;src&quot;
-    })
-    .pipe(changed(baseConfig.distPath))
-    .pipe(gulpif(!this.isDev, prettyData({
-      type: &quot;minify&quot;,
-      preserveComments: true,
-      extensions: {
-        &quot;json&quot;: &quot;json&quot;,
-      }
-    })))
-    .pipe(dest(baseConfig.distPath));
-
-  done();
-})
-</code></pre>
-</li>
-<li><p>其他所有文件。</p>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;compile:other&quot;, done =&gt; {
-      // console.log(&quot;:::: compile:other&quot;);
-
-      src(baseConfig.otherPath, {
-          base: &quot;src&quot;
-        })
-        .pipe(changed(baseConfig.distPath))
-        .pipe(dest(baseConfig.distPath));
-
-      done();
-    })
-</code></pre>
-</li>
-<li><p>图片压缩。</p>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;minify:image&quot;, async done =&gt; {
-  // console.log(&quot;:::: minify:image&quot;);
-
-  src(baseConfig.imagePath, {
-      base: &quot;src&quot;
-    })
-    .pipe(imagemin([imagemin.optipng(), imagemin.gifsicle(), imagemin.jpegtran()]))
-    .pipe(dest(baseConfig.distPath))
-
-  done();
-})
-</code></pre>
-</li>
-<li><p>开发环境开启监控 <em>watch</em>。</p>
-<p>主要代码如下：</p>
-<pre><code class="javascript">task(&quot;watch&quot;, done =&gt; {
-  // console.log(&quot;:::: compile:other&quot;);
-
-  watch(baseConfig.basePath, {
-    base: &quot;src&quot;
-  }, series(&quot;compile:less&quot;, &quot;compile:js&quot;, &quot;compile:wxml&quot;, &quot;compile:json&quot;, &quot;compile:other&quot;, &quot;minify:image&quot;))
-
-  done();
-})
-</code></pre>
-</li>
-<li><p>最后，将任务进行 <em>id</em> 绑定处理，还有不同环境的区分。主要代码如下：</p>
-<pre><code class="javascript">task(&quot;default&quot;, parallel(&quot;compile:less&quot;, &quot;compile:js&quot;, &quot;compile:wxml&quot;, &quot;compile:json&quot;, &quot;compile:other&quot;, &quot;minify:image&quot;));
-task(`dev-${id}`, series(&quot;default&quot;, &quot;watch&quot;));
-task(`prod-${id}`, series(&quot;default&quot;));
-</code></pre>
-</li>
-</ul>
-<h4 id="gulpfile-js-gulp-入口文件处理："><a href="#gulpfile-js-gulp-入口文件处理：" class="headerlink" title="gulpfile.js gulp 入口文件处理："></a><em>gulpfile.js</em> <em>gulp</em> 入口文件处理：</h4><p>主要是对不同环境的区分，还有 <em>taskControler.js</em> 定义的各个任务进行引用。主要代码如下：</p>
-<pre><code class="javascript">const {
-  task,
-  series
-} = require(&quot;gulp&quot;);
-const TaskControler = require(&quot;./gulpTask/taskControler&quot;);
-// 项目 ID
-const id = require(&quot;./package.json&quot;).name || &quot;min-program&quot;;
-
-new TaskControler(id);
-
-/*---------- 相关的 gulp 任务 ----------*/
-
-// dev 开发环境任务
-task(&quot;dev&quot;, series(`dev-${id}`));
-
-// prod 生产环境任务
-task(&quot;prod&quot;, series(`prod-${id}`));
-</code></pre>
-<p>接着，只需要执行 <code>npm run build:dev</code>或 <code>npm run build:prod</code>，然后将生成的 <em>dist</em> 目录丢到微信开发者工具即可。</p>
-
-          
+考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 g
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/11/05/小程序工程化/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1096,48 +817,21 @@ task(&quot;prod&quot;, series(`prod-${id}`));
       
         
           
-            <h2 id="防抖"><a href="#防抖" class="headerlink" title="防抖"></a>防抖</h2><ul>
-<li>对于一些高频触发操作的场景，我们需要加防抖操作。比如：监听页面滚动、输入实时显示搜索结果等。这些都需要加防抖操作，不然对页面性能有很大的副作用。</li>
-<li>简单概括：防抖就是将高频操作优化为最后一次执行。</li>
-</ul>
-<p>实现：</p>
-<pre><code>// 防抖
-const debounce = (fn, wait, immediate = false) =&gt; {
-  let timer = null;
-  return function () {
-    let context = this,
-      args = arguments;
-    if (immediate &amp;&amp; !timer) {
-      fn.apply(context, args);
-    }
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(() =&gt; {
-      fn.apply(context, args);
-    }, wait)
-  }
-}
-</code></pre><h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>每段时间后执行一次，将高频转化为低频。</p>
-<pre><code>// 节流
-const throttle = (fn, wait, immediate = false) =&gt; {
-  let timer = null;
-  return function () {
-    let context = this,
-      args = arguments;
-    if (immediate) {
-      fn.apply(context, args);
-    }
-    if (!timer) {
-      timer = setTimeout(() =&gt; {
-        fn.apply(context, args);
-        timer = null;
-      }, wait)
-    }
-  }
-}
-</code></pre>
-          
+          防抖
+对于一些高频触发操作的场景，我们需要加防抖操作。比如：监听页面滚动、输入实时显示搜索结果等。这些都需要加防抖操作，不然对页面性能有很大的副作用。
+简单概括：防抖就是将高频操作优化为最后一次执行。
+
+实现：
+// 防抖
+const debounce = (fn, wait, immediate 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/18/防抖和节流/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1292,252 +986,29 @@ const throttle = (fn, wait, immediate = false) =&gt; {
       
         
           
-            <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><ul>
-<li><p>安装 <strong>vue3.0</strong> 脚手架</p>
-<pre><code>npm install -g @vue/cli
-</code></pre></li>
-<li><p>创建项目</p>
-<pre><code>vue create my_project
-</code></pre><p>一系列选择之后，可以保存你当前的选择配置，之后创建项目的时候就可以直接用了。</p>
-</li>
-<li><p>安装依赖</p>
-<pre><code>cd my_project
-</code></pre></li>
-</ul>
-<p>最后的项目目录结构如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-5267ed577dcb2fc6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h2><p><strong>vue3.0</strong> 运行项目主要有两种方式：</p>
-<ul>
-<li><p>命令行方式：</p>
-<pre><code>npm run serve
-</code></pre></li>
-<li><p>UI视图方式，这也是3.0版本的一大亮点。通过UI视图方式，可以帮助我们很多事，如：运行项目、安装依赖、安装插件等。</p>
-<pre><code>vue ui
-</code></pre></li>
-</ul>
-<h2 id="webpack-配置"><a href="#webpack-配置" class="headerlink" title="webpack 配置"></a>webpack 配置</h2><p>vue 已经帮我们配置了很多，额外自己又添加了一些配置；在根目录添加 <strong>vue.config.js</strong> 配置文件：</p>
-<pre><code>const path = require(&#39;path&#39;);
-const px2rem = require(&#39;postcss-px2rem&#39;);
-const VconsoleWebpackPlugin = require(&#39;vconsole-webpack-plugin&#39;);
-const TerserWebpackPlugin = require(&#39;terser-webpack-plugin&#39;);
-// 判断是否为生产环境
-const isProduction = process.env.NNODE_ENV === &#39;production&#39;;
-// 路径处理函数
-const resolve = name =&gt; path.resolve(__dirname, name);
+          创建项目
+安装 vue3.0 脚手架
+npm install -g @vue/cli
 
-module.exports = {
-  publicPath: isProduction ? &#39;/production&#39; : &#39;/&#39;, // 部署应用包时的基本 URL
-  productionSourceMap: !isProduction, // 生产环境不开启 source-map
-  devServer: { // webpack-dev-server 的配置
-    port: 8089, // 本地端口
-    open: true, // 自动打开浏览器
-    // proxy: { // 代理
-    //   &#39;/api&#39;: {
-    //     target: &#39;&lt;url&gt;&#39;,
-    //     ws: true,
-    //     changeOrigin: true
-    //   },
-    // }
-  },
-  css: {
-    extract: isProduction, // 生产环境将 css 单独抽离成一个文件
-    sourceMap: !isProduction, // 生成环境不开启 source-map
-    loaderOptions: {
-      postcss: {
-        // 移动端使用rem
-        plugins: [
-          px2rem({
-            remUnit: 75
-          })
-        ]
-      },
-      // 全局共享variables.scss
-      sass: {
-        // @/ 是 src/ 的别名
-        // 所以这里假设你有 `src/variables.scss` 这个文件
-        data: `@import &quot;@/variables.scss&quot;;`
-      }
-    }
-  },
-  configureWebpack: config =&gt; {
-    const devPlugins = [
-      new VconsoleWebpackPlugin({ // 微信移动端调试控制台
-        enable: !isProduction
-      })
-    ];
-    const prodPlugins = [
-      new TerserWebpackPlugin({
-        terserOptions: { // 打包时候的配置
-          warnings: false,
-          compress: true,
-          drop_console: true,
-          drop_debugger: true,
-          pure_funcs: [&#39;console.log&#39;]
-        }
-      })
-    ];
-    if (isProduction) { // 生产环境
-      config.optimization.minimizer = [
-        ...config.optimization.minimizer,
-        ...prodPlugins
-      ]
-    } else { // 开发环境
-      config.plugins = [...config.plugins, ...devPlugins]
-    }
-  },
-  chainWebpack: config =&gt; {
-    // 自定义全局变量
-    // config
-    //   .plugin(&#39;define&#39;)
-    //   .tap((args) =&gt; {
-    //     args[0].PRODUCTION = isProduction ? JSON.stringify(&#39;&#39;) :
-    //       JSON.stringify(
-    //         &#39;other/&#39;,
-    //       );
-    //     return args;
-    //   });
-    // 别名设置
-    config.resolve.alias
-      .set(&#39;js&#39;, resolve(&#39;src/assets/js&#39;))
-      .set(&#39;scss&#39;, resolve(&#39;src/assets/scss&#39;))
-      .set(&#39;images&#39;, resolve(&#39;src/assets/images&#39;))
-      .set(&#39;components&#39;, resolve(&#39;src/components&#39;));
-  }
-}
-</code></pre><h2 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h2><p><strong>vue3.0</strong> 的路由配置已经很完善了，这里我仅仅小改动，封装了路由懒加载函数：</p>
-<pre><code>import Vue from &#39;vue&#39;
-import Router from &#39;vue-router&#39;
-import Home from &#39;./views/Home.vue&#39;
+创建项目
+vue create my_project
+一系列选择之后，可以保存你当前的选择配置，之后创建项目的时候就可以直接用了。
 
-Vue.use(Router)
-// 路由懒加载
-// route level code-splitting
-// this generates a separate chunk (about.[hash].js) for this route
-// which is lazy-loaded when the route is visited.
-const addRouterComponent = path =&gt; import(path);
+安装依赖
+cd my_project
 
-export default new Router({
-  mode: &#39;history&#39;,
-  base: process.env.BASE_URL,
-  routes: [{
-      path: &#39;/&#39;,
-      name: &#39;home&#39;,
-      component: Home
-    },
-    {
-      path: &#39;/about&#39;,
-      name: &#39;about&#39;,
-      component: addRouterComponent(&#39;./views/About.vue&#39;)
-    }
-  ]
-})
-</code></pre><h2 id="axios-的配置"><a href="#axios-的配置" class="headerlink" title="axios 的配置"></a>axios 的配置</h2><p>在 <strong>scr</strong> 目录下添加 <strong>api</strong> 目录，并新建两个文件：<strong>config.js</strong> 和 <strong>api.js</strong>。配置如下：</p>
-<ul>
-<li><strong>config.js</strong></li>
-</ul>
-<pre><code>import axios from &#39;axios&#39;;
-import qs from &#39;qs&#39;;
 
-axios.defaults.withCredentials = false;
-// 请求拦截器
-axios.interceptors.request.use(
-  request =&gt; {
-    request.data = request.data || {};
-    const hasHttp = /^http(|s):\/\//.test(request.url);
-    if (!hasHttp) { // 无 http or https 头处理
-      request.url = `https://${request.url}`;
-    }
-    if (request.data) {
-      request.data = {
-        // commom: &#39;&#39;, 这里可以添加一些公共的请求参数
-        data: JSON.stringify(request.data)
-      };
-      request.data = qs.stringify(request.data);
-    }
-    return request;
-  },
-  error =&gt; Promise.reject(error)
-);
-// 响应拦截器
-axios.interceptors.response.use(
-  response =&gt; {
-    const responseData = response.data;
-    if (responseData.errcode !== 0) { // 错误处理
-      return Promise.reject(responseData.msg || &#39;未知错误&#39;);
-    }
-    responseData.result = responseData.result || {};
-    return responseData;
-  },
-  error =&gt; Promise.reject(error)
-);
+最后的项目目录结构如下：
 
-export {
-  axios
-};
-</code></pre><ul>
-<li><strong>api.js</strong></li>
-</ul>
-<pre><code>import {
-  axios
-} from &#39;./config.js&#39;;
-
-// 例子 1
-export const aApi1Name = params =&gt; axios.post(url, params);
-// 例子 2
-export const aApi2Name = params =&gt; axios.get(url, params);
-</code></pre><h2 id="打包后自动部署到服务器"><a href="#打包后自动部署到服务器" class="headerlink" title="打包后自动部署到服务器"></a>打包后自动部署到服务器</h2><p>使用的是 <strong>scp2</strong>；通过向脚本传递不同参数，部署到不同的服务器路径；在根目录添加 <strong>deploy.js</strong> 脚本。相关配置如下：</p>
-<ul>
-<li><strong>package.json</strong></li>
-</ul>
-<pre><code>&quot;buildTest&quot;: &quot;vue-cli-service build &amp;&amp; node deploy.js development&quot;,
-&quot;buildProd&quot;: &quot;vue-cli-service build &amp;&amp; node deploy.js production&quot;
-</code></pre><ul>
-<li><strong>deploy.js</strong></li>
-</ul>
-<pre><code>const qs = require(&#39;qs&#39;);
-
-// 判断是否输出帮助信息
-const helpMessage = `usage: node deploy.js [deploy_target]`;
-if (
-  process.argv.length !== 3 ||
-  process.argv[2] === &#39;-h&#39; ||
-  process.argv[2] === &#39;--help&#39;
-) {
-  console.log(helpMessage);
-  process.exit(0);
-}
-
-// 判断是否是生产环境
-const isProduction = process.argv[2] === &#39;production&#39;;
-
-// 设置部署的文件路径，正服 or 测服
-let deployPath = &#39;&#39;;
-if (isProduction) {
-  deployPath = &#39;/production&#39;
-} else {
-  deployPath = &#39;/test&#39;
-}
-
-// 设置服务器服务器信息
-const SERVER_INFO = {
-  host: &#39;134.175.150.8&#39;,
-  port: 22,
-  username: &#39;&#39;,
-  password: &#39;&#39;,
-  path: deployPath
-}
-
-// 部署到服务器
-client.scp(&#39;./dist/&#39;, SERVER_INFO, err =&gt; {
-  if (err) {
-    console.log(&#39;Deploy Failed!\n&#39;, err);
-  }
-})
-
-console.log(`Deploy ${isProduction ? &#39;production&#39; : &#39;developemt&#39;} finished!`);
-</code></pre><p>总结：通过上面的配置，基本可以实现 <strong>vue</strong> 项目从创建到配置到打包自动部署的过程。</p>
-
-          
+运行项目
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/17/vue-cli3-0项目创建-配置-自动部署/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1681,74 +1152,18 @@ console.log(`Deploy ${isProduction ? &#39;production&#39; : &#39;developemt&#39;
       
         
           
-            <h2 id="HTTP-HTTPS-协议"><a href="#HTTP-HTTPS-协议" class="headerlink" title="HTTP/HTTPS 协议"></a>HTTP/HTTPS 协议</h2><ul>
-<li>一个 <strong>request</strong> 对应一个 <strong>response</strong>。一般使用 <strong>轮询</strong> 机制获取信息。</li>
-<li>虽然后期有 <strong>keep-alive</strong>，可以一次连接中处理多个 <strong>request</strong> 合并发送，接收多个 <strong>response</strong>，对每个请求仍然需要单独发 <strong>header</strong>。</li>
-<li><strong>HTTP</strong> 的 <strong>response</strong> 是被动的，通信只能由客户端发起，做不到服务端主动向客户端推送信息。</li>
-<li><strong>HTTP</strong> 是无状态协议。</li>
-<li>需要三次握手。</li>
-<li>HTTP：TCP + HTTP</li>
-<li>HTTPS：TCP + HTTP + TLS</li>
-</ul>
-<h4 id="ajax-轮询"><a href="#ajax-轮询" class="headerlink" title="ajax 轮询"></a>ajax 轮询</h4><p><strong>ajax 轮询</strong> 是指客户端 <strong>不断</strong> 向服务器发送资源请求 <strong>request</strong>，服务端不管有无目标资源，都会返回 <strong>response</strong> 结果。这样就要求服务器拥有更好的处理速度。</p>
-<h4 id="long-poll-长轮询"><a href="#long-poll-长轮询" class="headerlink" title="long poll / 长轮询"></a>long poll / 长轮询</h4><p><strong>long poll</strong> 比 <strong>ajax 轮询</strong> 好点，<strong>不会不断</strong> 向服务器发送资源请求 <strong>request</strong>，一旦接受客户端的请求，有资源就返回；无资源就挂起，直到有资源才返回 <strong>response</strong> 结果（有且仅有返回一次）。高并发，需要服务器可以同时处理多个请求的能力。</p>
-<h2 id="websocket-协议"><a href="#websocket-协议" class="headerlink" title="websocket 协议"></a>websocket 协议</h2><ul>
-<li><strong>websocket</strong> 是 <strong>html5</strong> 出的协议。</li>
-<li><strong>websocket</strong> 是一个持久化的协议，<strong>websocket</strong> 只需要一次请求（一次 <strong>HTTP 握手</strong> ），就可以得到所需的资源。</li>
-<li>服务端可以 <strong>主动</strong> 向客户端推送信息，客户端也可以 <strong>主动</strong> 向服务端推送消息，实现“双向平等”，是属于服务器推送技术的一种。</li>
-<li>与 <strong>HTTP</strong> 有较好的兼容性，在握手阶段采用 <strong>HTTP</strong> 协议。</li>
-<li>默认端口 <strong>80</strong> and <strong>443</strong>。</li>
-<li>数据格式轻量，性能开销小，通信高效，可以发送文本，也可以二进制数据。</li>
-<li>没有同源策略。</li>
-<li>WS：TCP + WS</li>
-<li>WSS：TCP + WS + TLS</li>
-</ul>
-<h4 id="websocket-握手"><a href="#websocket-握手" class="headerlink" title="websocket 握手"></a>websocket 握手</h4><pre><code>GET /chat HTTP/1.1
-Host: server.example.com
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
-Sec-WebSocket-Protocol: chat, superchat
-Sec-WebSocket-Version: 13
-</code></pre><ul>
-<li>Upgrade/Connection：通知服务器发起的是 <strong>wesocket</strong> 协议。</li>
-<li>Sec-WebSocket-Key：浏览器随机生成的 <strong>Base64 encode</strong> 的值，用于验证服务器是不是 <strong>websocket 协议</strong>。</li>
-<li>Sec-WebSocket-Protocol：用户定义的字符串，用来区分 <strong>同 url</strong> 下，不同的服务所需要的协议。</li>
-<li>Sec-WebSocket-Version：协议版本。</li>
-</ul>
-<h4 id="服务器返回"><a href="#服务器返回" class="headerlink" title="服务器返回"></a>服务器返回</h4><pre><code>HTTP/1.1 101 Switching Protocols
-Upgrade: websocket
-Connection: Upgrade
-Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
-Sec-WebSocket-Protocol: chat
-</code></pre><ul>
-<li>Upgrade/Connection：通知客户端升级的是 <strong>websocket</strong> 协议。</li>
-<li>Sec-WebSocket-Accept：经服务器确认，加密后的 <strong>Sec-WebSocket-Key</strong>。</li>
-<li>Sec-WebSocket-Protocol：最终使用的协议。</li>
-</ul>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code>ws.addEventListener(&#39;open&#39;, function () {
-    console.log(&#39;Open the websocket...&#39;);
-    ws.send(&#39;Hello websocket...&#39;);
-});
-ws.addEventListener(&#39;message&#39;, function (e) {
-    console.log(&#39;Ready state: &#39; + ws.readyState, &#39;Receive the websocket message...&#39; + e.data);
-    ws.close();
-    setTimeout(() =&gt; {
-        console.log(&#39;Ready state: &#39; + ws.readyState);
-    }, 1000)
-});
-ws.addEventListener(&#39;close&#39;, function () {
-    console.log(&#39;Ready state: &#39; + ws.readyState, &#39;Close the websocket...&#39;);
-})
-</code></pre><p>结果：<br><img src="http://upload-images.jianshu.io/upload_images/659084-021a1bb1915811bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>参考：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-d06ed1bfe9c9fadb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li><a href="https://www.zhihu.com/search?type=content&amp;q=websocket" target="_blank" rel="noopener">https://www.zhihu.com/search?type=content&amp;q=websocket</a></li>
-<li><a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2017/05/websocket.html</a></li>
-</ul>
-
-          
+          HTTP/HTTPS 协议
+一个 request 对应一个 response。一般使用 轮询 机制获取信息。
+虽然后期有 keep-alive，可以一次连接中处理多个 request 合并发送，接收多个 response，对每个请求仍然需要单独发 header。
+HTTP 的 response 是被
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/17/websocket/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1892,58 +1307,20 @@ ws.addEventListener(&#39;close&#39;, function () {
       
         
           
-            <h2 id="用户认证"><a href="#用户认证" class="headerlink" title="用户认证"></a>用户认证</h2><p>一般的用户认证流程如下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-bdfa6d0008a02e53.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/800" alt="image.png"></p>
-<p>但是，这种模式的扩展性不好。单个服务器没问题，如果多个服务器集群，要求共享 <strong>session</strong> ，每个服务器都能访问到 <strong>session</strong> 。</p>
-<ul>
-<li>解决方案一：<strong>session</strong> 数据持久化，写入数据库或者其他持久层。各个服务器收到请求后，向持久层发送数据请求。<ul>
-<li>缺点：工程量大。</li>
-</ul>
-</li>
-<li>解决方案二：服务器不保存 <strong>session</strong> 数据，所有的数据保存在客户端，每次请求都发回服务器。如：JWT(Json Web Token)。</li>
-</ul>
-<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p><strong>JWT</strong> 服务器不保存 <strong>session</strong> 数据，在服务器认证之后，返回一个 <strong>JSON</strong> 对象。格式如下：</p>
-<pre><code>{
-    &quot;姓名&quot;: &quot;zero&quot;,
-    &quot;角色&quot;: &quot;管理员&quot;,
-    &quot;到期时间&quot;: &quot;2018年10月6日0点0分&quot;
-}
-</code></pre><p>之后，客户端与服务器的用户认证都靠这个 <strong>JSON</strong> 对象，当然，这个对象后面会加上签名，保证数据不被篡改。</p>
-<h4 id="JWT-的数据结构"><a href="#JWT-的数据结构" class="headerlink" title="JWT 的数据结构"></a>JWT 的数据结构</h4><ul>
-<li><strong>JWT</strong> 是一个很长的字符串，中间用 <strong>.</strong> 分隔，内部没有换行。</li>
-<li>组成由三个部分：<strong>Header.Payload.Signature</strong><ul>
-<li>Header：头部。<strong>JSON</strong> 对象，描述 <strong>JWT</strong> 的元数据。</li>
-<li>Payload：负载。<strong>JSON</strong> 对象，存放实际需要传递的数据；不加密。</li>
-<li>Signature：签名。对 <strong>Header</strong> 和 <strong>Payload</strong> 的签名，防止数据被篡改。</li>
-</ul>
-</li>
-</ul>
-<p>Header 格式：</p>
-<pre><code>{
-  &quot;alg&quot;: &quot;HS256&quot;,   // 签名的算法
-  &quot;typ&quot;: &quot;JWT&quot;      // token 类型
-}
-</code></pre><p>Payload 七个字段：</p>
-<ul>
-<li>iss (issuer)：签发人</li>
-<li>exp (expiration time)：过期时间</li>
-<li>sub (subject)：主题</li>
-<li>aud (audience)：受众</li>
-<li>nbf (Not Before)：生效时间</li>
-<li>iat (Issued At)：签发时间</li>
-<li>jti (JWT ID)：编号</li>
-</ul>
-<h4 id="JWT-的使用方式"><a href="#JWT-的使用方式" class="headerlink" title="JWT 的使用方式"></a>JWT 的使用方式</h4><ul>
-<li>存储在 <strong>cookie</strong> 中。</li>
-<li>存储在 <strong>localStorage</strong> 中。</li>
-<li>客户端每次与服务器进行通信的时候，都会带上 <strong>JWT</strong>。</li>
-</ul>
-<p>参考：</p>
-<ul>
-<li><a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html</a></li>
-</ul>
+          用户认证一般的用户认证流程如下图：
 
-          
+但是，这种模式的扩展性不好。单个服务器没问题，如果多个服务器集群，要求共享 session ，每个服务器都能访问到 session 。
+
+解决方案一：session 数据持久化，写入数据库或者其他持久层。各个服务器收到请求后，向持久层发送数据请求。
+缺点：工程量
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/17/用户认证小总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2098,41 +1475,18 @@ ws.addEventListener(&#39;close&#39;, function () {
       
         
           
-            <h2 id="CSRF-Cross-Site-Request-Forgery"><a href="#CSRF-Cross-Site-Request-Forgery" class="headerlink" title="CSRF : Cross Site Request Forgery"></a>CSRF : Cross Site Request Forgery</h2><p><strong>CSRF</strong> 跨站请求伪造。<br>是一种劫持受信任用户向服务器发送非预期请求的攻击方式。简而言之：用户在登录的情况下访问了钓鱼网站，钓鱼网站通过用户向其他网站发送请求，这样就达到了模拟用户的目的。具体实现如下图：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/659084-9ce93c3bff5d427b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h4 id="防御手段"><a href="#防御手段" class="headerlink" title="防御手段"></a>防御手段</h4><ul>
-<li>验证码实现用户验证。验证码强制用户必须与应用进行交互，才能完成最终的请求。</li>
-<li>通过 referer 实现用户验证。根据 <strong>HTTP</strong> 协议，在 <strong>HTTP</strong> 头中有一个字段叫 <strong>Referer</strong>，它记录了该 <strong>HTTP</strong> 请求的 <strong>来源地址</strong>。通过 <strong>Referer Check</strong>，可以检查请求是否来自合法的”源”。</li>
-<li>通过 token 实现用户验证。</li>
-<li>尽量不要在页面的链接中暴露用户隐私信息。</li>
-<li>对于用户修改删除等操作最好都使用 post 操作。</li>
-<li>避免全站通用的 cookie，严格设置 cookie 的域。</li>
-</ul>
-<h2 id="XSS-Cross-Site-Script"><a href="#XSS-Cross-Site-Script" class="headerlink" title="XSS : Cross Site Script"></a>XSS : Cross Site Script</h2><p><strong>XSS</strong> 跨站脚本攻击。<br>攻击者向用户的网站嵌入的 js 脚本代码，当用户访问该网站的时候，该 js 脚本代码就会被执行，从而达到攻击用户的目的。</p>
-<h4 id="反射型-XSS-攻击"><a href="#反射型-XSS-攻击" class="headerlink" title="反射型 XSS 攻击"></a>反射型 XSS 攻击</h4><p>又称非持久性跨站脚本攻击。发出请求时，XSS 代码出现在 <strong>URL</strong> 中，作为输入提交到服务器端，服务器端解析后响应，XSS 随响应内容一起返回给浏览器，最后浏览器解析执行 XSS 代码。漏洞产生的原因是攻击者注入的数据反映在响应中。一个典型的非持久性 XSS 包含一个带 XSS 攻击向量的链接(即每次攻击需要用户的点击)。<br>比如：</p>
-<pre><code>http://www.test.com/message.php?send=&lt;script&gt;alert(‘foolish!’)&lt;/script&gt;！
-</code></pre><h4 id="存储型-XSS-攻击"><a href="#存储型-XSS-攻击" class="headerlink" title="存储型 XSS 攻击"></a>存储型 XSS 攻击</h4><p>XSS 提交的代码会存储在服务器端（数据库，内存，文件系统等），下次请求目标页面时不用再提交 XSS 代码。这种攻击方式的稳定性很好。<br>比如：</p>
-<blockquote>
-<p>攻击者在 value 填写<code>&lt;script&gt;alert(‘foolish!’)&lt;/script&gt;</code>【或者 html 其他标签（破坏样式。。。）、一段攻击型代码】；将数据存储到数据库中；其他用户取出数据显示的时候，将会执行这些攻击性代码。</p>
-</blockquote>
-<h4 id="具体方式"><a href="#具体方式" class="headerlink" title="具体方式"></a>具体方式</h4><ul>
-<li>攻击者向服务器注入 js 代码。</li>
-<li>诱导用户访问受到攻击的网站。</li>
-<li>用户访问受到攻击的网站，执行注入的 js 代码。</li>
-</ul>
-<h4 id="XSS-防御方式"><a href="#XSS-防御方式" class="headerlink" title="XSS 防御方式"></a>XSS 防御方式</h4><ul>
-<li>HttpOnly</li>
-<li>输入检查</li>
-<li>输出检查</li>
-</ul>
-<p>参考链接：</p>
-<ul>
-<li><a href="https://www.cnblogs.com/shytong/p/5308667.html" target="_blank" rel="noopener">https://www.cnblogs.com/shytong/p/5308667.html</a></li>
-<li><a href="https://github.com/dwqs/blog/issues/68" target="_blank" rel="noopener">https://github.com/dwqs/blog/issues/68</a></li>
-<li><a href="https://www.cnblogs.com/phpstudy2015-6/p/6767032.html#_label3" target="_blank" rel="noopener">https://www.cnblogs.com/phpstudy2015-6/p/6767032.html#_label3</a></li>
-</ul>
+          CSRF : Cross Site Request ForgeryCSRF 跨站请求伪造。是一种劫持受信任用户向服务器发送非预期请求的攻击方式。简而言之：用户在登录的情况下访问了钓鱼网站，钓鱼网站通过用户向其他网站发送请求，这样就达到了模拟用户的目的。具体实现如下图：
 
-          
+防御手段
+验证码实现用户验证
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/17/web-safe/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2287,160 +1641,16 @@ ws.addEventListener(&#39;close&#39;, function () {
       
         
           
-            <h2 id="Ajax（JavaScript实现）"><a href="#Ajax（JavaScript实现）" class="headerlink" title="Ajax（JavaScript实现）"></a>Ajax（JavaScript实现）</h2><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Ajax（Async Javascript And Xml）：异步Js和Xml，意思就是用Js执行异步网络请求。作用主要是在不重新加载<strong>全部网页</strong>的情况下，对<strong>部分页面</strong>进行更新。</p>
-<h4 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h4><p>除了IE5和IE6不支持之外（支持ActiveXObject对象），几乎现在所有的有内建的XMLHttpRequest对象。所以在创建请求对象之前判断下就好了：</p>
-<pre><code>let xhr = null;
-xhr = window.XMLHttpRequest ? new xmlHttpRequest() : new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-// 或者
-if(window.XMLHttpRequest){
-    xhr = new XMLHttpRequest()
-}else{
-    xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)
-}
-</code></pre><h4 id="通过open-和send-向服务器发送请求"><a href="#通过open-和send-向服务器发送请求" class="headerlink" title="通过open()和send()向服务器发送请求"></a>通过open()和send()向服务器发送请求</h4><ul>
-<li>xhr.open(method, url, async)<br>这个方法的参数分别是：method请求的类型GET或者POST；URL请求的文件在服务器上的地址；async是否异步请求true或者false（一般不设置为false）。</li>
-<li>xhr.send()：发送请求。</li>
-<li>xhr.setRequestHeader(header, value)：如果是POST的话，要设置发送的HTTP头，然后通过send方法发送内容。参数分别是：发送的头部名称，头部的值。一般都是固定的。</li>
-</ul>
-<pre><code>// 向浏览器发送请求
-xhr.open(&#39;GET&#39;, &#39;./server.php&#39;, true)
-// 添加HTTP头（POST方法）
-xhr.setRequestHeader(&#39;Content-Text&#39;, &#39;application/x-www-form-urlencoded&#39;)   
-xhr.send()
-</code></pre><p>GET方法不需要参数，POST方法则需要把body参数；如果要想向服务器发送相关的参数，则通过open里面的第二个参数url进行发送，具体实现如下代码：</p>
-<pre><code>url = &quot;./filePath?paramName=&quot; + paramValue + ...;
-</code></pre><h4 id="判断准备状态"><a href="#判断准备状态" class="headerlink" title="判断准备状态"></a>判断准备状态</h4><pre><code>xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
-        ...
-    }
-}
-</code></pre><ul>
-<li>xhr.onreadystatechange方法中，每当readyState改变时，就会触发xhr.onreadystatechange事件。</li>
-<li>readyState属性：存有XMLHttpRequest的状态信息。0：请求未初始化；1：服务器链接已经建立；2：请求已经接受；3：请求处理中；4：请求已完成，且响应已就绪。一共有5个状态，所以onreadystatechange事件会被触发5次。</li>
-<li>实际上onreadystateschange是通过回调函数实现的，即：每当readyState的状态改变时，这个回调函数就会被执行。</li>
-<li>status属性：表示响应的结果。</li>
-</ul>
-<p>总的代码如下：</p>
-<pre><code>document.getElementById(&#39;btn&#39;).onclick = function () {
-// 创建请求对象（先判断浏览器类型）
-// var xhr = null;
-// if (window.XMLHttpRequest) {
-//     xhr = new XMLHttpRequest()
-// } else {
-//     xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)
-// }
-xhr = (window.XMLHttpRequest) ? (new XMLHttpRequest()) : (new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;))
-// 判断响应状态并执行相关的操作
-xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
-        let data = xhr.responseText
-        console.log(data);
-        document.getElementById(&#39;myDiv&#39;).innerText = data
-    }
-}
-// 向浏览器发送请求
-let url = &quot;./server.txt&quot;
-xhr.open(&#39;GET&#39;, url, true)
-// 添加HTTP头（POST方法）
-// xhr.setRequestHeader(&#39;Content-Text&#39;, &#39;application/x-www-form-urlencoded&#39;)
-xhr.send(null);
-}
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-b5b344a3944ba224.gif?imageMogr2/auto-orient/strip" alt="异步1.gif"></p>
-<p>但是，由于在<strong>同源策略</strong>的作用下，浏览器只能同源的其他域的资源，先看看什么是同源策略～</p>
-<h2 id="同源策略-SOP（Same-origin-policy）"><a href="#同源策略-SOP（Same-origin-policy）" class="headerlink" title="同源策略/SOP（Same origin policy）"></a>同源策略/SOP（Same origin policy）</h2><p>来自百度的解释：</p>
-<blockquote>
-<p>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能（防止CSRF/XSRF攻击：跨站请求伪造）。现在所有支持JavaScript 的浏览器都会使用这个策略。所谓同源是指，域名，协议，端口相同。</p>
-</blockquote>
-<p>简单来说，就是浏览器只能请求同源的其他域的资源，即同源的网页才能相互获取资源，而不能访问其他域的资源；但是有一个例外，同源策略不会阻止动态脚本插入到文档中；其中，<strong><script>\</script></strong>是开放策略；当web网页执行一个脚本之前，会检查是否同源，只有同源才会被执行，非同源则会被拒绝访问。<br>截取网上的图片说明同源：<br><img src="http://upload-images.jianshu.io/upload_images/659084-80411ea5e317ed19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
-<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>跨域就是突破同源策略的限制，获取其他源的资源。<br>非同源主要有三种行为会受到限制：</p>
-<ul>
-<li>Cookie,LocalStorage和IndexDB无法读取。</li>
-<li>DOM无法获取。</li>
-<li>Ajax无法获取。</li>
-</ul>
-<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p>JSONP是实现跨域的常用方法，但是JSONP只能实现GET方法。实际上是是利用了浏览器允许跨域引用JavaScript资源（script标签是开放策略）。</p>
-<p>下面举一个例子：我们从360浏览器首页的天气查询获取天气查询的异步请求地址；这里我们实现通过本地localhost服务器跨域请求360的天气查询，来说明JSONP怎么实现跨域。<br>我们请求资源的地址为：<br><a href="https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600" target="_blank" rel="noopener">https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600</a><br>在浏览器中打开这个地址，我们会得到这样的数据：__jsonp21__({…})。<br>解释：JSONP返回的通常是以函数的形式返回，前面这个__jsonp21__是函数名，所以我们需要在我们的代码中事先准备好名称为__jsonp21__的函数，我们对跨域请求到的数据就是放在这个函数中的，然后动态加载一个<strong>script</strong>节点，相当于动态读取外域的JavaScript资源，最后就等着接收回调了。</p>
-<p>具体代码如下：</p>
-<pre><code> // 请求的地址为：https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600
-
-function __jsonp21__(data) {   // 将要处理了的数据放在这个函数中
-    console.log(data);  // 得到的是跨域请求的数据
-    let myDiv = document.getElementById(&#39;myDiv&#39;)  
-    myDiv.innerHTML = data.area
-}
-window.onload = function () { 
-    let btn = document.getElementById(&#39;btn&#39;)
-    btn.addEventListener(&#39;click&#39;, function () {  
-        let url = &#39;https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600&#39;
-        let scriptTag = document.createElement(&#39;script&#39;)    // 动态创建script标签 
-        scriptTag.setAttribute(&#39;src&#39;, url)      // 将其他源的地址设置为动态script的src属性
-        // console.log(scriptTag);  // 得到的是script标签
-        document.getElementsByTagName(&#39;body&#39;)[0].appendChild(scriptTag)  // 将动态创建的script标签添加到html页面中
-    })
-}
-</code></pre><p>注意：数据处理的函数名要跟跨域返回的函数名一样，这样我们通过JSONP请求数据的时候，服务器才能返回数据。<br>最终结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-df752a8458c616ff.gif?imageMogr2/auto-orient/strip" alt="跨域1.gif"></p>
-<p>再句一个例子：<br>请求地址是<a href="http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice" target="_blank" rel="noopener">http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice</a></p>
-<pre><code>function refreshPrice(data) { 
-console.log(data);
-}
-window.onload = function () {  
-    let scriptTag = document.createElement(&#39;script&#39;)
-    let url = &#39;http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice&#39;
-    scriptTag.setAttribute(&#39;src&#39;, url)
-    document.getElementsByTagName(&#39;body&#39;)[0].appendChild(scriptTag)
-}
-</code></pre><h2 id="Ajax（JQuery实现）"><a href="#Ajax（JQuery实现）" class="headerlink" title="Ajax（JQuery实现）"></a>Ajax（JQuery实现）</h2><p>在JQuery中，实现Ajax主要是由<strong>$.ajax({…})</strong>方法实现。方法的常用参数有：</p>
-<ul>
-<li>async：是否实现异步加载，一般来说，是true。</li>
-<li>type：GET或者POST。</li>
-<li>url：发送请求的地址。</li>
-<li>timeout：设置请求的超时时间。</li>
-<li>success：请求成功后的回调函数。</li>
-<li>error：请求失败后的回调函数。</li>
-<li>jsonp：在一个JSONP请求中重写回调函数的名字，默认为callback，用来重新命名回调我们跨域请求时候的函数名字。这个值用来替代在 “callback=?” 这种 GET 或 POST 请求中 URL 参数里的 “callback” 部分，比如 {jsonp:’onJsonPLoad’} 会导致将 “onJsonPLoad=?” 传给服务器。</li>
-<li>jsonpCallback：为JSONP请求指定一个回调函数名。 </li>
-<li>dataType：预期服务器返回的数据类型。不指定的话，JQueryhi自动判断。”xml”: 返回 XML 文档，可用jQuery处理。</li>
-</ul>
-<blockquote>
-<p>“html”: 返回纯文本 HTML 信息；包含的 script 标签会在插入 dom 时执行；”script”: 返回纯文本JavaScript代码。不会自动缓存结果。除非设置了”cache”参数。注意：在远程请求时(不在同一个域下)，所有POST请求都将转为GET请求。（因为将使用DOM的 script标签来加载）；”json”: 返回JSON数据；”jsonp”: JSONP格式。使用 JSONP 形式调用函数时，如 “myurl?callback=?” jQuery 将自动替换 ? 为正确的函数名，以执行回调函数；”text”: 返回纯文本字符串。</p>
-</blockquote>
-<p>用JQuery实现同源的Ajax请求：</p>
-<pre><code>$(function () {  
-    $(&#39;button&#39;).on(&#39;click&#39;, function () {  
-        $.ajax({
-            url: &#39;./server.txt&#39;,    // 请求地址
-            type: &#39;GET&#39;,    // 请求方式
-            async: true,    // 是否异步
-            success: function (data) {  
-                console.log(data);
-            }   // 请求成功后执行的函数
-        })
-    })
-})
-</code></pre><p>实现结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-b1fcb9ed574a8a24.gif?imageMogr2/auto-orient/strip" alt="异步2.gif"></p>
-<p>用JQuery实现非同源的JSONP跨域请求：</p>
-<pre><code>$(function () {  
-$(&#39;button&#39;).on(&#39;click&#39;, function () {  
-    $.ajax({
-        url: &#39;https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600&#39;,
-        type: &#39;GET&#39;,
-        async: true,
-        dataType: &#39;jsonp&#39;,
-        jsonp: &#39;_jsonp&#39;,
-        jsonpCallback: &#39;__jsonp21__&#39;,
-        success: function (data) {  
-            console.log(data);
-            $(&#39;#myDiv&#39;).html(data.area)
-        },
-        error: function (err) {  
-            console.log(err);
-        }
-    })
-})
-})
-</code></pre><p>实现结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-14e8fc745c21ab00.gif?imageMogr2/auto-orient/strip" alt="跨域2.gif"></p>
-
-          
+          Ajax（JavaScript实现）简介Ajax（Async Javascript And Xml）：异步Js和Xml，意思就是用Js执行异步网络请求。作用主要是在不重新加载全部网页的情况下，对部分页面进行更新。
+创建XMLHttpRequest对象除了IE5和IE6不支持之外（支持ActiveXO
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/02/17/Ajax和跨域总结/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
