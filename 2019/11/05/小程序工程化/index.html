@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="gulp👉官方文档传送门 gulp 编译项目日常进行小程序开发，遇到的问题有：  如果在微信开发者工具进行开发的话，效率低； 不支持 less css预编译器； autoprefixer； …  考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 gulp 将 src 下的代码搬移到 dist 打包目录即可。 项目结构└───gulpTask 目录">
+<meta name="description" content="gulp👉官方文档传送门 gulp 编译项目日常进行小程序开发，遇到的问题有：  如果在微信开发者工具进行开发的话，效率低； 不支持 less css预编译器 ； autoprefixer ； …  考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 gulp 将 src 下的代码搬移到 dist 打包目录即可。 项目结构└───gulpTask">
 <meta name="keywords" content="minapp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小程序工程化">
 <meta property="og:url" content="https://ertsul.github.io/2019/11/05/小程序工程化/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="gulp👉官方文档传送门 gulp 编译项目日常进行小程序开发，遇到的问题有：  如果在微信开发者工具进行开发的话，效率低； 不支持 less css预编译器； autoprefixer； …  考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 gulp 将 src 下的代码搬移到 dist 打包目录即可。 项目结构└───gulpTask 目录">
+<meta property="og:description" content="gulp👉官方文档传送门 gulp 编译项目日常进行小程序开发，遇到的问题有：  如果在微信开发者工具进行开发的话，效率低； 不支持 less css预编译器 ； autoprefixer ； …  考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 gulp 将 src 下的代码搬移到 dist 打包目录即可。 项目结构└───gulpTask">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png">
-<meta property="og:updated_time" content="2019-11-11T15:36:26.402Z">
+<meta property="og:image" content="https://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png">
+<meta property="og:updated_time" content="2019-11-12T15:32:23.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序工程化">
-<meta name="twitter:description" content="gulp👉官方文档传送门 gulp 编译项目日常进行小程序开发，遇到的问题有：  如果在微信开发者工具进行开发的话，效率低； 不支持 less css预编译器； autoprefixer； …  考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 gulp 将 src 下的代码搬移到 dist 打包目录即可。 项目结构└───gulpTask 目录">
-<meta name="twitter:image" content="http://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png">
+<meta name="twitter:description" content="gulp👉官方文档传送门 gulp 编译项目日常进行小程序开发，遇到的问题有：  如果在微信开发者工具进行开发的话，效率低； 不支持 less css预编译器 ； autoprefixer ； …  考虑到小程序是多页面应用，我们只要在 src 目录添加小程序初始化时所需要的相关配置文件，然后通过 gulp 将 src 下的代码搬移到 dist 打包目录即可。 项目结构└───gulpTask">
+<meta name="twitter:image" content="https://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png">
 
 
 
@@ -349,8 +349,8 @@
 <h2 id="gulp-编译项目"><a href="#gulp-编译项目" class="headerlink" title="gulp 编译项目"></a><em>gulp</em> 编译项目</h2><p>日常进行小程序开发，遇到的问题有：</p>
 <ul>
 <li>如果在微信开发者工具进行开发的话，效率低；</li>
-<li>不支持 <em>less</em> css预编译器；</li>
-<li><em>autoprefixer</em>；</li>
+<li>不支持 <em>less</em> css预编译器 ；</li>
+<li><em>autoprefixer</em> ；</li>
 <li>…</li>
 </ul>
 <p>考虑到小程序是多页面应用，我们只要在 <em>src</em> 目录添加小程序初始化时所需要的相关配置文件，然后通过 <em>gulp</em> 将 <em>src</em> 下的代码搬移到 <em>dist</em> 打包目录即可。</p>
@@ -368,6 +368,16 @@
 |             └───...
 |     └───pages // 页面
 |             └───...
+|     └───router // 路由
+|             └───router.js // 路由处理逻辑
+|             └───routerPath.js // 路由表
+|     └───api // 请求数据接口统一处理
+|             └───api.js
+|     └───http // http 网络请求
+|             └───baseConfig.js // 基本配置
+|             └───devConfig.js // 开发基本配置
+|             └───prodConfig.js // 生产基本配置
+|             └───request.js // 请求处理逻辑
 |    └───app.js
 |    └───app.json
 |    └───project.config.json
@@ -429,8 +439,8 @@ module.exports = {
 }
 </code></pre>
 <h3 id="gulp-开发流程"><a href="#gulp-开发流程" class="headerlink" title="gulp 开发流程"></a><em>gulp</em> 开发流程</h3><p>主要流程如下：</p>
-<p><img src="http://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png" alt="image-20191105174239088.png"></p>
-<h4 id="gulp-的各个任务如下：（taskControler-js-文件）"><a href="#gulp-的各个任务如下：（taskControler-js-文件）" class="headerlink" title="gulp 的各个任务如下：（taskControler.js 文件）"></a><em>gulp</em> 的各个任务如下：（<em>taskControler.js</em> 文件）</h4><ul>
+<p><img src="https://i.loli.net/2019/11/05/yxatp6HzRUAm9G4.png" alt="image-20191105174239088.png"></p>
+<h4 id="gulp-的各个任务：（taskControler-js-文件）"><a href="#gulp-的各个任务：（taskControler-js-文件）" class="headerlink" title="gulp 的各个任务：（taskControler.js 文件）"></a><em>gulp</em> 的各个任务：（<em>taskControler.js</em> 文件）</h4><ul>
 <li><p>每次进行 <em>gulp</em> 任务前都要清空 <em>dist</em> 打包后的目录。主要代码如下：</p>
 <pre><code class="javascript">task(&quot;clean:dist&quot;, done =&gt; {
     // console.log(&quot;:::: clean:dist&quot;);
@@ -619,7 +629,7 @@ task(`prod-${id}`, series(&quot;default&quot;));
 </code></pre>
 </li>
 </ul>
-<h4 id="gulpfile-js-gulp-入口文件处理："><a href="#gulpfile-js-gulp-入口文件处理：" class="headerlink" title="gulpfile.js gulp 入口文件处理："></a><em>gulpfile.js</em> <em>gulp</em> 入口文件处理：</h4><p>主要是对不同环境的区分，还有 <em>taskControler.js</em> 定义的各个任务进行引用。主要代码如下：</p>
+<h4 id="gulp-入口文件处理：（gulpfile-js-文件）"><a href="#gulp-入口文件处理：（gulpfile-js-文件）" class="headerlink" title="gulp 入口文件处理：（gulpfile.js 文件）"></a><em>gulp</em> 入口文件处理：（<em>gulpfile.js</em> 文件）</h4><p>主要是对不同环境的区分，还有 <em>taskControler.js</em> 定义的各个任务进行引用。主要代码如下：</p>
 <pre><code class="javascript">const {
   task,
   series
@@ -639,6 +649,168 @@ task(&quot;dev&quot;, series(`dev-${id}`));
 task(&quot;prod&quot;, series(`prod-${id}`));
 </code></pre>
 <p>接着，只需要执行 <code>npm run build:dev</code>或 <code>npm run build:prod</code>，然后将生成的 <em>dist</em> 目录丢到微信开发者工具即可。</p>
+<h3 id="路由封装"><a href="#路由封装" class="headerlink" title="路由封装"></a>路由封装</h3><ul>
+<li><p>路由表文件</p>
+<pre><code class="javascript">/**
+ * 路由路径
+ */
+const routerPath = {
+  index: &quot;/pages/index/index&quot;,
+  detail: &quot;/pages/detail/detail&quot;,
+}
+
+module.exports = routerPath;
+</code></pre>
+</li>
+<li><p>路由逻辑处理</p>
+<p>最后使用路由的方式为：</p>
+<pre><code class="javascript">app.Router.push({
+    path: &#39;detail&#39;,
+    query: {
+        name: &#39;Ertsul&#39;,
+        age: 23
+    }
+})
+</code></pre>
+<p>需要处理的问题有：路由参数转化为小程序的格式、有参无参路由。</p>
+<p>路由参数转化为小程序的格式。</p>
+<pre><code class="javascript">/**
+ * 处理路由参数，拼接成字符串形式
+ * @param {*} queryObj ： 路由参数
+ */
+function dealQuery(queryObj) {
+  let tempArr = [];
+  for (let key in queryObj) {
+    if (queryObj.hasOwnProperty(key)) {
+      const value = queryObj[key];
+      const item = `${key}=${value}`;
+      tempArr.push(item);
+    }
+  }
+  return &quot;?&quot; + tempArr.join(&quot;&amp;&quot;);
+}
+</code></pre>
+<p>封装一个对象，添加 <em>push</em> 对外暴露的方法，添加内部跳转的方法。</p>
+<pre><code class="javascript">let Router = {
+  /**
+   * 
+   * @param {String} param0 : 路径
+   * @param {Object} param1 : 参数
+   * @param {String} param2 : 类型，redirectTo/reLaunch/back/navigateTo
+   */
+  push({
+    path = &quot;&quot;,
+    query = {},
+    type = &quot;navigateTo&quot;
+  }) {
+    if (!path) {
+      return;
+    }
+    // 获取对应的小程序路径
+    let url = routerPath[path] || routerPath[&#39;index&#39;];
+    let params = &quot;&quot;;
+    // 处理 query 
+    if (Object.keys(query) &amp;&amp; Object.prototype.toString.call(query) == &#39;[object Object]&#39;) {
+      params = dealQuery(query);
+    } else {
+      console.error(&quot;路由参数类型错误！&quot;);
+      return;
+    }
+    url += params;
+    this.to(url, type); // 执行跳转
+  },
+  /**
+   * 
+   * @param {*} url : 路径 + 参数
+   * @param {*} type : 类型，redirectTo/reLaunch/back/navigateTo
+   */
+  to(url, type = &quot;&quot;) {
+    switch (type) {
+      case &quot;redirectTo&quot;:
+        wx.redirectTo({
+          url
+        });
+        break;
+      case &quot;reLaunch&quot;:
+        wx.reLaunch({
+          url
+        });
+        break;
+      case &quot;back&quot;:
+        wx.navigateBack({
+          delta: 1
+        });
+        break;
+      case &quot;navigateTo&quot;:
+        wx.navigateTo({
+          url
+        });
+        break;
+    }
+  }
+}
+</code></pre>
+<p>最后将 <em>Router</em> 对象挂载到 <em>app</em> 对象。</p>
+<pre><code class="javascript">const Router = require(&quot;./router/router&quot;);
+
+//app.js
+App({
+  Router,
+  ...
+})
+</code></pre>
+</li>
+</ul>
+<h3 id="http-封装及其接口统一管理"><a href="#http-封装及其接口统一管理" class="headerlink" title="http 封装及其接口统一管理"></a>http 封装及其接口统一管理</h3><p><em>http</em> 封装，可以添加一些请求公共参数等。核心代码为：</p>
+<pre><code class="javascript">function request({
+  url = &#39;&#39;,
+  data = {},
+  method = &#39;POST&#39;,
+  header = {
+    &#39;content-type&#39;: &#39;application/json&#39; // 默认值
+  }
+}) {
+  return new Promise(async (resolve, reject) =&gt; {
+    wx.request({
+      url,
+      data,
+      method,
+      header,
+      success(res) {
+        resolve(res);
+      },
+      fail(err) {
+        reject(err);
+      }
+    })
+  })
+}
+</code></pre>
+<p>接口统一管理。接口统一管理有利于后期维护。</p>
+<pre><code class="javascript">const request = require(&#39;../http/request&#39;);
+const baseConfig = require(&#39;../http/baseConfig&#39;);
+
+// get 例子
+const getList = request({
+  method: &#39;GET&#39;,
+  url: baseConfig.baseUrl + &#39;/list?page=1&amp;size=10&#39;,
+})
+
+// post 例子
+const updateInfo = request({
+  method: &#39;POST&#39;,
+  url: baseConfig.baseUrl + &#39;/updateInfo&#39;,
+  data: {
+    name: &#39;Ertsul&#39;,
+    age: 23
+  }
+})
+
+module.exports = {
+  getList,
+  updateInfo
+}
+</code></pre>
 
       
     </div>
@@ -851,7 +1023,7 @@ task(&quot;prod&quot;, series(`prod-${id}`));
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp"><span class="nav-number">1.</span> <span class="nav-text">gulp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-编译项目"><span class="nav-number">2.</span> <span class="nav-text">gulp 编译项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目结构"><span class="nav-number">2.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-配置文件-baseConfig-js"><span class="nav-number">2.2.</span> <span class="nav-text">gulp 配置文件 baseConfig.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-开发流程"><span class="nav-number">2.3.</span> <span class="nav-text">gulp 开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-的各个任务如下：（taskControler-js-文件）"><span class="nav-number">2.3.1.</span> <span class="nav-text">gulp 的各个任务如下：（taskControler.js 文件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gulpfile-js-gulp-入口文件处理："><span class="nav-number">2.3.2.</span> <span class="nav-text">gulpfile.js gulp 入口文件处理：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp"><span class="nav-number">1.</span> <span class="nav-text">gulp</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gulp-编译项目"><span class="nav-number">2.</span> <span class="nav-text">gulp 编译项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#项目结构"><span class="nav-number">2.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-配置文件-baseConfig-js"><span class="nav-number">2.2.</span> <span class="nav-text">gulp 配置文件 baseConfig.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gulp-开发流程"><span class="nav-number">2.3.</span> <span class="nav-text">gulp 开发流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-的各个任务：（taskControler-js-文件）"><span class="nav-number">2.3.1.</span> <span class="nav-text">gulp 的各个任务：（taskControler.js 文件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gulp-入口文件处理：（gulpfile-js-文件）"><span class="nav-number">2.3.2.</span> <span class="nav-text">gulp 入口文件处理：（gulpfile.js 文件）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由封装"><span class="nav-number">2.4.</span> <span class="nav-text">路由封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-封装及其接口统一管理"><span class="nav-number">2.5.</span> <span class="nav-text">http 封装及其接口统一管理</span></a></li></ol></li></ol></div>
             
 
           </div>
