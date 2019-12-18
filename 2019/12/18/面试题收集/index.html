@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="算法,">
+  <meta name="keywords" content="面试题,">
 
 
 
@@ -86,22 +86,18 @@
 
 
 
-<meta name="description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       chlid: [         {           nod">
-<meta name="keywords" content="算法">
+<meta name="description" content="题目 1内容function Foo() { // 函数 1     getName = function () {         console.log(1);     }     return this; } Foo.getName = function () { // 函数 2     console.log(2); } Foo.prototype.getName = function (">
+<meta name="keywords" content="面试题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="广度优先搜索 BFS 和深度优先搜索 DFS">
-<meta property="og:url" content="https://ertsul.github.io/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/index.html">
+<meta property="og:title" content="面试题收集">
+<meta property="og:url" content="https://ertsul.github.io/2019/12/18/面试题收集/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       chlid: [         {           nod">
+<meta property="og:description" content="题目 1内容function Foo() { // 函数 1     getName = function () {         console.log(1);     }     return this; } Foo.getName = function () { // 函数 2     console.log(2); } Foo.prototype.getName = function (">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/12/13/Li2XeM8a46u3jZV.png">
-<meta property="og:image" content="https://i.loli.net/2019/12/13/fQRoxlaeU1mXEku.png">
-<meta property="og:image" content="https://i.loli.net/2019/12/13/WoE4fxkBRCs3NOd.png">
-<meta property="og:updated_time" content="2019-12-14T13:32:04.582Z">
+<meta property="og:updated_time" content="2019-12-18T14:27:38.901Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="广度优先搜索 BFS 和深度优先搜索 DFS">
-<meta name="twitter:description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       chlid: [         {           nod">
-<meta name="twitter:image" content="https://i.loli.net/2019/12/13/Li2XeM8a46u3jZV.png">
+<meta name="twitter:title" content="面试题收集">
+<meta name="twitter:description" content="题目 1内容function Foo() { // 函数 1     getName = function () {         console.log(1);     }     return this; } Foo.getName = function () { // 函数 2     console.log(2); } Foo.prototype.getName = function (">
 
 
 
@@ -131,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://ertsul.github.io/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/">
+  <link rel="canonical" href="https://ertsul.github.io/2019/12/18/面试题收集/">
 
 
 
 
 
-  <title>广度优先搜索 BFS 和深度优先搜索 DFS | Ertsul</title>
+  <title>面试题收集 | Ertsul</title>
   
 
 
@@ -297,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ertsul.github.io/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/">
+    <link itemprop="mainEntityOfPage" href="https://ertsul.github.io/2019/12/18/面试题收集/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ertsul">
@@ -314,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">广度优先搜索 BFS 和深度优先搜索 DFS</h1>
+          <h1 class="post-title" itemprop="name headline">面试题收集</h1>
         
 
         <div class="post-meta">
@@ -326,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-14T21:29:53+08:00">
-                2019-12-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-18T22:26:24+08:00">
+                2019-12-18
               </time>
             
 
@@ -358,7 +354,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1k
                 </span>
               
 
@@ -374,7 +370,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  4
                 </span>
               
             </div>
@@ -395,207 +391,127 @@
       
 
       
-        <p>最近在写 <code>virtual dom</code> 方面的逻辑，用到 <code>BFS</code> 和 <code>DFS</code>。总结一波~😀</p>
-<p><code>Virtual Dom</code> 的示例 <code>json</code> 如下：</p>
-<pre><code class="javascript">const vNode = {
-  node: &quot;root&quot;,
-  child: [
-    {
-      node: &quot;element1&quot;,
-      chlid: [
-        {
-          node: &quot;element3&quot;
-        },
-        {
-          node: &quot;element4&quot;
-        }
-      ]
-    },
-    {
-      node: &quot;element2&quot;
+        <h3 id="题目-1"><a href="#题目-1" class="headerlink" title="题目 1"></a>题目 1</h3><h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><pre><code class="javascript">function Foo() { // 函数 1
+    getName = function () {
+        console.log(1);
     }
-  ]
-};
+    return this;
+}
+Foo.getName = function () { // 函数 2
+    console.log(2);
+}
+Foo.prototype.getName = function () { // 函数 3
+    console.log(3);
+}
+var getName = function () { // 函数 4
+    console.log(4);
+}
+function getName() { // 函数 5
+    console.log(5);
+}
+
+Foo.getName();
+getName();
+Foo().getName();
+getName();
+new Foo.getName();
+new Foo().getName();
+new new Foo().getName();
 
 </code></pre>
-<p><code>Virtual Dom</code> 的树如下：</p>
-<p><img src="https://i.loli.net/2019/12/13/Li2XeM8a46u3jZV.png" alt="image.png"></p>
-<h3 id="广度优先搜索-BFS"><a href="#广度优先搜索-BFS" class="headerlink" title="广度优先搜索  BFS"></a>广度优先搜索  BFS</h3><p><code>BFS</code> ：逐层访问节点，从左到右访问完成一层访问后，访问下一层，且每个节点只访问一次。</p>
-<p>上面的树用 <code>BFS</code> 顺序就是：<code>root</code> -&gt; <code>element1</code> -&gt; <code>element2</code> -&gt; <code>element3</code> -&gt; <code>element4</code>。</p>
-<p>实现思路：</p>
-<ul>
-<li>设置队列 <code>queue</code>，就将<strong>根节点</strong>添加到队列 <code>queue</code>；</li>
-<li>判断当队列 <code>queue</code> 是否为空，不为空则弹出队头节点 <code>currentNode</code>；</li>
-<li>将队头节点 <code>currentNode</code> 添加到结果队列 <code>lists</code>；</li>
-<li>判断队头节点 <code>currentNode</code> 是否有子节点，有则将子节点<strong>从左到右</strong>依次添加到队列 <code>queue</code>；</li>
-<li>重复步骤2~4。</li>
+<h4 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h4><p><code>2 4 1 1 2 3 3</code></p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><ul>
+<li><code>Foo.getName()</code>：直接调用<strong>函数 2</strong> ，故<strong>打印 2</strong>。</li>
+<li><code>getName()</code>：调用的是<strong>函数 4</strong>。这里有 <em>getName</em> 的函数声明和函数定义：首先，<strong>函数声明比变量声明优先级高</strong>，故<strong>函数声明</strong>会整个提升到程度顶部；接着，<strong>函数定义</strong>会重写这个函数，故执行 <em>getName</em> 函数的时候，函数已经变成<strong>函数 4</strong>，故<strong>打印 4</strong>。</li>
+<li><code>Foo().getName()</code>：先执行函数 <em>Foo()</em>，此时 <em>this</em> 指向 <em>window</em>，函数内部的 <em>getName</em> 代码相当于对全局的 <em>getName</em> 进行了重新赋值，故执行完 <em>Foo()</em> 后相当于 <em>this.getName()</em> 也就是 <em>window.getName()</em> 也就是 <em>getName()</em>，故<strong>打印 1</strong>。</li>
+<li><code>getName()</code>：同上，此时全局的 <em>getName()</em> 已被重写，故<strong>打印 1</strong>。</li>
+<li><code>new Foo.getName()</code>：<em>new</em> 实例化一个对象，也就是实例化 <em>Foo.getName</em> 对象，故<strong>打印 2</strong>。</li>
+<li><code>new Foo().getName()</code>：相当于 <code>(new Foo()).getName()</code>，先实例化 <em>Foo</em> 对象，然后执行 <em>getName</em> 函数，<em>Foo</em> 并没有 <em>this.getName</em>，向原型链上查找，执行<strong>函数 3</strong>，故<strong>打印 3</strong>。</li>
+<li><code>new new Foo().getName()</code>：相当于<code>(new (new Foo()).getName())</code>，先实例化 <em>Foo</em> 对象，然后实例化 <em>Foo</em> 原型上的 <em>getName</em> 函数，即<strong>函数 3</strong>，故<strong>打印 3</strong>。</li>
 </ul>
-<p>简单理解就是：</p>
-<ul>
-<li>根节点进队列；</li>
-<li>判断队头节点是否子节点，有则将子节点<strong>从左到右</strong>依次进队列，队头节点出队列。</li>
-<li>重复2。</li>
-</ul>
-<p>用 <code>js</code> 代码实现如下：（注意：判断条件为队列长度）</p>
-<pre><code class="javascript">/**
- * BFS 非递归写法
- * @param {*} root 根节点
- */
-const BFS = root =&gt; {
-  if (Object.prototype.toString.call(root) != &#39;[object Object]&#39;) {
-    throw(new Error(&#39;root 类型错误！&#39;));
-    return;
-  }
-  let resLists = []; // 存放 BFS 节点队列
-  if (!Object.keys(root).length) {
-    return lists;
-  }
-  let queue = []; // 临时队列，每遇到一个节点就存放进队列
-  queue.unshift(root);
-  while (queue.length) {
-    // queue 队列不为空，遍历临时队列
-    let currentNode = queue.pop(); // 弹出临时队列的一个节点
-    const hasChild =
-      currentNode.hasOwnProperty(&quot;child&quot;) &amp;&amp; currentNode.child.length; // 判断当前节点是否有子节点
-    if (hasChild) {
-      const childrenNodes = currentNode.child; // 子节点数组
-      for (let i = 0, len = childrenNodes.length; i &lt; len; i++) {
-        const currentChildNode = childrenNodes[i]; // 当前子节点
-        queue.unshift(currentChildNode); // 添加到队列
-      }
+<h4 id="改题"><a href="#改题" class="headerlink" title="改题"></a>改题</h4><p>改一下，如果把<strong>函数 1</strong> 改成：（其他不变）</p>
+<pre><code class="javascript">function Foo() { // 函数 1
+    getName = function () {
+        console.log(1);
     }
-    resLists.push(currentNode); // 当前节点存放到 BFS 节点队列
-  }
-  return resLists;
-};
+    return this;
+}
 </code></pre>
-<p>结果如下：</p>
-<p><img src="https://i.loli.net/2019/12/13/fQRoxlaeU1mXEku.png" alt="image.png"></p>
-<h3 id="深度优先搜索-DFS"><a href="#深度优先搜索-DFS" class="headerlink" title="深度优先搜索  DFS"></a>深度优先搜索  DFS</h3><p> <code>DFS</code>：对每一个可能的分支路径深入到不能再深入为止，且每个节点只访问一次。</p>
-<p>上面的树用 <code>BFS</code> 顺序就是：<code>root</code>  -&gt; <code>element1</code> -&gt; <code>element3</code> -&gt; <code>element4</code> -&gt; <code>element2</code>。</p>
-<p>实现思路1（非递归）:</p>
+<p>那么答案则是：<code>2 4 1 1 2 1 1</code></p>
+<p>解析：执行语句 1 2 4 5 不变，还是一样的逻辑，</p>
 <ul>
-<li>根节点进栈 <code>stack</code>；</li>
-<li>判断栈 <code>stack</code> 是否为空，判断栈顶元素是否有有子节点，有则将栈顶元素的子节点<strong>从右到左</strong>依次进栈；</li>
-<li>弹出栈顶元素，存进 <code>lists</code>;</li>
-<li>重复2~3；</li>
+<li><code>Foo().getName()</code>：先执行函数 <em>Foo</em>，此时函数内部的 <em>this</em> 指向 <em>window</em>，<em>this.getName = …</em> 相当于给全局的 <em>getName</em> 重新赋值了；故执行完 <em>Foo()</em> 后相当于 <em>this.getName()</em> 也就是 <em>window.getName()</em> 也就是 <em>getName()</em>，故<strong>打印 1</strong>。</li>
+<li><code>new Foo().getName()</code>：相当于 <code>(new Foo()).getName()</code>，先实例化 <em>Foo</em> 对象，然后执行 <em>getName</em> 函数，此时<em>this</em> 指向 实例化对象， 构造函数有 <em>this.getName</em> 定义，不需要向原型链上查找，执行<strong>函数 1</strong> 内部的 <em>getName</em>，故<strong>打印 1</strong>。</li>
+<li><code>new new Foo().getName()</code>：相当于<code>(new (new Foo()).getName())</code>，先实例化 <em>Foo</em> 对象，然后执行 <em>getName</em> 函数，此时 <em>this</em> 指向实例化对象， 构造函数有 <em>this.getName</em> 定义，不需要向原型链上查找，即<strong>函数 1</strong>内部的 <em>getName</em>，故<strong>打印 1</strong>。</li>
 </ul>
-<p>简单理解就是：</p>
+<h3 id="题目-2"><a href="#题目-2" class="headerlink" title="题目 2"></a>题目 2</h3><h4 id="内容-1"><a href="#内容-1" class="headerlink" title="内容"></a>内容</h4><pre><code class="javascript">function test(arg){
+    // 1. 形参 arg 是 &quot;hi&quot;
+    // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function
+    console.log(arg);  
+    var arg = &#39;hello&#39;; // 3.var arg 变量声明被忽略， arg = &#39;hello&#39;被执行
+    function arg(){
+        console.log(&#39;hello world&#39;) 
+    }
+    console.log(arg);  
+}
+test(&#39;hi&#39;);
+</code></pre>
+<h4 id="答案-1"><a href="#答案-1" class="headerlink" title="答案"></a>答案</h4><pre><code class="javascript">ƒ arg() {
+    console.log(&#39;hello world&#39;)
+}
+hello
+</code></pre>
+<h4 id="解析-1"><a href="#解析-1" class="headerlink" title="解析"></a>解析</h4><ul>
+<li>函数声明比变量声明优先级高，<em>arg</em> 函数定义整个被提升到程序顶部，故打印整个声明函数。</li>
+<li><code>var arg = &#39;hello&#39;</code>，<em>var arg</em> 变量声明被忽略， <em>arg = ‘hello’</em> 被执行。</li>
+</ul>
+<h3 id="题目-3"><a href="#题目-3" class="headerlink" title="题目 3"></a>题目 3</h3><h4 id="内容-2"><a href="#内容-2" class="headerlink" title="内容"></a>内容</h4><pre><code class="javascript">const a = {};
+const b = { key: &quot;b&quot;};
+const c = { key: &quot;c&quot;};
+a[b] = 123;
+a[c] = 456;
+console.log(a[b]);
+</code></pre>
+<h4 id="答案-2"><a href="#答案-2" class="headerlink" title="答案"></a>答案</h4><p><code>456</code></p>
+<h4 id="解析-2"><a href="#解析-2" class="headerlink" title="解析"></a>解析</h4><ul>
+<li>将对象作为对象的 <em>key</em> ,实际上是将 <em>[object Object]</em> 作为对象的 <em>key</em>。</li>
+<li><code>a[b] = 123</code> 相当于 <code>a[&#39;[object Object]&#39;] = 123</code>。</li>
+<li><code>a[c]=456</code> 相当于 <code>a[&#39;[object Object]&#39;] = 456</code>。</li>
+<li>故<strong>打印 456</strong>；</li>
+</ul>
+<h4 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h4><p>如果是数组作为对象的 <em>key</em>，则有以下规则：</p>
 <ul>
-<li>根节点进栈；</li>
-<li>弹出栈顶元素，判断栈顶元素是否子节点，有则将子节点<strong>从右到左</strong>依次进栈；</li>
-<li>重复2。</li>
+<li>数组单元是<strong>对象类型</strong>，将该对象变成 <em>[object Object]</em>。</li>
+<li>数组单元是 <strong>null</strong> 和 <strong>undefined</strong>，删除。</li>
+<li>其他类型：转化为字符串。</li>
 </ul>
-<p>代码如下：（注意：判断条件为栈长度）</p>
-<pre><code class="javascript">const DFS = root =&gt; {
-  if (Object.prototype.toString.call(root) != &quot;[object Object]&quot;) {
-    throw new Error(&quot;root 类型错误！&quot;);
-  }
-  let resLists = []; // 存放 BFS 节点队列
-  if (!Object.keys(root).length) {
-    return lists;
-  }
-  let stack = []; // 栈，每遇到一个节点就存放进栈
-  stack.push(root);
-  while (stack.length) {
-    let currentNode = stack.pop(); // 弹出栈顶元素
-    const hasChild =
-      currentNode.hasOwnProperty(&quot;child&quot;) &amp;&amp; currentNode.child.length; // 判断当前节点是否有子节点
-    if (hasChild) {
-      const childrenNodes = currentNode.child; // 子节点数组
-      for (let i = childrenNodes.length - 1; i &gt;= 0; i--) {
-        const currentChildNode = childrenNodes[i]; // 当前子节点
-        stack.push(currentChildNode); // 添加到队列
-      }
-    }
-    resLists.push(currentNode); // 当前节点存放到 DFS 结果列表
-  }
-  return resLists;
-};
+<p>如：</p>
+<pre><code class="javascript">const a = {};
+const b = [{
+    a: 1
+}, function () { console.log(123); }, null, undefined];
+const c = [4, 5, 6];
+a[b] = 111;
+a[c] = 222;
+console.log(a);
 </code></pre>
-<p>实现思路2（递归）：</p>
-<ul>
-<li>当前节点入栈 <code>stack</code>；</li>
-<li>判断当前节点是否有子节点；</li>
-<li>有子节点：<ul>
-<li>将子节点从右到左依次进行递归；（栈是先进后出 ）</li>
-<li>所有子节点递归结束，当前节点出栈；</li>
-</ul>
-</li>
-<li>无：<ul>
-<li>当前节点出栈。</li>
-</ul>
-</li>
-</ul>
-<p>代码实现如下：（注意：判断关键为节点是否有子节点）</p>
-<pre><code class="javascript">var stack = []; // 栈
-var lists = []; // 存放 DFS 节点
-/**
- * 全局变量实现
- * @param {*} currentNode : 当前节点
- */
-const DFS = currentNode =&gt; {
-  let hasChild =
-    currentNode.hasOwnProperty(&quot;child&quot;) &amp;&amp; currentNode.child.length; // 判断当前节点是否有子节点
-
-  stack.push(currentNode); // 推入栈
-  if (hasChild) {
-    let len = currentNode.child.length;
-    for (let i = len - 1; i &gt;= 0; i--) {
-      const currentChildNode = currentNode.child[i]; // 当前子节点
-      DFS(currentChildNode); // 递归
+<p>答案</p>
+<p><code>{&quot;[object Object],function () {console.log(123);},,&quot;: 111, 4,5,6: 222}</code></p>
+<h3 id="题目-4"><a href="#题目-4" class="headerlink" title="题目 4"></a>题目 4</h3><h4 id="内容-3"><a href="#内容-3" class="headerlink" title="内容"></a>内容</h4><pre><code class="javascript">function F1() {
+    var a = 100;
+    return function () {
+        console.log(a);
     }
-    lists.unshift(stack.pop()); // 出栈
-  } else {
-    lists.unshift(stack.pop()); // 出栈
-  }
-};
+}
+function F2(f1) {
+    var a = 200;
+    f1();
+}
+var f1 = F1();
+F2(f1);
 </code></pre>
-<pre><code class="javascript">/**
- * 非全局变量方式实现
- * @param {*} currentNode : 当前节点
- * @param {*} cache : 缓存栈和节点
- */
-const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
-  if (Object.prototype.toString.call(currentNode) != &quot;[object Object]&quot;) {
-    throw new Error(&quot;root 类型错误！&quot;);
-  }
-  let hasChild =
-    currentNode.hasOwnProperty(&quot;child&quot;) &amp;&amp; currentNode.child.length; // 判断当前节点是否有子节点
-
-  let { lists, stack } = cache;
-
-  stack.push(currentNode); // 推入栈
-  if (hasChild) {
-    let len = currentNode.child.length;
-    for (let i = len - 1; i &gt;= 0; i--) { // 注意这里要从右向左循环，因为 stack 是先进后出
-      const currentChildNode = currentNode.child[i]; // 当前子节点
-      const {
-        lists: newLists,
-        stack: newStack
-      } = DFS(currentChildNode, {
-        lists,
-        stack
-      }); // 递归
-      lists = newLists; // 更新 lists
-      stack = newStack; // 更新栈
-    }
-    lists.unshift(stack.pop()); // 出栈
-  } else {
-    lists.unshift(stack.pop()); // 出栈
-  }
-  // 函数返回结果，如果栈中还有节点，证明还没回溯完成，则返回缓存；否则函数执行结束
-  const res = stack.length
-    ? {
-        lists: lists,
-        stack: stack
-      }
-    : lists;
-  return res;
-};
-</code></pre>
-<p>结果如下：</p>
-<p><img src="https://i.loli.net/2019/12/13/WoE4fxkBRCs3NOd.png" alt="image.png"></p>
+<h4 id="答案-3"><a href="#答案-3" class="headerlink" title="答案"></a>答案</h4><p><code>100</code></p>
+<h4 id="解析-3"><a href="#解析-3" class="headerlink" title="解析"></a>解析</h4><p>当自由变量从作用域中去寻找，依据的是函数定义时的作用域链，而不是函数执行时。</p>
 
       
     </div>
@@ -622,7 +538,7 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://ertsul.github.io/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/" title="广度优先搜索 BFS 和深度优先搜索 DFS">https://ertsul.github.io/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/</a>
+    <a href="https://ertsul.github.io/2019/12/18/面试题收集/" title="面试题收集">https://ertsul.github.io/2019/12/18/面试题收集/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -637,7 +553,7 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
       
         <div class="post-tags">
           
-            <a href="/tags/算法/" rel="tag"># 算法</a>
+            <a href="/tags/面试题/" rel="tag"># 面试题</a>
           
         </div>
       
@@ -650,8 +566,8 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/05/小程序工程化/" rel="next" title="小程序工程化">
-                <i class="fa fa-chevron-left"></i> 小程序工程化
+              <a href="/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/" rel="next" title="广度优先搜索 BFS 和深度优先搜索 DFS">
+                <i class="fa fa-chevron-left"></i> 广度优先搜索 BFS 和深度优先搜索 DFS
               </a>
             
           </div>
@@ -659,10 +575,6 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/12/18/面试题收集/" rel="prev" title="面试题收集">
-                面试题收集 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -812,7 +724,7 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#广度优先搜索-BFS"><span class="nav-number">1.</span> <span class="nav-text">广度优先搜索  BFS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先搜索-DFS"><span class="nav-number">2.</span> <span class="nav-text">深度优先搜索  DFS</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目-1"><span class="nav-number">1.</span> <span class="nav-text">题目 1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容"><span class="nav-number">1.1.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案"><span class="nav-number">1.2.</span> <span class="nav-text">答案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析"><span class="nav-number">1.3.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改题"><span class="nav-number">1.4.</span> <span class="nav-text">改题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目-2"><span class="nav-number">2.</span> <span class="nav-text">题目 2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容-1"><span class="nav-number">2.1.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案-1"><span class="nav-number">2.2.</span> <span class="nav-text">答案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析-1"><span class="nav-number">2.3.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目-3"><span class="nav-number">3.</span> <span class="nav-text">题目 3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容-2"><span class="nav-number">3.1.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案-2"><span class="nav-number">3.2.</span> <span class="nav-text">答案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析-2"><span class="nav-number">3.3.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓展"><span class="nav-number">3.4.</span> <span class="nav-text">拓展</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目-4"><span class="nav-number">4.</span> <span class="nav-text">题目 4</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容-3"><span class="nav-number">4.1.</span> <span class="nav-text">内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#答案-3"><span class="nav-number">4.2.</span> <span class="nav-text">答案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解析-3"><span class="nav-number">4.3.</span> <span class="nav-text">解析</span></a></li></ol></li></ol></div>
             
 
           </div>
