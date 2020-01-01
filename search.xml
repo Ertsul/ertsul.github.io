@@ -1040,42 +1040,72 @@ cd gitFile
 <li>简单概括：防抖就是将高频操作优化为最后一次执行。</li>
 </ul>
 <p>实现：</p>
-<pre><code>// 防抖
-const debounce = (fn, wait, immediate = false) =&gt; {
-  let timer = null;
-  return function () {
-    let context = this,
-      args = arguments;
-    if (immediate &amp;&amp; !timer) {
-      fn.apply(context, args);
+<pre><code>function debounce(fn, wait, immediate = false) {
+  var timeout, result;
+
+  timeout &amp;&amp; clearTimeout(timeout);
+  var debounced = function () {
+    var context = this;
+    var args = arguments;
+
+    if (immediate) { // 事件停止触发后 n 秒，触发事件立刻执行回调
+      var callNow = !timeout;
+      timeout = setTimeout(function () {
+        timeout = null;
+      }, wait)
+      if (callNow) {
+        result = fn.apply(context, args);
+      }
+    } else { // 事件停止触发后，执行回调函数
+      timeout = setTimeout(function () {
+        fn.apply(context, args);
+      }, wait);
     }
-    if (timer) {
-      clearTimeout(timer);
-    }
-    timer = setTimeout(() =&gt; {
-      fn.apply(context, args);
-    }, wait)
   }
+
+  debounced.cancel = function () {
+    clearTimeout(timeout);
+    timeout = null;
+  }
+
+  return debounced;
 }
 </code></pre><h2 id="节流"><a href="#节流" class="headerlink" title="节流"></a>节流</h2><p>每段时间后执行一次，将高频转化为低频。</p>
-<pre><code>// 节流
-const throttle = (fn, wait, immediate = false) =&gt; {
-  let timer = null;
-  return function () {
-    let context = this,
-      args = arguments;
-    if (immediate) {
-      fn.apply(context, args);
+<ul>
+<li>时间戳</li>
+</ul>
+<pre><code>function throttle(fn, wait) {
+    var previous = 0;
+
+    return function () {
+        var args = arguments;
+        var context = this;
+        var now = +new Date();
+        if (now - previous &gt; wait) {
+            fn.apply(context, args);
+            previous = now;
+        }
     }
-    if (!timer) {
-      timer = setTimeout(() =&gt; {
-        fn.apply(context, args);
-        timer = null;
-      }, wait)
-    }
+}
+</code></pre><ul>
+<li><p>定时器</p>
+<pre><code>function throttle(fn, wait) {
+  var timeout;
+
+  return function() {
+      var args = arguments;
+      var context = this;
+      if (!timeout) {
+          timeout = setTimeout(function() {
+              timeout = null;
+              fn.apply(context, args);
+          }, wait)
+      }
   }
 }
-</code></pre>]]></content>
+</code></pre></li>
+</ul>
+]]></content>
       <categories>
         <category>frontEnd</category>
         <category>js</category>
