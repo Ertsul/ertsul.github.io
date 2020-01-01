@@ -1088,24 +1088,23 @@ cd gitFile
     }
 }
 </code></pre><ul>
-<li><p>定时器</p>
-<pre><code>function throttle(fn, wait) {
-  var timeout;
-
-  return function() {
-      var args = arguments;
-      var context = this;
-      if (!timeout) {
-          timeout = setTimeout(function() {
-              timeout = null;
-              fn.apply(context, args);
-          }, wait)
-      }
-  }
-}
-</code></pre></li>
+<li>定时器</li>
 </ul>
-]]></content>
+<pre><code>function throttle(fn, wait) {
+    var timeout;
+
+    return function() {
+        var args = arguments;
+        var context = this;
+        if (!timeout) {
+            timeout = setTimeout(function() {
+                timeout = null;
+                fn.apply(context, args);
+            }, wait)
+        }
+    }
+}
+</code></pre>]]></content>
       <categories>
         <category>frontEnd</category>
         <category>js</category>
