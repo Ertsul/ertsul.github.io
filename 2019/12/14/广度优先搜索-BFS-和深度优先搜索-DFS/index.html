@@ -86,21 +86,21 @@
 
 
 
-<meta name="description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       chlid: [         {           nod">
+<meta name="description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       child: [         {           nod">
 <meta name="keywords" content="算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="广度优先搜索 BFS 和深度优先搜索 DFS">
 <meta property="og:url" content="https://ertsul.github.io/2019/12/14/广度优先搜索-BFS-和深度优先搜索-DFS/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       chlid: [         {           nod">
+<meta property="og:description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       child: [         {           nod">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/12/13/Li2XeM8a46u3jZV.png">
 <meta property="og:image" content="https://i.loli.net/2019/12/13/fQRoxlaeU1mXEku.png">
 <meta property="og:image" content="https://i.loli.net/2019/12/13/WoE4fxkBRCs3NOd.png">
-<meta property="og:updated_time" content="2019-12-14T13:32:04.582Z">
+<meta property="og:updated_time" content="2020-02-06T06:00:08.268Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="广度优先搜索 BFS 和深度优先搜索 DFS">
-<meta name="twitter:description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       chlid: [         {           nod">
+<meta name="twitter:description" content="最近在写 virtual dom 方面的逻辑，用到 BFS 和 DFS。总结一波~😀 Virtual Dom 的示例 json 如下： const vNode = {   node: &amp;quot;root&amp;quot;,   child: [     {       node: &amp;quot;element1&amp;quot;,       child: [         {           nod">
 <meta name="twitter:image" content="https://i.loli.net/2019/12/13/Li2XeM8a46u3jZV.png">
 
 
@@ -402,7 +402,7 @@
   child: [
     {
       node: &quot;element1&quot;,
-      chlid: [
+      child: [
         {
           node: &quot;element3&quot;
         },
@@ -660,6 +660,10 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2020/02/06/小程序文件生成脚本/" rel="prev" title="小程序文件生成脚本">
+                小程序文件生成脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -737,7 +741,7 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -759,7 +763,7 @@ const DFS = (currentNode = {}, cache = { lists: [], stack: [] }) =&gt; {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
