@@ -8,7 +8,9 @@
 <h3 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h3><ul>
 <li>读取命令行参数，获取目录类型和目录名称。</li>
 <li>生成目录和四个文件。</li>
-<li>如果是页面类型，则将页面路由添加到 <em>app.json</em> 文件中。<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3></li>
+<li>如果是页面类型，则将页面路由添加到 <em>app.json</em> 文件中。</li>
+</ul>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
 <li>安装依赖：<em>npm install</em>。</li>
 <li>链接生成本地命令：<em>npm link</em>。</li>
 <li>命令<ul>
@@ -18,10 +20,11 @@
 </li>
 <li>参数<ul>
 <li><em>-t</em> 或 <em>–type</em>：<em>page</em> 或者 <em>component</em></li>
-<li><em>-n</em> 或 <em>–name</em>：组件或者页面名称。<h3 id="github-地址"><a href="#github-地址" class="headerlink" title="github 地址"></a>github 地址</h3><a href="https://github.com/Ertsul/make-mp-file" target="_blank" rel="noopener">链接地址</a></li>
+<li><em>-n</em> 或 <em>–name</em>：组件或者页面名称。</li>
 </ul>
 </li>
 </ul>
+<h3 id="github-地址"><a href="#github-地址" class="headerlink" title="github 地址"></a>github 地址</h3><p><a href="https://github.com/Ertsul/make-mp-file" target="_blank" rel="noopener">链接地址</a></p>
 ]]></content>
       <categories>
         <category>minapp</category>
