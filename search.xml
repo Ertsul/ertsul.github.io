@@ -1,6 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>实现一个简易的webpack</title>
+    <url>/2020/03/08/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E6%98%93%E7%9A%84webpack/</url>
+    <content><![CDATA[<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>webpack 的官方解释如下：</p>
+<blockquote>
+<p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图会映射项目所需的每个模块，并生成一个或多个 bundle。</p>
+</blockquote>
+<p>简单理解，webpack 就是从入口开始，分析各个模块之间的相互依赖关系，最后将这些依赖模块生成 bundle。所以要手动首先一个 webpack，需要解析以下几个问题：</p>
+<ul>
+<li>获取入口文件和出口文件的路径；</li>
+<li>分析入口文件的相关模块依赖；</li>
+<li>递归分析其他模块的相关模块依赖；</li>
+<li>生成模块的依赖关系图谱；</li>
+<li>解决浏览器不能识别 require 的问题，生成 bundle。</li>
+</ul>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h3><pre><code>└───lib 目录
+|     └───compiler.js // 主要 webpack 类，存放主要逻辑，如：调用 parser.js 相关方法，生成依赖关系图谱和 bundle。
+|     └───parser.js // 获取 AST、依赖模块和最后生成的 code
+|───src
+|     └───index.js // 入口文件
+|     └───module1.js // 模块 1，被 index.js 引用
+|     └───module1-1.js // 模块 1-1，被 module1.js 引用
+└───webpack.js // node 执行文件
+└───webpack.config.js // webpack 配置信息
+└───node_modules
+└───package.json
+</code></pre><ul>
+<li>webpack.config.js<br><code>`</code>javascript<br>const path = require(‘path’);</li>
+</ul>
+<p>module.exports = {<br>  entry: ‘./src/index.js’,<br>  output: {<br>    filename: ‘bundle.js’,<br>    path: path.resolve(__dirname, ‘./dist’)<br>  }<br>}</p>
+<pre><code>- webpack.js
+
+该文件作用是最后通过 `node webpack.js` 即可执行 webpack 代码逻辑，故：需要将 `lib/compiler.js` 引进并且执行，传入 webpack 的配置即可。
+
+```javascript
+const Compiler = require(&quot;./lib/compiler&quot;);
+const options = require(&quot;./webpack.config.js&quot;);
+
+new Compiler(options).run();
+</code></pre><h3 id="初始化-Compiler-类"><a href="#初始化-Compiler-类" class="headerlink" title="初始化 Compiler 类"></a>初始化 Compiler 类</h3><pre><code class="javascript">module.exports = class Compiler {
+  constructor(options) {
+    this.entry = options.entry;
+    this.output = options.output;
+    this.modules = []; // 存放所有依赖模块
+  }
+  /**
+   * 主要执行函数
+   */
+  run() {
+    // ...
+  }
+  /**
+   * 获取单个文件的依赖关系、文件名和执行代码
+   */
+  build(entryFile) {
+    // ...
+  }
+  /**
+   * 获取 bundle
+   */
+  generateBundle() {
+    // ... 
+  }
+}
+</code></pre>
+<h3 id="实现-parser-js"><a href="#实现-parser-js" class="headerlink" title="实现 parser.js"></a>实现 parser.js</h3><p>该文件主要实现由三点：</p>
+<ul>
+<li>获取 AST；</li>
+<li>获取文件的所有依赖；</li>
+<li>生成执行代码。</li>
+</ul>
+<p>在 index.js 中引进使用了 module1.js 模块，那么 index.js 的依赖模块就是 module1.js;在 module1.js 中引进使用了 module1-1.js 模块，那么 module1.js 的依赖模块就是 module1-1.js。想要获得模块的相关依赖模块，需要借助 AST（抽象语法树），从 AST 中我们可以获得模块的依赖。实现逻辑如下：</p>
+<ul>
+<li>获取文件的绝对路径，通过 <code>@babel/parser</code> 将目标文件转化为 AST；</li>
+<li>通过 <code>@babel/traverse</code> 分析 AST 中的 <strong>ImportDeclaration</strong> 方法，可以得到该模块的所有依赖模块；</li>
+<li>通过 <code>@babel/core</code> 中的 <code>transformFromAst</code> 可以将 AST 转化为 js 代码。</li>
+</ul>
+<p>最后所有的代码如下：</p>
+<pre><code class="javascript">const fs = require(&quot;fs&quot;);
+const path = require(&quot;path&quot;);
+const parser = require(&quot;@babel/parser&quot;);
+const traverse = require(&quot;@babel/traverse&quot;).default;
+const { transformFromAst } = require(&quot;@babel/core&quot;);
+
+module.exports = {
+  // 分析模块，获取 ast
+  getAst: fileName =&gt; {
+    const content = fs.readFileSync(fileName, &quot;utf-8&quot;);
+    const ast = parser.parse(content, {
+      sourceType: &quot;module&quot; // module 模块模式
+    });
+    return ast;
+  },
+  // 获取依赖
+  getDependencies: (ast, fileName) =&gt; {
+    const dependencies = {}; // key: 相对路径 value: 根路径
+    traverse(ast, {
+      ImportDeclaration({ node }) {
+        // dependencies.push(node.source.value); // 提取 import 依赖的相对路径
+        const dirname = path.dirname(fileName);
+        let newPath = path.join(dirname, node.source.value); // 拼接路径
+        if (!/\.js$/.test(newPath)) { // 兼容解决 window 文件路径不带后缀问题
+          newPath += &quot;.js&quot;;
+        }
+        dependencies[node.source.value] = newPath;
+      }
+    });
+    return dependencies;
+  },
+  // 转换代码
+  getCode: ast =&gt; {
+    const { code } = transformFromAst(ast, null, {
+      presets: [&quot;@babel/preset-env&quot;]
+    });
+    return code;
+  }
+};
+</code></pre>
+<h3 id="完成-compiler-js"><a href="#完成-compiler-js" class="headerlink" title="完成 compiler.js"></a>完成 compiler.js</h3><ul>
+<li><code>build()</code>。这个方法的主要作用：获取单个文件的 AST、所有依赖模块的路径和执行代码。</li>
+</ul>
+<pre><code class="javascript">build(entryFile) {
+  const ast = getAst(entryFile);
+  const dependencies = getDependencies(ast, entryFile);
+  const code = getCode(ast);
+  return {
+    fileName: entryFile,
+    dependencies,
+    code
+  };
+}
+</code></pre>
+<ul>
+<li><code>run()</code>。这个方法的主要作用：<ul>
+<li>从入口文件开始调用 build 方法（获取单个文件的 AST、所有依赖模块的路径和执行代码）；</li>
+<li>将 build 方法返回的获取单个文件的 AST、所有依赖模块的路径和执行代码存进 modules 数组；</li>
+<li>循环 modules 数组，判断每个数组单元是否有自己的依赖（dependencies是否为空 ），有则继续调用 build 方法；</li>
+<li>数组结构转化为 <code>key - value</code> 格式，key 是每个模块的相对路径，value 是 build 返回的结果。</li>
+</ul>
+</li>
+</ul>
+<pre><code class="javascript">run() {
+  const info = this.build(this.entry);
+  this.modules.push(info);
+  for (let i = 0; i &lt; this.modules.length; i++) {
+    const item = this.modules[i];
+    const { dependencies } = item;
+    if (dependencies) {
+      for (let j in dependencies) {
+        this.modules.push(this.build(dependencies[j]));
+      }
+    }
+  }
+  // 转换数据结构：数组 =&gt; 对象
+  const obj = {};
+  this.modules.forEach(item =&gt; {
+    obj[item.fileName] = {
+      dependencies: item.dependencies,
+      code: item.code
+    };
+  });
+  // 生成代码文件
+  this.generateBundle(obj);
+}
+</code></pre>
+<ul>
+<li><code>generateBundle()</code>。重写 requier 方法，生成 bundle。</li>
+</ul>
+<p>通过将 run 最后生成的 <code>key - value</code> 对象进行解析，通过 eval 执行代码，遇到 require() 方法，调用本地的 localRequire 方法。</p>
+<pre><code class="javascript">generateBundle(code) {
+  // 获取输出信息
+  const filePath = path.join(this.output.path, this.output.filename); // dist 路径
+  const newCode = JSON.stringify(code);
+  const bundle = `(function(graph){
+    function require(module) {
+      function localRequire(relativePath) {
+        return require(graph[module].dependencies[relativePath]);
+      }
+      var exports = {};
+      (function(require, exports, code) {
+        eval(code)
+      })(localRequire, exports, graph[module].code)
+      return exports;
+    }
+    require(&#39;${this.entry}&#39;);
+  })(${newCode})`;
+
+  fs.writeFileSync(filePath, bundle, &quot;utf-8&quot;);
+}
+</code></pre>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>执行 <code>node webpack.js</code>，获取生成的 bundle.js</p>
+<pre><code class="javascript">(function(graph){
+      function require(module) {
+        function localRequire(relativePath) {
+          return require(graph[module].dependencies[relativePath]);
+        }
+        var exports = {};
+        (function(require, exports, code) {
+          eval(code)
+        })(localRequire, exports, graph[module].code)
+        return exports;
+      }
+      require(&#39;./src/index.js&#39;);
+    })({&quot;./src/index.js&quot;:{&quot;dependencies&quot;:{&quot;./module1.js&quot;:&quot;src\\module1.js&quot;},&quot;code&quot;:&quot;\&quot;use strict\&quot;;\n\nvar _module = require(\&quot;./module1.js\&quot;);\n\ndocument.write((0, _module.module1)());&quot;},&quot;src\\module1.js&quot;:{&quot;dependencies&quot;:{&quot;./module1-1.js&quot;:&quot;src\\module1-1.js&quot;},&quot;code&quot;:&quot;\&quot;use strict\&quot;;\n\nObject.defineProperty(exports, \&quot;__esModule\&quot;, {\n  value: true\n});\nexports.module1 = module1;\n\nvar _module = require(\&quot;./module1-1.js\&quot;);\n\nfunction module1() {\n  return &#39;module1&#39; + (0, _module.module2)();\n}&quot;},&quot;src\\module1-1.js&quot;:{&quot;dependencies&quot;:{},&quot;code&quot;:&quot;\&quot;use strict\&quot;;\n\nObject.defineProperty(exports, \&quot;__esModule\&quot;, {\n  value: true\n});\nexports.module2 = module2;\n\nfunction module2() {\n  return &#39;module2&#39;;\n}&quot;}})
+</code></pre>
+<p>执行结果如下：</p>
+<p><img src="/.io//res.png" alt="res"></p>
+]]></content>
+      <tags>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>小程序文件生成脚本</title>
     <url>/2020/02/06/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%96%87%E4%BB%B6%E7%94%9F%E6%88%90%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[<h3 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h3><p>开发微信小程序，当需要新增页面或者组件的时候，需要手动增加一个目录和四个文件。如果是页面的话，还需要将页面路由添加到 <em>app.json</em> 文件中。这样一旦增加页面或者组件多了，是十分繁琐的。重复工作用脚本替代。</p>
