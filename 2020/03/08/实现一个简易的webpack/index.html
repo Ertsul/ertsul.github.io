@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Ertsul">
 <meta property="og:description" content="分析webpack 的官方解释如下：  本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图会映射项目所需的每个模块，并生成一个或多个 bundle。  简单理解，webpack 就是从入口开始，分析各个模块之间的相互依赖关系，最后将这些依赖模块生成 bun">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ertsul.github.io/.io//res.png">
-<meta property="og:updated_time" content="2020-03-08T07:56:20.722Z">
+<meta property="og:image" content="https://i.loli.net/2020/03/08/WT6M8G5tbr1kR7N.png">
+<meta property="og:updated_time" content="2020-03-08T08:00:42.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="实现一个简易的webpack">
 <meta name="twitter:description" content="分析webpack 的官方解释如下：  本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图会映射项目所需的每个模块，并生成一个或多个 bundle。  简单理解，webpack 就是从入口开始，分析各个模块之间的相互依赖关系，最后将这些依赖模块生成 bun">
-<meta name="twitter:image" content="https://ertsul.github.io/.io//res.png">
+<meta name="twitter:image" content="https://i.loli.net/2020/03/08/WT6M8G5tbr1kR7N.png">
 
 
 
@@ -417,19 +417,27 @@
 └───node_modules
 └───package.json
 </code></pre><ul>
-<li>webpack.config.js<br><code>`</code>javascript<br>const path = require(‘path’);</li>
+<li>webpack.config.js</li>
 </ul>
-<p>module.exports = {<br>  entry: ‘./src/index.js’,<br>  output: {<br>    filename: ‘bundle.js’,<br>    path: path.resolve(__dirname, ‘./dist’)<br>  }<br>}</p>
-<pre><code>- webpack.js
-
-该文件作用是最后通过 `node webpack.js` 即可执行 webpack 代码逻辑，故：需要将 `lib/compiler.js` 引进并且执行，传入 webpack 的配置即可。
-
-```javascript
-const Compiler = require(&quot;./lib/compiler&quot;);
+<pre><code class="javascript">const path = require(&#39;path&#39;);
+module.exports = {
+  entry: &#39;./src/index.js&#39;,
+  output: {
+    filename: &#39;bundle.js&#39;,
+    path: path.resolve(__dirname, &#39;./dist&#39;)
+  }
+}
+</code></pre>
+<ul>
+<li>webpack.js</li>
+</ul>
+<p>该文件作用是最后通过 <code>node webpack.js</code> 即可执行 webpack 代码逻辑，故：需要将 <code>lib/compiler.js</code> 引进并且执行，传入 webpack 的配置即可。</p>
+<pre><code class="javascript">const Compiler = require(&quot;./lib/compiler&quot;);
 const options = require(&quot;./webpack.config.js&quot;);
 
 new Compiler(options).run();
-</code></pre><h3 id="初始化-Compiler-类"><a href="#初始化-Compiler-类" class="headerlink" title="初始化 Compiler 类"></a>初始化 Compiler 类</h3><pre><code class="javascript">module.exports = class Compiler {
+</code></pre>
+<h3 id="初始化-Compiler-类"><a href="#初始化-Compiler-类" class="headerlink" title="初始化 Compiler 类"></a>初始化 Compiler 类</h3><pre><code class="javascript">module.exports = class Compiler {
   constructor(options) {
     this.entry = options.entry;
     this.output = options.output;
@@ -596,7 +604,7 @@ module.exports = {
     })({&quot;./src/index.js&quot;:{&quot;dependencies&quot;:{&quot;./module1.js&quot;:&quot;src\\module1.js&quot;},&quot;code&quot;:&quot;\&quot;use strict\&quot;;\n\nvar _module = require(\&quot;./module1.js\&quot;);\n\ndocument.write((0, _module.module1)());&quot;},&quot;src\\module1.js&quot;:{&quot;dependencies&quot;:{&quot;./module1-1.js&quot;:&quot;src\\module1-1.js&quot;},&quot;code&quot;:&quot;\&quot;use strict\&quot;;\n\nObject.defineProperty(exports, \&quot;__esModule\&quot;, {\n  value: true\n});\nexports.module1 = module1;\n\nvar _module = require(\&quot;./module1-1.js\&quot;);\n\nfunction module1() {\n  return &#39;module1&#39; + (0, _module.module2)();\n}&quot;},&quot;src\\module1-1.js&quot;:{&quot;dependencies&quot;:{},&quot;code&quot;:&quot;\&quot;use strict\&quot;;\n\nObject.defineProperty(exports, \&quot;__esModule\&quot;, {\n  value: true\n});\nexports.module2 = module2;\n\nfunction module2() {\n  return &#39;module2&#39;;\n}&quot;}})
 </code></pre>
 <p>执行结果如下：</p>
-<p><img src="/.io//res.png" alt="res"></p>
+<p><img src="https://i.loli.net/2020/03/08/WT6M8G5tbr1kR7N.png" alt="res.png"></p>
 
       
     </div>
