@@ -7,12 +7,12 @@
 <blockquote>
 <p>本质上，webpack 是一个现代 JavaScript 应用程序的静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图会映射项目所需的每个模块，并生成一个或多个 bundle。</p>
 </blockquote>
-<p>简单理解，webpack 就是从入口开始，分析各个模块之间的相互依赖关系，最后将这些依赖模块生成 bundle。所以要手动首先一个 webpack，需要解析以下几个问题：</p>
+<p>简单理解，webpack 就是从入口开始，分析各个模块之间的相互依赖关系，最后将这些依赖模块生成 bundle。所以要手动实现一个 webpack，需要解决以下几个问题：</p>
 <ul>
 <li>获取入口文件和出口文件的路径；</li>
 <li>分析入口文件的相关模块依赖；</li>
 <li>递归分析其他模块的相关模块依赖；</li>
-<li>生成模块的依赖关系图谱；</li>
+<li>生成模块之间的依赖关系；</li>
 <li>解决浏览器不能识别 require 的问题，生成 bundle。</li>
 </ul>
 <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="文件目录结构"><a href="#文件目录结构" class="headerlink" title="文件目录结构"></a>文件目录结构</h3><pre><code>└───lib 目录
@@ -79,10 +79,10 @@ new Compiler(options).run();
 <li>获取文件的所有依赖；</li>
 <li>生成执行代码。</li>
 </ul>
-<p>在 index.js 中引进使用了 module1.js 模块，那么 index.js 的依赖模块就是 module1.js;在 module1.js 中引进使用了 module1-1.js 模块，那么 module1.js 的依赖模块就是 module1-1.js。想要获得模块的相关依赖模块，需要借助 AST（抽象语法树），从 AST 中我们可以获得模块的依赖。实现逻辑如下：</p>
+<p>在 index.js 中引进使用了 module1.js 模块，那么 index.js 的依赖模块就是 module1.js；在 module1.js 中引进使用了 module1-1.js 模块，那么 module1.js 的依赖模块就是 module1-1.js。想要获得模块的相关依赖模块，需要借助 AST（抽象语法树），从 AST 中我们可以获得模块的依赖。实现逻辑如下：</p>
 <ul>
-<li>获取文件的绝对路径，通过 <code>@babel/parser</code> 将目标文件转化为 AST；</li>
-<li>通过 <code>@babel/traverse</code> 分析 AST 中的 <strong>ImportDeclaration</strong> 方法，可以得到该模块的所有依赖模块；</li>
+<li>获取文件的绝对路径，通过 <code>@babel/parser</code> 将目标文件中的代码转化为 AST；</li>
+<li>通过 <code>@babel/traverse</code> 分析 AST 中的 <code>ImportDeclaration</code> 方法，可以得到该模块的所有依赖模块；</li>
 <li>通过 <code>@babel/core</code> 中的 <code>transformFromAst</code> 可以将 AST 转化为 js 代码。</li>
 </ul>
 <p>最后所有的代码如下：</p>
@@ -144,8 +144,8 @@ module.exports = {
 <li><code>run()</code>。这个方法的主要作用：<ul>
 <li>从入口文件开始调用 build 方法（获取单个文件的 AST、所有依赖模块的路径和执行代码）；</li>
 <li>将 build 方法返回的获取单个文件的 AST、所有依赖模块的路径和执行代码存进 modules 数组；</li>
-<li>循环 modules 数组，判断每个数组单元是否有自己的依赖（dependencies是否为空 ），有则继续调用 build 方法；</li>
-<li>数组结构转化为 <code>key - value</code> 格式，key 是每个模块的相对路径，value 是 build 返回的结果。</li>
+<li>循环遍历 modules 数组，判断每个数组单元是否有自己的依赖（dependencies是否为空 ），有则继续调用 build 方法；</li>
+<li>数组结构转化为 <code>key - value</code> 格式，<code>key</code> 是每个模块的相对路径，<code>value</code> 是 build 返回的结果。</li>
 </ul>
 </li>
 </ul>
@@ -174,9 +174,9 @@ module.exports = {
 }
 </code></pre>
 <ul>
-<li><code>generateBundle()</code>。重写 requier 方法，生成 bundle。</li>
+<li><code>generateBundle()</code>。重写 require 方法，生成 bundle。</li>
 </ul>
-<p>通过将 run 最后生成的 <code>key - value</code> 对象进行解析，通过 eval 执行代码，遇到 require() 方法，调用本地的 localRequire 方法。</p>
+<p>通过将 run 最后生成的 <code>key - value</code> 对象进行解析，通过 <code>eval</code> 执行代码，遇到 <code>require()</code> 方法，调用本地的 <code>localRequire()</code> 方法。</p>
 <pre><code class="javascript">generateBundle(code) {
   // 获取输出信息
   const filePath = path.join(this.output.path, this.output.filename); // dist 路径
@@ -198,7 +198,7 @@ module.exports = {
   fs.writeFileSync(filePath, bundle, &quot;utf-8&quot;);
 }
 </code></pre>
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>执行 <code>node webpack.js</code>，获取生成的 bundle.js</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>执行 <code>node webpack.js</code>，获取生成的 bundle.js。</p>
 <pre><code class="javascript">(function(graph){
       function require(module) {
         function localRequire(relativePath) {
