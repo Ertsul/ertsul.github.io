@@ -1,6 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>flutter 知识点记录</title>
+    <url>/2021/03/21/flutter-%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h2 id="Flutter-记录"><a href="#Flutter-记录" class="headerlink" title="Flutter 记录"></a>Flutter 记录</h2><h3 id="1-Button-限制宽高"><a href="#1-Button-限制宽高" class="headerlink" title="1. Button 限制宽高"></a>1. Button 限制宽高</h3><p>使用 SizeBox 进行包裹。</p>
+<pre><code class="dart">Widget _arrowIcon = SizedBox(
+  width: duSetWidth(18.0),
+  child: FlatButton(
+    padding: EdgeInsets.all(0),
+    onPressed: () {
+      print(&#39;_arrowIcon  tap&#39;);
+    },
+    child: Icon(
+      IconFont.iconmore,
+      color: AppColors.grayThirdColor,
+      size: duSetFontSize(14),
+    ),
+  ),
+);
+
+</code></pre>
+<h3 id="2-获取目标-widget-相关信息"><a href="#2-获取目标-widget-相关信息" class="headerlink" title="2.获取目标 widget 相关信息"></a>2.获取目标 widget 相关信息</h3><p>使用 GlobalKey()</p>
+<pre><code class="dart">// 定义变量
+GlobalKey _Key = GlobalKey();
+// 绑定 widget
+Center(
+    key: _Key,
+    child: Text(&#39;content&#39;)
+);
+// 使用
+RenderBox _box = _alphabetListKey?.currentContext?.findRenderObject();
+_box.localToGlobal(Offset.zero); // offset
+// ...
+</code></pre>
+<h3 id="3-沉浸式状态栏"><a href="#3-沉浸式状态栏" class="headerlink" title="3.沉浸式状态栏"></a>3.沉浸式状态栏</h3><pre><code class="dart">void _statusBar([String color]) {
+    // 白色沉浸式状态栏颜色  白色文字
+    SystemUiOverlayStyle light = SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF000000),
+      systemNavigationBarDividerColor: null,
+
+      /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
+      statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.dark,
+    );
+
+    // 黑色沉浸式状态栏颜色 黑色文字
+    SystemUiOverlayStyle dark = SystemUiOverlayStyle(
+      systemNavigationBarColor: Color(0xFF000000),
+      systemNavigationBarDividerColor: null,
+
+      /// 注意安卓要想实现沉浸式的状态栏 需要底部设置透明色
+      statusBarColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+      statusBarBrightness: Brightness.light,
+    );
+    &quot;white&quot; == color?.trim()
+        ? SystemChrome.setSystemUIOverlayStyle(light)
+        : SystemChrome.setSystemUIOverlayStyle(dark);
+  }
+</code></pre>
+<h3 id="4-获取顶部状态栏高度"><a href="#4-获取顶部状态栏高度" class="headerlink" title="4.获取顶部状态栏高度"></a>4.获取顶部状态栏高度</h3><ul>
+<li>MediaQuery.of(context).padding.top</li>
+<li>MediaQueryData.fromWindow(window).padding.top</li>
+</ul>
+<h3 id="5-安全区域，比如：iphone-12等全面屏底部遮挡问题"><a href="#5-安全区域，比如：iphone-12等全面屏底部遮挡问题" class="headerlink" title="5.安全区域，比如：iphone 12等全面屏底部遮挡问题"></a>5.安全区域，比如：iphone 12等全面屏底部遮挡问题</h3><ul>
+<li>SafeArea</li>
+</ul>
+<h3 id="6-国际化初始化生命周期问题"><a href="#6-国际化初始化生命周期问题" class="headerlink" title="6.国际化初始化生命周期问题"></a>6.国际化初始化生命周期问题</h3><p>问题：在 initState 直接调用 <code>DemoLocalizations.of(context).all</code></p>
+<pre><code>原因：initState 生命周期的作用主要是将当前的 state 与上下文 buildContext 产生关联，此时的上下文还不能使用。
+</code></pre><p><img src="https://i.loli.net/2021/03/11/2Ox4blhzp3SjwaJ.png" alt="image-20201209164937816.png"></p>
+<p>解决方案：</p>
+<ul>
+<li>initState 添加异步逻辑</li>
+</ul>
+<pre><code class="dart">Future.delayed(Duration.zero, () { // ... });
+</code></pre>
+<ul>
+<li>放 didChangeDependencies 生命周期</li>
+</ul>
+<h3 id="7-切换-tab，addListener-触发两次"><a href="#7-切换-tab，addListener-触发两次" class="headerlink" title="7.切换 tab，addListener 触发两次"></a>7.切换 tab，addListener 触发两次</h3><p>点击切换tab的时候执行了一个动画效果，滑动切换的时候是没有的，在这个过程中触发了一次Listener，所以触发了两次addListener方法。</p>
+<p>解决方案：在 addListener 中添加判断</p>
+<ul>
+<li><code>if(_newsTabController.index == _newsTabController.animation.value) { //... }</code></li>
+<li><code>if(_newsTabController.indexIsChanging) { //... }</code></li>
+</ul>
+<h3 id="8-stack-溢出部分点击失效问题"><a href="#8-stack-溢出部分点击失效问题" class="headerlink" title="8.stack 溢出部分点击失效问题"></a>8.stack 溢出部分点击失效问题</h3><p>如下图：蓝色区域为父级 stack 容器，灰色容器（1+2）为 stack 子级样式，由于 2 溢出父级容器，出现问题：2 点击事件不生效。</p>
+<p><img src="https://i.loli.net/2021/03/11/cmoSrClHk9LYtTV.png" alt="image-20201224173117517.png"></p>
+<p>解决办法：更改布局，父级容器包裹整个区域，不让其溢出。</p>
+<h3 id="9-vscdoe-多渠道-flavor-配置"><a href="#9-vscdoe-多渠道-flavor-配置" class="headerlink" title="9.vscdoe 多渠道 flavor 配置"></a>9.vscdoe 多渠道 flavor 配置</h3><p>根目录添加 .vscode/launch.json 配置文件，添加配置：</p>
+<pre><code class="dart">{
+  &quot;version&quot;: &quot;xxx&quot;,
+  &quot;configurations&quot;: [
+    {
+      &quot;name&quot;: &quot;wapcar&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;type&quot;: &quot;dart&quot;,
+      &quot;args&quot;: [
+        &quot;--flavor&quot;,
+        &quot;wapcar&quot;
+      ]
+    },
+    {
+      &quot;name&quot;: &quot;autofun&quot;,
+      &quot;request&quot;: &quot;launch&quot;,
+      &quot;type&quot;: &quot;dart&quot;,
+      &quot;args&quot;: [
+        &quot;--flavor&quot;,
+        &quot;autofun&quot;
+      ]
+    }
+  ]
+}
+</code></pre>
+<h3 id="10-json-序列化"><a href="#10-json-序列化" class="headerlink" title="10.json 序列化"></a>10.<a href="https://flutter.cn/docs/development/data-and-backend/json#code-generation" target="_blank" rel="noopener">json 序列化</a></h3><ul>
+<li>安装依赖</li>
+</ul>
+<pre><code class="yaml">dependencies:
+    json_annotation: ^3.1.1
+dev_dependencies:
+     build_runner: ^1.10.13
+    json_serializable: ^3.5.1
+</code></pre>
+<ul>
+<li>创建模型类 user.dart</li>
+</ul>
+<pre><code class="dart">import &#39;package:json_annotation/json_annotation.dart&#39;;
+
+/// This allows the `User` class to access private members in
+/// the generated file. The value for this is *.g.dart, where
+/// the star denotes the source file name.
+part &#39;user.g.dart&#39;;
+
+/// An annotation for the code generator to know that this class needs the
+/// JSON serialization logic to be generated.
+@JsonSerializable()
+
+class User {
+  User(this.name, this.email);
+
+  String name;
+  String email;
+
+  /// A necessary factory constructor for creating a new User instance
+  /// from a map. Pass the map to the generated `_$UserFromJson()` constructor.
+  /// The constructor is named after the source class, in this case, User.
+  factory User.fromJson(Map&lt;String, dynamic&gt; json) =&gt; _$UserFromJson(json);
+
+  /// `toJson` is the convention for a class to declare support for serialization
+  /// to JSON. The implementation simply calls the private, generated
+  /// helper method `_$UserToJson`.
+  Map&lt;String, dynamic&gt; toJson() =&gt; _$UserToJson(this);
+}
+</code></pre>
+<ul>
+<li>执行命令 flutter pub run build_runner build 后生成 user.g.dart 文件 </li>
+</ul>
+<p><img src="https://i.loli.net/2021/03/11/41H8cOWdCIlamjG.png" alt="image-20210122170901165.png"></p>
+<h3 id="11-延迟加载库"><a href="#11-延迟加载库" class="headerlink" title="11.延迟加载库"></a>11.延迟加载库</h3><p><img src="https://i.loli.net/2021/03/11/jn18W4s9T2olSci.png" alt="image-20210122170901165.png"></p>
+<h3 id="12-获取屏幕宽高"><a href="#12-获取屏幕宽高" class="headerlink" title="12.获取屏幕宽高"></a>12.获取屏幕宽高</h3><pre><code class="dart">double _screenHeight = MediaQuery.of(context).size.height
+double _screenWidth = MediaQuery.of(context).size.width
+
+</code></pre>
+<h3 id="13-解决-bottomNavigationBar切换-tabbar-刷新页面，原有状态消失问题"><a href="#13-解决-bottomNavigationBar切换-tabbar-刷新页面，原有状态消失问题" class="headerlink" title="13.解决 bottomNavigationBar切换 tabbar 刷新页面，原有状态消失问题"></a>13.解决 bottomNavigationBar切换 tabbar 刷新页面，原有状态消失问题</h3><ul>
+<li>AutomaticKeepAliveClientMixin </li>
+<li>IndexedStack</li>
+</ul>
+<pre><code class="dart">Scaffold(
+    bottomNavigationBar: _buildBottomNavigationBar(),
+    body: IndexedStack( // indexedStack 可以确保 tabbar 时候不刷新页面
+        index: _selectedIndex,
+        children: _contentListView,
+    ),
+);
+
+</code></pre>
+<h3 id="14-切换-tabbar-保存状态"><a href="#14-切换-tabbar-保存状态" class="headerlink" title="14.切换 tabbar 保存状态"></a>14.切换 tabbar 保存状态</h3><pre><code class="dart">class _HomeRecommednedState extends State&lt;HomeRecommedned&gt;
+    with AutomaticKeepAliveClientMixin {
+  @override
+    bool get wantKeepAlive =&gt; true; //  with AutomaticKeepAliveClientMixin + 设置 wantKeepAlive 为 true，确保顶部切换 tabbar 保存 state
+  }
+
+</code></pre>
+<h3 id="15-FutrueBuilder-StreamBuilder"><a href="#15-FutrueBuilder-StreamBuilder" class="headerlink" title="15.FutrueBuilder / StreamBuilder"></a>15.FutrueBuilder / StreamBuilder</h3><p>作用：异步 UI 更新。两者都可以用于接收异步事件数据。</p>
+<p>区别：</p>
+<p><code>futureBuilder</code> 只有一个响应，类似于 js 中的 Promise。</p>
+<p><code>streamBuilder</code> 可以接收多个异步操作的结果，常用于多次读取数据的异步任务场景。</p>
+<h3 id="16-Flutter-布局约束"><a href="#16-Flutter-布局约束" class="headerlink" title="16. Flutter 布局约束"></a>16. Flutter 布局约束</h3><p>链接：<a href="https://flutter.cn/docs/development/ui/layout/constraints" target="_blank" rel="noopener">https://flutter.cn/docs/development/ui/layout/constraints</a></p>
+]]></content>
+      <categories>
+        <category>flutter</category>
+      </categories>
+      <tags>
+        <tag>flutter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flutter 字母联动列表</title>
     <url>/2020/12/20/flutter-%E5%AD%97%E6%AF%8D%E8%81%94%E5%8A%A8%E5%88%97%E8%A1%A8/</url>
     <content><![CDATA[<h1 id="flutter-字母联动列表"><a href="#flutter-字母联动列表" class="headerlink" title="flutter 字母联动列表"></a>flutter 字母联动列表</h1><p>网上的第三方包，用的最多就是：<a href="https://pub.dev/packages/azlistview" target="_blank" rel="noopener">azListView</a>。</p>
@@ -200,6 +397,9 @@ void _onVerticalDragUpdateHandle(DragUpdateDetails event, int index) {
 </code></pre><h3 id="5-主列表滚动锁。"><a href="#5-主列表滚动锁。" class="headerlink" title="5. 主列表滚动锁。"></a>5. 主列表滚动锁。</h3><p>为防止出现上次滚动还没结束，下次滚动就开始执行的问题，给主列表滚动上锁。</p>
 <pre><code>/// 更新字母表当前激活的字母 void _updateAlphebetListView() {  // 主列表上锁中（滚动执行中），直接返回  if (_mainListScrollLock) return;  // ... }
 </code></pre>]]></content>
+      <categories>
+        <category>flutter</category>
+      </categories>
       <tags>
         <tag>flutter</tag>
       </tags>
