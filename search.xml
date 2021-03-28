@@ -1,6 +1,504 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>可视化搭建平台（三）- 打包</title>
+    <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%89%EF%BC%89-%E6%89%93%E5%8C%85/</url>
+    <content><![CDATA[<h1 id="可视化搭建平台（三）-打包"><a href="#可视化搭建平台（三）-打包" class="headerlink" title="可视化搭建平台（三）- 打包"></a>可视化搭建平台（三）- 打包</h1><p>通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
+<ul>
+<li>通过 jsonData 数据实现页面渲染；</li>
+<li>打包生成 html。</li>
+</ul>
+<h2 id="打包目录结构"><a href="#打包目录结构" class="headerlink" title="打包目录结构"></a>打包目录结构</h2><pre><code class="txt">└───build 目录：主要存放 webpack 相关配置
+|     └───static.js // 封装 webpack.run() 方法
+|     └───webpack.base.config.js // webpack 基本配置
+|───src
+|     └───App.vue // server 端入口
+|     └───main.js // client 端入口
+|     └──index.tpl.html // 页面模板
+|     └───components.js // 组件引进注册
+|───create-html
+|     └───待页面名称 目录
+|         └───config.js // webpack 发布相关配置
+|         └───data.js // jsonData 获取相关逻辑
+|───html 目录：打包输出
+|     └───static 目录：静态资源目录
+|         └───...
+|     └──待页面名称.html // 输出的页面
+|───index.js // 打包入口文件
+</code></pre>
+<h2 id="打包相关"><a href="#打包相关" class="headerlink" title="打包相关"></a>打包相关</h2><h3 id="webpack-公共基本配置-webpack-base-config-js"><a href="#webpack-公共基本配置-webpack-base-config-js" class="headerlink" title="webpack 公共基本配置 - webpack.base.config.js"></a>webpack 公共基本配置 - webpack.base.config.js</h3><p>用到的 webpack 插件有：vue-loader、optimize-css-assets-webpack-plugin、html-webpack-plugin、html-webpack-inline-source-plugin、ptimize-css-assets-webpack-plugin、babel-loader等。</p>
+<p>常规的 webpack 配置跳过，说下 plugins 配置：</p>
+<pre><code class="javascript"> plugins(type) {
+     const common = [
+         new VueLoaderPlugin(),
+         new MiniCssExtractPlugin({
+             filename: &#39;[name].[contenthash:6].css&#39;,
+             chunkFilename: &#39;[id].[contenthash:6].css&#39;,
+         }),
+         new OptimizeCssAssetsWebpackPlugin(),
+     ]
+     const onDemand = {
+         server: [],
+         client: [
+             new HtmlWebpackPlugin({
+                 filename: &#39;index.template.html&#39;,
+                 template: path.resolve(__dirname, &#39;../src/index.tpl.html&#39;),
+                 inlineSource: &#39;.css$&#39;,
+                 minify: {
+                     collapseWhitespace: true,
+                 },
+             }),
+             new OptimizeCSSAssetsPlugin({}),
+             new HtmlWebpackInlineSourcePlugin(),
+         ],
+     }
+     return [].concat(common).concat(onDemand[type] || [])
+ },
+</code></pre>
+<p>这通过传入 type 类型判断，判断是 client 端还是 server 端。公共需要的是 vue-loader，但 client 需要的是 html-webpack-plugin。</p>
+<h3 id="client-webpack-配置"><a href="#client-webpack-配置" class="headerlink" title="client webpack 配置"></a>client webpack 配置</h3><p>除了 webpack.base.config.js 公共配置，client 的 webpack 需要配置的有：entry、output、端判断变量等。</p>
+<pre><code class="javascript">const clientWebpackConfig = {
+    ...webpackBaseConfig,
+    mode,
+    entry: path.resolve(__dirname, &#39;./src/main.js&#39;),
+    output: {
+        path: path.resolve(__dirname, &#39;.&#39;, publishConfig.outputPath),
+        filename: &#39;[name].[contenthash:8].js&#39;,
+        publicPath: publishConfig.publicPath,
+    },
+    plugins: [
+        ...webpackBaseConfig.plugins(&#39;client&#39;),
+        new webpack.DefinePlugin({
+            &#39;process.env&#39;: JSON.stringify({
+                IS_SERVER: false,
+            }),
+        }),
+    ],
+}
+</code></pre>
+<h3 id="server-webpack-配置"><a href="#server-webpack-配置" class="headerlink" title="server webpack 配置"></a>server webpack 配置</h3><p>除了 webpack.base.config.js 公共配置，server 的 webpack 需要配置的有：entry、output、端判断变量等。</p>
+<pre><code class="javascript">const serverWebpackConfig = {
+    ...webpackBaseConfig,
+    mode,
+    entry: {
+        app: path.resolve(__dirname, &#39;./src/App.vue&#39;),
+    },
+    output: {
+        path: path.resolve(__dirname, &#39;.&#39;, publishConfig.outputPath),
+        libraryTarget: &#39;commonjs&#39;,
+        publicPath: publishConfig.publicPath,
+    },
+    plugins: [
+        ...webpackBaseConfig.plugins(&#39;server&#39;),
+        new webpack.DefinePlugin({
+            &#39;process.env&#39;: JSON.stringify({
+                IS_SERVER: true,
+            }),
+        }),
+    ],
+}
+</code></pre>
+<h2 id="static-js-webpack-run-封装"><a href="#static-js-webpack-run-封装" class="headerlink" title="static.js - webpack.run 封装"></a>static.js - webpack.run 封装</h2><p>这里封装要给 Static 类，输入 webpack 配置，输出打包好的 bundle。</p>
+<pre><code class="javascript">const webpack = require(&#39;webpack&#39;)
+
+class Static {
+  constructor(options) {
+    this.options = options
+  }
+
+  run() {
+    const webpacks = []
+    Object.keys(this.options).forEach((k) =&gt; {
+      webpacks.push(webpack(this.options[k]))
+    })
+    return Promise.all(
+      webpacks.map(
+        (web) =&gt;
+          new Promise((reslove) =&gt; {
+            web.run((err, stats) =&gt; {
+              reslove()
+            })
+          })
+      )
+    )
+  }
+}
+
+module.exports = {
+  Static,
+}
+</code></pre>
+<h2 id="server-入口-渲染生成页面"><a href="#server-入口-渲染生成页面" class="headerlink" title="server 入口 - 渲染生成页面"></a>server 入口 - 渲染生成页面</h2><p>通过封装一个入口组件 App.vue，将 jsonData 通过 props 传入，然后通过 js 引进相关的渲染组件，最后通过 <code>v-for</code> 配合动态组件<code>&lt;component :is=&quot;&quot; /&gt;</code>可以实现 组件渲染。</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div class=&quot;h5-page&quot; :style=&quot;pageStyle&quot;&gt;
+    &lt;div class=&quot;layout-item&quot; v-for=&quot;(item, index) in layout&quot; :key=&quot;index&quot;&gt;
+      &lt;component :is=&quot;item.component&quot; :dynamicStyle=&quot;item.config&quot;&gt;&lt;/component&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+import components from &quot;./components.js&quot;;
+export default {
+  name: &quot;H5Page&quot;,
+  components: components,
+  props: {
+    pageConfig: {
+      type: Object,
+      default: () =&gt; [],
+    },
+  },
+  data() {
+    return {
+      layout: [],
+    };
+  },
+  computed: {
+    pageStyle() {
+      return {
+        backgroundColor:
+          this.$props.pageConfig.pageInfo.backgroundColor || &quot;#fff&quot;,
+      };
+    },
+  },
+  created() {
+    this.bindComponent();
+  },
+  methods: {
+    /**
+     * 给每个布局绑定唯一组件
+     */
+    bindComponent() {
+      if (!Object.keys(components).length) {
+        return;
+      }
+      // 给 layout 绑定对应组件
+      const layout = this.$props.pageConfig.layout || [];
+      if (!layout.length) {
+        return;
+      }
+      layout.forEach((item) =&gt; {
+        item.component = components[item.type];
+      });
+      this.layout = layout;
+    },
+  },
+};
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot;&gt;
+.h5-page {
+  width: 100vw;
+}
+&lt;/style&gt;
+</code></pre>
+<p>这里将组件注入单独抽离，后期有新的组件使用，改动 components.js 即可。</p>
+<pre><code class="javascript">/************************ 组件注册 ************************/
+
+if (!process.env.IS_SERVER) {
+  // 解决：UnhandledPromiseRejectionWarning: ReferenceError: window is not defined 问题
+  const H5Editor = require(&#39;h5-editor&#39;)
+
+  module.exports = {
+    EdText: H5Editor.default.EdText,
+    EdImage: H5Editor.default.EdImage
+  }
+}
+
+</code></pre>
+<p>注意：上面有一个全局变量（通过 webpack.DefinePlugin 插件注入变量）判断是服务端还是客户端的判断，因为打包使用的是<a href="https://ssr.vuejs.org/zh/api/" target="_blank" rel="noopener">vue-server-renderer</a>相关逻辑。故：存在两个端，client 和 server，server 端没有 window、document 等对象。</p>
+<h2 id="client-入口-注入全局数据-window-initData"><a href="#client-入口-注入全局数据-window-initData" class="headerlink" title="client 入口 - 注入全局数据 window.__initData__"></a>client 入口 - 注入全局数据 window.__initData__</h2><p>主要做两件事：</p>
+<ul>
+<li>挂载 Vue 实例到目标节点；</li>
+<li>注入全局 window.__ininData__</li>
+</ul>
+<pre><code class="javascript">import Vue from &#39;vue&#39;
+import App from &#39;./App.vue&#39;
+
+let props = {}
+if (window.__initData__) {
+  props = { pageConfig: window.__initData__.pageConfig }
+}
+
+new Vue({
+  components: { App: App },
+  render: (h) =&gt; h(&#39;App&#39;, { props }),
+}).$mount(&#39;#app&#39;)
+
+</code></pre>
+<h3 id="页面-html-模板"><a href="#页面-html-模板" class="headerlink" title="页面 html 模板"></a>页面 html 模板</h3><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html style=&quot;font-size:100px;&quot;&gt;
+
+&lt;head&gt;
+  &lt;title&gt;{{ title }}&lt;/title&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width,initial-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui&quot;&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;{{description}}&quot; /&gt;
+&lt;/head&gt;
+
+&lt;body style=&quot;font-size: 16px&quot;&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;!--vue-ssr-outlet--&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    {{{ script }}}
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h2 id="index-js-构建"><a href="#index-js-构建" class="headerlink" title="index.js - 构建"></a>index.js - 构建</h2><p>打包使用的是<a href="https://ssr.vuejs.org/zh/api/" target="_blank" rel="noopener">vue-server-renderer</a>相关逻辑。</p>
+<p>主要做几件事：</p>
+<ul>
+<li>通过 webpack 打包输出 templateHtml 和 bundle.js（还没有注入页面数据 window.__initData__）</li>
+</ul>
+<pre><code class="javascript"> const compiler = new Static({
+    app: appWebpackConfig,
+    client: clientWebpackConfig,
+  })
+  await compiler.run()
+</code></pre>
+<ul>
+<li>通过 <code>vue-server-renderer</code>结合 templateHtml 和 bundle.js 生成 renderer 对象</li>
+</ul>
+<pre><code class="javascript">const renderer = require(&#39;vue-server-renderer&#39;).createRenderer({
+    template: fs.readFileSync(&#39;./html/static/index.template.html&#39;, &#39;utf-8&#39;),
+})
+const main = require(path.resolve(
+    __dirname,
+    `./${publishConfig.outputPath}/app.js`
+))
+</code></pre>
+<ul>
+<li>通过 <code>/create-html/待打包页面名/data.js</code>脚本获取 jsonData 数据</li>
+<li>将 jsonData 相关数据通过 context，注入到模板页面中</li>
+</ul>
+<pre><code class="javascript">const pageConfigData = await dataHandler()
+const { title = &#39;&#39;, description = &#39;&#39; } = pageConfigData.pageInfo
+const context = {
+    title,
+    description,
+    script: `window.__initData__=${JSON.stringify({
+        pageConfig: pageConfigData,
+    })}`,
+}
+const app = new Vue({
+    data: {},
+    components: { App: main.default },
+    render: (h) =&gt; h(&#39;App&#39;, { props: { pageConfig: pageConfigData } }),
+})
+</code></pre>
+<ul>
+<li>通过 renderer 对象输出 html 并写入到目标目录下。</li>
+</ul>
+<pre><code class="javascript">renderer.renderToString(app, context, (err, html) =&gt; {
+    if (!html) {
+        return
+    }
+    const filePath = path.resolve(__dirname, `${publishConfig.filePath}`)
+    fse.ensureDirSync(filePath)
+    // name 为 nodejs 命令行参数：待打包页面名称
+    fs.writeFile(`${filePath}/${name}.html`, html, function(err) {
+        if (err) {
+            console.error(`&gt;&gt;&gt;&gt; 生成 ${name} 页面失败!`, err)
+            return
+        }
+        console.log(
+            `${publishConfig.filePath}/${name}.html` + &#39;:数据写入成功！&#39;
+        )
+    })
+})
+</code></pre>
+<p>over~</p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>可视化搭建平台</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>可视化搭建平台（二）- 实现</title>
+    <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%BA%8C%EF%BC%89-%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="可视化搭建平台（二）-实现"><a href="#可视化搭建平台（二）-实现" class="headerlink" title="可视化搭建平台（二）- 实现"></a>可视化搭建平台（二）- 实现</h1><p>页面效果：</p>
+<p><img src="https://i.loli.net/2021/03/28/eZxB8cI6DSN25ly.gif" alt="h5_editor.gif"></p>
+<p>主要解决两个问题：</p>
+<ul>
+<li>组件的拖拽；</li>
+<li>渲染组件 component 和样式修改组件 styleComponent 数据流转问题。</li>
+</ul>
+<h2 id="组件的拖拽和克隆"><a href="#组件的拖拽和克隆" class="headerlink" title="组件的拖拽和克隆"></a>组件的拖拽和克隆</h2><p>组件拖拽这里使用到的是这个基于 <a href="https://github.com/SortableJS/Sortable" target="_blank" rel="noopener">sortable.js</a>，使用 Vue 进行封装的组件 <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank" rel="noopener">Vue.Draggable</a>。具体使用官方文档和相关例子都很详细。</p>
+<p>主要使用两个功能：</p>
+<ul>
+<li>拖拽：更改页面布局</li>
+<li>克隆：将左边渲染组件列表中的组件拖拽克隆到中间页面预览区域</li>
+</ul>
+<h3 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h3><p>h5-editor 组件使用方式：</p>
+<pre><code class="vue">&lt;h5-editor v-model=&quot;jsonData&quot; :data=&quot;data&quot;&gt;&lt;/h5-editor&gt;
+</code></pre>
+<pre><code class="vue">&lt;template&gt;
+    &lt;draggable
+        class=&quot;dragArea list-group&quot;
+        v-model=&quot;layout&quot;
+        tag=&quot;div&quot;
+        v-bind=&quot;dragOptions&quot;
+        @start=&quot;startDragLayout&quot;
+        @end=&quot;finishDragLayout&quot;
+        group=&quot;preview&quot;
+        &gt;
+        &lt;div v-for=&quot;(element, index) in layout&quot; :key=&quot;index&quot;&gt;
+            // ...
+            &lt;component :is=&quot;element.component&quot; :dynamicStyle=&quot;element.dynamicStyle&quot;&gt;&lt;/component&gt;
+        &lt;/div&gt;   
+    &lt;/draggable&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+export default {
+    model: {
+        prop: &quot;jsonData&quot;,
+        event: &quot;changePageInfo&quot;,
+     },
+    props: {
+        // 页面初始化数据
+        data: {
+            type: Array,
+            default: () =&gt; [],
+        },
+    },
+    data() {
+        return {
+            layout: []   
+        }
+    },
+    computed: {
+        // 主要是定义一些属性
+        dragOptions() {
+            return {
+                animation: 200, // 动画执行时间
+                group: &quot;preview&quot;, // 这个 group  的作用是，设置渲染区域的 group 和左边组件列表的 group 相同，在同一 group 中，即可进行克隆
+                disabled: false,
+                ghostClass: &quot;ghost&quot;, // 组件拖动还未放下的样式
+            };
+        },
+    },
+    // ... 其他实现细节忽略
+    watch: {
+        // ...
+    }
+}
+&lt;/script&gt;
+
+</code></pre>
+<p>实现 v-model，监听 layout 是否变更，然后派发 changePageInfo 事件即可实现 v-model。</p>
+<p><code>&lt;draggable&gt;&lt;/draggable&gt;</code> 标签是 <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank" rel="noopener">Vue.Draggable</a> 封装好的组件，只要把我们的布局数组 layout 跟内部进行判定，即可实现拖拽和 layout 数据更新。</p>
+<p>而<code>&lt;draggable&gt;&lt;/draggable&gt;</code>标签内部通过一个 <code>v-for</code>循环包裹，结合 Vue 动态组件 <code>&lt;component :is=&quot;&quot; /&gt;</code> 即可实现组件的展示。 </p>
+<p>注：<code>@start</code>、<code>@end</code>等事件的绑定，函数的参数里面有新旧索引等重要信息可利用。</p>
+<h3 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h3><p>h5-editor 组件使用方式：</p>
+<pre><code class="vue">&lt;h5-editor v-model=&quot;jsonData&quot; :data=&quot;data&quot;&gt;&lt;/h5-editor&gt;
+</code></pre>
+<pre><code class="vue">&lt;draggable
+    class=&quot;all-coms__box dragArea list-group&quot;
+    :list=&quot;baseComponentsData&quot;
+    :group=&quot;{ name: &#39;preview&#39;, pull: &#39;clone&#39;, put: false }&quot;
+    :clone=&quot;clone&quot;
+    :sort=&quot;false&quot;
+    @end=&quot;finishClone&quot;
+&gt;
+&lt;/draggable&gt;
+</code></pre>
+<p>克隆组件跟拖拽组件多了两个设置属性：</p>
+<ul>
+<li>group：设置组别，组别跟预览区域的组别一样，都是 preview；</li>
+<li>sort：禁止自身列表重新排序。</li>
+</ul>
+<h2 id="显示对应的样式修改组件"><a href="#显示对应的样式修改组件" class="headerlink" title="显示对应的样式修改组件"></a>显示对应的样式修改组件</h2><p>在中间预览区域点击一个组件后，右边样式修改区域会显示对应的组件。这个逻辑实现比较简单，因为每个组件都有对应的索引，通过对应索引显示对应组件即可，结合 Vue 动态组件 <code>&lt;component :is=&quot;&quot; /&gt;</code> 即可实现组件的展示。 </p>
+<h2 id="修改对应的渲染组件样式"><a href="#修改对应的渲染组件样式" class="headerlink" title="修改对应的渲染组件样式"></a>修改对应的渲染组件样式</h2><p>当样式修改组件向上派发事件 changeStyle，父组件 h5-editor 就可以监听到事件触发和携带新的样式对象，然后通过修改 layout 对应索引的 dynamicStyle 属性值（<code>$set()</code>触发），即可修改对应渲染组件样式。</p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>可视化搭建平台</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>可视化搭建平台（一）- 流程</title>
+    <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<h1 id="可视化搭建平台（一）-流程"><a href="#可视化搭建平台（一）-流程" class="headerlink" title="可视化搭建平台（一）- 流程"></a>可视化搭建平台（一）- 流程</h1><p>做一个更加通用的可视化搭建平台，用户通过 npm 安装 h5-editor (包名)，就可以直接使用了。</p>
+<p>可以使用的功能有：</p>
+<ul>
+<li>拖拽组件、删除组件；</li>
+<li>修改页面基本信息，如：页面标题、页面背景色等；</li>
+<li>修改组件样式，如：组件大小、颜色等；</li>
+<li>可以使用基础组件（组件内提供）；</li>
+<li>可以使用自定义组件（用户自己实现的组件）；</li>
+<li>打包生成静态化页面。</li>
+</ul>
+<p>应用场景：面对不同业务所需的组件不同，因此抽离并且封装内部数据流通，封装基础组件。</p>
+<p>最终页面效果如下：</p>
+<p><img src="https://i.loli.net/2021/03/28/eZxB8cI6DSN25ly.gif" alt="h5_editor.gif"></p>
+<h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><p><img src="https://i.loli.net/2021/03/27/Liw4XgCNj5lxkUE.png" alt="image.png"></p>
+<h2 id="数据流转"><a href="#数据流转" class="headerlink" title="数据流转"></a>数据流转</h2><p>主要数据流转如下图：</p>
+<p><img src="https://i.loli.net/2021/03/28/n9s4fUWHwpJLPBx.png" alt="image.png"></p>
+<p>上图就是数据流转的使用图：通过将基础组件信息传入 h5-editor，然后输出一份 json 数据，然后通过这份 json 数据打包生成 html 页面。</p>
+<p>组件最后的使用方式为：</p>
+<pre><code class="vue">&lt;h5-editor v-model=&quot;jsonData&quot; :data=&quot;data&quot;&gt;&lt;/h5-editor&gt;
+</code></pre>
+<h2 id="数据格式及流转"><a href="#数据格式及流转" class="headerlink" title="数据格式及流转"></a>数据格式及流转</h2><h3 id="外部传入-h5-editor-组件信息"><a href="#外部传入-h5-editor-组件信息" class="headerlink" title="外部传入 h5-editor 组件信息"></a>外部传入 h5-editor 组件信息</h3><p>外部传入基本数据信息 data 格式如下：</p>
+<pre><code class="txt">[
+    {
+        component, // 渲染组件
+        styleComponent, // 渲染组件对应修改样式的组件
+        dynamicStyle, // 组件样式 props
+    },
+    {
+         // ...       
+    }
+]
+</code></pre>
+<ul>
+<li><code>component</code>：渲染组件，即拖拽添加到页面、最后显示到实际页面上的组件；</li>
+<li><code>styleComponent</code>：渲染组件对应的样式修改组件。即在中间预览区域点击了一个组件后，右边区域显示对应的样式修改组件。</li>
+<li><code>dynamicStyle</code>：该属性是传入到组件内部的 props 对象。</li>
+</ul>
+<h3 id="h5-editor-输出数据格式"><a href="#h5-editor-输出数据格式" class="headerlink" title="h5-editor 输出数据格式"></a>h5-editor 输出数据格式</h3><p>h5-editor 调用者和 h5-editor 组件通过 v-model 共享一份 jsonData 数据。有两个作用：</p>
+<ul>
+<li>调用者实时拿到 jsonData 数据；</li>
+<li>可用于草稿 jsonData 数据的传入初始化 h5-editor 组件信息。</li>
+</ul>
+<p>jsonData 数据格式如下：</p>
+<pre><code class="txt">{
+    // 基本配置信息
+    pageInfo: {
+        title: &#39;&#39;, // 页面标题
+        description: &#39;&#39;, // 页面描述
+        backgroundColor: &#39;&#39;, // 页面背景色
+        // ...
+    },
+    // 页面布局信息
+    layout: [
+        {
+            type: &#39;&#39;, // 组件类型，对用 component.name
+            dynamicStyle: { // 页面样式信息 
+                // ...
+            }
+        }
+    ]
+}
+</code></pre>
+<h3 id="数据流转过程"><a href="#数据流转过程" class="headerlink" title="数据流转过程"></a>数据流转过程</h3><p>渲染组件 component 和 样式修改组件 styleComponent 都包含这个 props 对象，这样一旦样式修改组件 styleComponent 修改了样式，就通过向父级组件派发样式修改事件 changeStyle（通过 <code>this.$emit(&#39;changeStyle&#39;, newDynamicStyleObj)</code>派发），这样父级组件 h5-editor 就可以接收到样式修改事件和新的样式值，然后将新的样式值注入到渲染组件 component 的 dynamicStyle props 中，最后将页面样式进行更新。</p>
+<p><img src="https://i.loli.net/2021/03/27/X2rnp8xLQRBjlgb.png" alt="image.png"></p>
+<p>总结：h5-editor 在渲染组件 component 和样式修改组件 styleComponent 之间扮演的角色只是数据转发的作用。</p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>可视化搭建平台</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>flutter 知识点记录</title>
     <url>/2021/03/21/flutter-%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h2 id="Flutter-记录"><a href="#Flutter-记录" class="headerlink" title="Flutter 记录"></a>Flutter 记录</h2><h3 id="1-Button-限制宽高"><a href="#1-Button-限制宽高" class="headerlink" title="1. Button 限制宽高"></a>1. Button 限制宽高</h3><p>使用 SizeBox 进行包裹。</p>

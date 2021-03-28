@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Vue,可视化搭建平台,webpack,">
 
 
 
@@ -86,16 +86,20 @@
 
 
 
-<meta name="description" content="Ertsul&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ertsul">
-<meta property="og:url" content="https://ertsul.github.io/tags/minapp/index.html">
+<meta name="description" content="可视化搭建平台（二）- 实现页面效果：  主要解决两个问题：  组件的拖拽； 渲染组件 component 和样式修改组件 styleComponent 数据流转问题。  组件的拖拽和克隆组件拖拽这里使用到的是这个基于 sortable.js，使用 Vue 进行封装的组件 Vue.Draggable。具体使用官方文档和相关例子都很详细。 主要使用两个功能：  拖拽：更改页面布局 克隆：将左边渲染组">
+<meta name="keywords" content="Vue,可视化搭建平台,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可视化搭建平台（二）- 实现">
+<meta property="og:url" content="https://ertsul.github.io/2021/03/28/可视化搭建平台（二）-实现/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="Ertsul&apos;s Blog">
+<meta property="og:description" content="可视化搭建平台（二）- 实现页面效果：  主要解决两个问题：  组件的拖拽； 渲染组件 component 和样式修改组件 styleComponent 数据流转问题。  组件的拖拽和克隆组件拖拽这里使用到的是这个基于 sortable.js，使用 Vue 进行封装的组件 Vue.Draggable。具体使用官方文档和相关例子都很详细。 主要使用两个功能：  拖拽：更改页面布局 克隆：将左边渲染组">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2021/03/28/eZxB8cI6DSN25ly.gif">
+<meta property="og:updated_time" content="2021-03-28T09:03:41.306Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ertsul">
-<meta name="twitter:description" content="Ertsul&apos;s Blog">
+<meta name="twitter:title" content="可视化搭建平台（二）- 实现">
+<meta name="twitter:description" content="可视化搭建平台（二）- 实现页面效果：  主要解决两个问题：  组件的拖拽； 渲染组件 component 和样式修改组件 styleComponent 数据流转问题。  组件的拖拽和克隆组件拖拽这里使用到的是这个基于 sortable.js，使用 Vue 进行封装的组件 Vue.Draggable。具体使用官方文档和相关例子都很详细。 主要使用两个功能：  拖拽：更改页面布局 克隆：将左边渲染组">
+<meta name="twitter:image" content="https://i.loli.net/2021/03/28/eZxB8cI6DSN25ly.gif">
 
 
 
@@ -125,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://ertsul.github.io/tags/minapp/">
+  <link rel="canonical" href="https://ertsul.github.io/2021/03/28/可视化搭建平台（二）-实现/">
 
 
 
 
 
-  <title>标签: minapp | Ertsul</title>
+  <title>可视化搭建平台（二）- 实现 | Ertsul</title>
   
 
 
@@ -150,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband">
     </div>
 
@@ -277,78 +281,303 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>minapp<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ertsul.github.io/2021/03/28/可视化搭建平台（二）-实现/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ertsul">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17139306?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ertsul">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/02/06/小程序文件生成脚本/" itemprop="url">
-              
-                <span itemprop="name">小程序文件生成脚本</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">可视化搭建平台（二）- 实现</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-02-06T13:59:43+08:00" content="2020-02-06">
-          02-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T16:58:59+08:00">
+                2021-03-28
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  810
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="可视化搭建平台（二）-实现"><a href="#可视化搭建平台（二）-实现" class="headerlink" title="可视化搭建平台（二）- 实现"></a>可视化搭建平台（二）- 实现</h1><p>页面效果：</p>
+<p><img src="https://i.loli.net/2021/03/28/eZxB8cI6DSN25ly.gif" alt="h5_editor.gif"></p>
+<p>主要解决两个问题：</p>
+<ul>
+<li>组件的拖拽；</li>
+<li>渲染组件 component 和样式修改组件 styleComponent 数据流转问题。</li>
+</ul>
+<h2 id="组件的拖拽和克隆"><a href="#组件的拖拽和克隆" class="headerlink" title="组件的拖拽和克隆"></a>组件的拖拽和克隆</h2><p>组件拖拽这里使用到的是这个基于 <a href="https://github.com/SortableJS/Sortable" target="_blank" rel="noopener">sortable.js</a>，使用 Vue 进行封装的组件 <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank" rel="noopener">Vue.Draggable</a>。具体使用官方文档和相关例子都很详细。</p>
+<p>主要使用两个功能：</p>
+<ul>
+<li>拖拽：更改页面布局</li>
+<li>克隆：将左边渲染组件列表中的组件拖拽克隆到中间页面预览区域</li>
+</ul>
+<h3 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h3><p>h5-editor 组件使用方式：</p>
+<pre><code class="vue">&lt;h5-editor v-model=&quot;jsonData&quot; :data=&quot;data&quot;&gt;&lt;/h5-editor&gt;
+</code></pre>
+<pre><code class="vue">&lt;template&gt;
+    &lt;draggable
+        class=&quot;dragArea list-group&quot;
+        v-model=&quot;layout&quot;
+        tag=&quot;div&quot;
+        v-bind=&quot;dragOptions&quot;
+        @start=&quot;startDragLayout&quot;
+        @end=&quot;finishDragLayout&quot;
+        group=&quot;preview&quot;
+        &gt;
+        &lt;div v-for=&quot;(element, index) in layout&quot; :key=&quot;index&quot;&gt;
+            // ...
+            &lt;component :is=&quot;element.component&quot; :dynamicStyle=&quot;element.dynamicStyle&quot;&gt;&lt;/component&gt;
+        &lt;/div&gt;   
+    &lt;/draggable&gt;
+&lt;/template&gt;
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/05/小程序工程化/" itemprop="url">
-              
-                <span itemprop="name">小程序工程化</span>
-              
-            </a>
-        
-      </h2>
+&lt;script&gt;
+export default {
+    model: {
+        prop: &quot;jsonData&quot;,
+        event: &quot;changePageInfo&quot;,
+     },
+    props: {
+        // 页面初始化数据
+        data: {
+            type: Array,
+            default: () =&gt; [],
+        },
+    },
+    data() {
+        return {
+            layout: []   
+        }
+    },
+    computed: {
+        // 主要是定义一些属性
+        dragOptions() {
+            return {
+                animation: 200, // 动画执行时间
+                group: &quot;preview&quot;, // 这个 group  的作用是，设置渲染区域的 group 和左边组件列表的 group 相同，在同一 group 中，即可进行克隆
+                disabled: false,
+                ghostClass: &quot;ghost&quot;, // 组件拖动还未放下的样式
+            };
+        },
+    },
+    // ... 其他实现细节忽略
+    watch: {
+        // ...
+    }
+}
+&lt;/script&gt;
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-05T22:36:57+08:00" content="2019-11-05">
-          11-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+</code></pre>
+<p>实现 v-model，监听 layout 是否变更，然后派发 changePageInfo 事件即可实现 v-model。</p>
+<p><code>&lt;draggable&gt;&lt;/draggable&gt;</code> 标签是 <a href="https://github.com/SortableJS/Vue.Draggable" target="_blank" rel="noopener">Vue.Draggable</a> 封装好的组件，只要把我们的布局数组 layout 跟内部进行判定，即可实现拖拽和 layout 数据更新。</p>
+<p>而<code>&lt;draggable&gt;&lt;/draggable&gt;</code>标签内部通过一个 <code>v-for</code>循环包裹，结合 Vue 动态组件 <code>&lt;component :is=&quot;&quot; /&gt;</code> 即可实现组件的展示。 </p>
+<p>注：<code>@start</code>、<code>@end</code>等事件的绑定，函数的参数里面有新旧索引等重要信息可利用。</p>
+<h3 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h3><p>h5-editor 组件使用方式：</p>
+<pre><code class="vue">&lt;h5-editor v-model=&quot;jsonData&quot; :data=&quot;data&quot;&gt;&lt;/h5-editor&gt;
+</code></pre>
+<pre><code class="vue">&lt;draggable
+    class=&quot;all-coms__box dragArea list-group&quot;
+    :list=&quot;baseComponentsData&quot;
+    :group=&quot;{ name: &#39;preview&#39;, pull: &#39;clone&#39;, put: false }&quot;
+    :clone=&quot;clone&quot;
+    :sort=&quot;false&quot;
+    @end=&quot;finishClone&quot;
+&gt;
+&lt;/draggable&gt;
+</code></pre>
+<p>克隆组件跟拖拽组件多了两个设置属性：</p>
+<ul>
+<li>group：设置组别，组别跟预览区域的组别一样，都是 preview；</li>
+<li>sort：禁止自身列表重新排序。</li>
+</ul>
+<h2 id="显示对应的样式修改组件"><a href="#显示对应的样式修改组件" class="headerlink" title="显示对应的样式修改组件"></a>显示对应的样式修改组件</h2><p>在中间预览区域点击一个组件后，右边样式修改区域会显示对应的组件。这个逻辑实现比较简单，因为每个组件都有对应的索引，通过对应索引显示对应组件即可，结合 Vue 动态组件 <code>&lt;component :is=&quot;&quot; /&gt;</code> 即可实现组件的展示。 </p>
+<h2 id="修改对应的渲染组件样式"><a href="#修改对应的渲染组件样式" class="headerlink" title="修改对应的渲染组件样式"></a>修改对应的渲染组件样式</h2><p>当样式修改组件向上派发事件 changeStyle，父组件 h5-editor 就可以监听到事件触发和携带新的样式对象，然后通过修改 layout 对应索引的 dynamicStyle 属性值（<code>$set()</code>触发），即可修改对应渲染组件样式。</p>
 
       
     </div>
+    
+    
+    
 
+    <div>
+      
+        
+      
+    </div>  
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Ertsul
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://ertsul.github.io/2021/03/28/可视化搭建平台（二）-实现/" title="可视化搭建平台（二）- 实现">https://ertsul.github.io/2021/03/28/可视化搭建平台（二）-实现/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/可视化搭建平台/" rel="tag"># 可视化搭建平台</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/可视化搭建平台（一）-流程/" rel="next" title="可视化搭建平台（一）- 流程">
+                <i class="fa fa-chevron-left"></i> 可视化搭建平台（一）- 流程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/28/可视化搭建平台（三）-打包/" rel="prev" title="可视化搭建平台（三）- 打包">
+                可视化搭建平台（三）- 打包 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -356,6 +585,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -376,8 +609,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -455,6 +697,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化搭建平台（二）-实现"><span class="nav-number">1.</span> <span class="nav-text">可视化搭建平台（二）- 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的拖拽和克隆"><span class="nav-number">1.1.</span> <span class="nav-text">组件的拖拽和克隆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#拖拽"><span class="nav-number">1.1.1.</span> <span class="nav-text">拖拽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆"><span class="nav-number">1.1.2.</span> <span class="nav-text">克隆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示对应的样式修改组件"><span class="nav-number">1.2.</span> <span class="nav-text">显示对应的样式修改组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改对应的渲染组件样式"><span class="nav-number">1.3.</span> <span class="nav-text">修改对应的渲染组件样式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -597,6 +855,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Vue,可视化搭建平台,webpack,">
 
 
 
@@ -86,16 +86,18 @@
 
 
 
-<meta name="description" content="Ertsul&apos;s Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ertsul">
-<meta property="og:url" content="https://ertsul.github.io/tags/minapp/index.html">
+<meta name="description" content="可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方">
+<meta name="keywords" content="Vue,可视化搭建平台,webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可视化搭建平台（三）- 打包">
+<meta property="og:url" content="https://ertsul.github.io/2021/03/28/可视化搭建平台（三）-打包/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="Ertsul&apos;s Blog">
+<meta property="og:description" content="可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-03-28T09:03:51.455Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ertsul">
-<meta name="twitter:description" content="Ertsul&apos;s Blog">
+<meta name="twitter:title" content="可视化搭建平台（三）- 打包">
+<meta name="twitter:description" content="可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方">
 
 
 
@@ -125,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://ertsul.github.io/tags/minapp/">
+  <link rel="canonical" href="https://ertsul.github.io/2021/03/28/可视化搭建平台（三）-打包/">
 
 
 
 
 
-  <title>标签: minapp | Ertsul</title>
+  <title>可视化搭建平台（三）- 打包 | Ertsul</title>
   
 
 
@@ -150,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband">
     </div>
 
@@ -277,78 +279,514 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>minapp<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://ertsul.github.io/2021/03/28/可视化搭建平台（三）-打包/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ertsul">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/17139306?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ertsul">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2020/02/06/小程序文件生成脚本/" itemprop="url">
-              
-                <span itemprop="name">小程序文件生成脚本</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">可视化搭建平台（三）- 打包</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2020-02-06T13:59:43+08:00" content="2020-02-06">
-          02-06
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-28T16:59:23+08:00">
+                2021-03-28
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
+      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h1 id="可视化搭建平台（三）-打包"><a href="#可视化搭建平台（三）-打包" class="headerlink" title="可视化搭建平台（三）- 打包"></a>可视化搭建平台（三）- 打包</h1><p>通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
+<ul>
+<li>通过 jsonData 数据实现页面渲染；</li>
+<li>打包生成 html。</li>
+</ul>
+<h2 id="打包目录结构"><a href="#打包目录结构" class="headerlink" title="打包目录结构"></a>打包目录结构</h2><pre><code class="txt">└───build 目录：主要存放 webpack 相关配置
+|     └───static.js // 封装 webpack.run() 方法
+|     └───webpack.base.config.js // webpack 基本配置
+|───src
+|     └───App.vue // server 端入口
+|     └───main.js // client 端入口
+|     └──index.tpl.html // 页面模板
+|     └───components.js // 组件引进注册
+|───create-html
+|     └───待页面名称 目录
+|         └───config.js // webpack 发布相关配置
+|         └───data.js // jsonData 获取相关逻辑
+|───html 目录：打包输出
+|     └───static 目录：静态资源目录
+|         └───...
+|     └──待页面名称.html // 输出的页面
+|───index.js // 打包入口文件
+</code></pre>
+<h2 id="打包相关"><a href="#打包相关" class="headerlink" title="打包相关"></a>打包相关</h2><h3 id="webpack-公共基本配置-webpack-base-config-js"><a href="#webpack-公共基本配置-webpack-base-config-js" class="headerlink" title="webpack 公共基本配置 - webpack.base.config.js"></a>webpack 公共基本配置 - webpack.base.config.js</h3><p>用到的 webpack 插件有：vue-loader、optimize-css-assets-webpack-plugin、html-webpack-plugin、html-webpack-inline-source-plugin、ptimize-css-assets-webpack-plugin、babel-loader等。</p>
+<p>常规的 webpack 配置跳过，说下 plugins 配置：</p>
+<pre><code class="javascript"> plugins(type) {
+     const common = [
+         new VueLoaderPlugin(),
+         new MiniCssExtractPlugin({
+             filename: &#39;[name].[contenthash:6].css&#39;,
+             chunkFilename: &#39;[id].[contenthash:6].css&#39;,
+         }),
+         new OptimizeCssAssetsWebpackPlugin(),
+     ]
+     const onDemand = {
+         server: [],
+         client: [
+             new HtmlWebpackPlugin({
+                 filename: &#39;index.template.html&#39;,
+                 template: path.resolve(__dirname, &#39;../src/index.tpl.html&#39;),
+                 inlineSource: &#39;.css$&#39;,
+                 minify: {
+                     collapseWhitespace: true,
+                 },
+             }),
+             new OptimizeCSSAssetsPlugin({}),
+             new HtmlWebpackInlineSourcePlugin(),
+         ],
+     }
+     return [].concat(common).concat(onDemand[type] || [])
+ },
+</code></pre>
+<p>这通过传入 type 类型判断，判断是 client 端还是 server 端。公共需要的是 vue-loader，但 client 需要的是 html-webpack-plugin。</p>
+<h3 id="client-webpack-配置"><a href="#client-webpack-配置" class="headerlink" title="client webpack 配置"></a>client webpack 配置</h3><p>除了 webpack.base.config.js 公共配置，client 的 webpack 需要配置的有：entry、output、端判断变量等。</p>
+<pre><code class="javascript">const clientWebpackConfig = {
+    ...webpackBaseConfig,
+    mode,
+    entry: path.resolve(__dirname, &#39;./src/main.js&#39;),
+    output: {
+        path: path.resolve(__dirname, &#39;.&#39;, publishConfig.outputPath),
+        filename: &#39;[name].[contenthash:8].js&#39;,
+        publicPath: publishConfig.publicPath,
+    },
+    plugins: [
+        ...webpackBaseConfig.plugins(&#39;client&#39;),
+        new webpack.DefinePlugin({
+            &#39;process.env&#39;: JSON.stringify({
+                IS_SERVER: false,
+            }),
+        }),
+    ],
+}
+</code></pre>
+<h3 id="server-webpack-配置"><a href="#server-webpack-配置" class="headerlink" title="server webpack 配置"></a>server webpack 配置</h3><p>除了 webpack.base.config.js 公共配置，server 的 webpack 需要配置的有：entry、output、端判断变量等。</p>
+<pre><code class="javascript">const serverWebpackConfig = {
+    ...webpackBaseConfig,
+    mode,
+    entry: {
+        app: path.resolve(__dirname, &#39;./src/App.vue&#39;),
+    },
+    output: {
+        path: path.resolve(__dirname, &#39;.&#39;, publishConfig.outputPath),
+        libraryTarget: &#39;commonjs&#39;,
+        publicPath: publishConfig.publicPath,
+    },
+    plugins: [
+        ...webpackBaseConfig.plugins(&#39;server&#39;),
+        new webpack.DefinePlugin({
+            &#39;process.env&#39;: JSON.stringify({
+                IS_SERVER: true,
+            }),
+        }),
+    ],
+}
+</code></pre>
+<h2 id="static-js-webpack-run-封装"><a href="#static-js-webpack-run-封装" class="headerlink" title="static.js - webpack.run 封装"></a>static.js - webpack.run 封装</h2><p>这里封装要给 Static 类，输入 webpack 配置，输出打包好的 bundle。</p>
+<pre><code class="javascript">const webpack = require(&#39;webpack&#39;)
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/11/05/小程序工程化/" itemprop="url">
-              
-                <span itemprop="name">小程序工程化</span>
-              
-            </a>
-        
-      </h2>
+class Static {
+  constructor(options) {
+    this.options = options
+  }
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-11-05T22:36:57+08:00" content="2019-11-05">
-          11-05
-        </time>
-      </div>
+  run() {
+    const webpacks = []
+    Object.keys(this.options).forEach((k) =&gt; {
+      webpacks.push(webpack(this.options[k]))
+    })
+    return Promise.all(
+      webpacks.map(
+        (web) =&gt;
+          new Promise((reslove) =&gt; {
+            web.run((err, stats) =&gt; {
+              reslove()
+            })
+          })
+      )
+    )
+  }
+}
 
-    </header>
-  </article>
+module.exports = {
+  Static,
+}
+</code></pre>
+<h2 id="server-入口-渲染生成页面"><a href="#server-入口-渲染生成页面" class="headerlink" title="server 入口 - 渲染生成页面"></a>server 入口 - 渲染生成页面</h2><p>通过封装一个入口组件 App.vue，将 jsonData 通过 props 传入，然后通过 js 引进相关的渲染组件，最后通过 <code>v-for</code> 配合动态组件<code>&lt;component :is=&quot;&quot; /&gt;</code>可以实现 组件渲染。</p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div class=&quot;h5-page&quot; :style=&quot;pageStyle&quot;&gt;
+    &lt;div class=&quot;layout-item&quot; v-for=&quot;(item, index) in layout&quot; :key=&quot;index&quot;&gt;
+      &lt;component :is=&quot;item.component&quot; :dynamicStyle=&quot;item.config&quot;&gt;&lt;/component&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
 
+&lt;script&gt;
+import components from &quot;./components.js&quot;;
+export default {
+  name: &quot;H5Page&quot;,
+  components: components,
+  props: {
+    pageConfig: {
+      type: Object,
+      default: () =&gt; [],
+    },
+  },
+  data() {
+    return {
+      layout: [],
+    };
+  },
+  computed: {
+    pageStyle() {
+      return {
+        backgroundColor:
+          this.$props.pageConfig.pageInfo.backgroundColor || &quot;#fff&quot;,
+      };
+    },
+  },
+  created() {
+    this.bindComponent();
+  },
+  methods: {
+    /**
+     * 给每个布局绑定唯一组件
+     */
+    bindComponent() {
+      if (!Object.keys(components).length) {
+        return;
+      }
+      // 给 layout 绑定对应组件
+      const layout = this.$props.pageConfig.layout || [];
+      if (!layout.length) {
+        return;
+      }
+      layout.forEach((item) =&gt; {
+        item.component = components[item.type];
+      });
+      this.layout = layout;
+    },
+  },
+};
+&lt;/script&gt;
+
+&lt;style lang=&quot;scss&quot;&gt;
+.h5-page {
+  width: 100vw;
+}
+&lt;/style&gt;
+</code></pre>
+<p>这里将组件注入单独抽离，后期有新的组件使用，改动 components.js 即可。</p>
+<pre><code class="javascript">/************************ 组件注册 ************************/
+
+if (!process.env.IS_SERVER) {
+  // 解决：UnhandledPromiseRejectionWarning: ReferenceError: window is not defined 问题
+  const H5Editor = require(&#39;h5-editor&#39;)
+
+  module.exports = {
+    EdText: H5Editor.default.EdText,
+    EdImage: H5Editor.default.EdImage
+  }
+}
+
+</code></pre>
+<p>注意：上面有一个全局变量（通过 webpack.DefinePlugin 插件注入变量）判断是服务端还是客户端的判断，因为打包使用的是<a href="https://ssr.vuejs.org/zh/api/" target="_blank" rel="noopener">vue-server-renderer</a>相关逻辑。故：存在两个端，client 和 server，server 端没有 window、document 等对象。</p>
+<h2 id="client-入口-注入全局数据-window-initData"><a href="#client-入口-注入全局数据-window-initData" class="headerlink" title="client 入口 - 注入全局数据 window.__initData__"></a>client 入口 - 注入全局数据 window.__initData__</h2><p>主要做两件事：</p>
+<ul>
+<li>挂载 Vue 实例到目标节点；</li>
+<li>注入全局 window.__ininData__</li>
+</ul>
+<pre><code class="javascript">import Vue from &#39;vue&#39;
+import App from &#39;./App.vue&#39;
+
+let props = {}
+if (window.__initData__) {
+  props = { pageConfig: window.__initData__.pageConfig }
+}
+
+new Vue({
+  components: { App: App },
+  render: (h) =&gt; h(&#39;App&#39;, { props }),
+}).$mount(&#39;#app&#39;)
+
+</code></pre>
+<h3 id="页面-html-模板"><a href="#页面-html-模板" class="headerlink" title="页面 html 模板"></a>页面 html 模板</h3><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html style=&quot;font-size:100px;&quot;&gt;
+
+&lt;head&gt;
+  &lt;title&gt;{{ title }}&lt;/title&gt;
+  &lt;meta charset=&quot;utf-8&quot;&gt;
+  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
+  &lt;meta name=&quot;viewport&quot;
+    content=&quot;width=device-width,initial-scale=1.0,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui&quot;&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;{{description}}&quot; /&gt;
+&lt;/head&gt;
+
+&lt;body style=&quot;font-size: 16px&quot;&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;!--vue-ssr-outlet--&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+    {{{ script }}}
+  &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</code></pre>
+<h2 id="index-js-构建"><a href="#index-js-构建" class="headerlink" title="index.js - 构建"></a>index.js - 构建</h2><p>打包使用的是<a href="https://ssr.vuejs.org/zh/api/" target="_blank" rel="noopener">vue-server-renderer</a>相关逻辑。</p>
+<p>主要做几件事：</p>
+<ul>
+<li>通过 webpack 打包输出 templateHtml 和 bundle.js（还没有注入页面数据 window.__initData__）</li>
+</ul>
+<pre><code class="javascript"> const compiler = new Static({
+    app: appWebpackConfig,
+    client: clientWebpackConfig,
+  })
+  await compiler.run()
+</code></pre>
+<ul>
+<li>通过 <code>vue-server-renderer</code>结合 templateHtml 和 bundle.js 生成 renderer 对象</li>
+</ul>
+<pre><code class="javascript">const renderer = require(&#39;vue-server-renderer&#39;).createRenderer({
+    template: fs.readFileSync(&#39;./html/static/index.template.html&#39;, &#39;utf-8&#39;),
+})
+const main = require(path.resolve(
+    __dirname,
+    `./${publishConfig.outputPath}/app.js`
+))
+</code></pre>
+<ul>
+<li>通过 <code>/create-html/待打包页面名/data.js</code>脚本获取 jsonData 数据</li>
+<li>将 jsonData 相关数据通过 context，注入到模板页面中</li>
+</ul>
+<pre><code class="javascript">const pageConfigData = await dataHandler()
+const { title = &#39;&#39;, description = &#39;&#39; } = pageConfigData.pageInfo
+const context = {
+    title,
+    description,
+    script: `window.__initData__=${JSON.stringify({
+        pageConfig: pageConfigData,
+    })}`,
+}
+const app = new Vue({
+    data: {},
+    components: { App: main.default },
+    render: (h) =&gt; h(&#39;App&#39;, { props: { pageConfig: pageConfigData } }),
+})
+</code></pre>
+<ul>
+<li>通过 renderer 对象输出 html 并写入到目标目录下。</li>
+</ul>
+<pre><code class="javascript">renderer.renderToString(app, context, (err, html) =&gt; {
+    if (!html) {
+        return
+    }
+    const filePath = path.resolve(__dirname, `${publishConfig.filePath}`)
+    fse.ensureDirSync(filePath)
+    // name 为 nodejs 命令行参数：待打包页面名称
+    fs.writeFile(`${filePath}/${name}.html`, html, function(err) {
+        if (err) {
+            console.error(`&gt;&gt;&gt;&gt; 生成 ${name} 页面失败!`, err)
+            return
+        }
+        console.log(
+            `${publishConfig.filePath}/${name}.html` + &#39;:数据写入成功！&#39;
+        )
+    })
+})
+</code></pre>
+<p>over~</p>
 
       
     </div>
+    
+    
+    
 
+    <div>
+      
+        
+      
+    </div>  
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Ertsul
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://ertsul.github.io/2021/03/28/可视化搭建平台（三）-打包/" title="可视化搭建平台（三）- 打包">https://ertsul.github.io/2021/03/28/可视化搭建平台（三）-打包/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/可视化搭建平台/" rel="tag"># 可视化搭建平台</a>
+          
+            <a href="/tags/webpack/" rel="tag"># webpack</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/28/可视化搭建平台（二）-实现/" rel="next" title="可视化搭建平台（二）- 实现">
+                <i class="fa fa-chevron-left"></i> 可视化搭建平台（二）- 实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -356,6 +794,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -376,8 +818,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -455,6 +906,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化搭建平台（三）-打包"><span class="nav-number">1.</span> <span class="nav-text">可视化搭建平台（三）- 打包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打包目录结构"><span class="nav-number">1.1.</span> <span class="nav-text">打包目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包相关"><span class="nav-number">1.2.</span> <span class="nav-text">打包相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-公共基本配置-webpack-base-config-js"><span class="nav-number">1.2.1.</span> <span class="nav-text">webpack 公共基本配置 - webpack.base.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#client-webpack-配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">client webpack 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-webpack-配置"><span class="nav-number">1.2.3.</span> <span class="nav-text">server webpack 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-js-webpack-run-封装"><span class="nav-number">1.3.</span> <span class="nav-text">static.js - webpack.run 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server-入口-渲染生成页面"><span class="nav-number">1.4.</span> <span class="nav-text">server 入口 - 渲染生成页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#client-入口-注入全局数据-window-initData"><span class="nav-number">1.5.</span> <span class="nav-text">client 入口 - 注入全局数据 window.__initData__</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面-html-模板"><span class="nav-number">1.5.1.</span> <span class="nav-text">页面 html 模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#index-js-构建"><span class="nav-number">1.6.</span> <span class="nav-text">index.js - 构建</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -597,6 +1064,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
