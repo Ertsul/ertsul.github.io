@@ -394,12 +394,13 @@
       
         
           
-          可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：
+           通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：
 
 通过 jsonData 数据实现页面渲染；
 打包生成 html。
 
-打包目录结构└───build 目录：主要存放 webp
+打包目录结构└───build 目录：主要存放 webpack 相关配置
+|   
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -560,14 +561,14 @@
       
         
           
-          可视化搭建平台（二）- 实现页面效果：
+          页面效果：
 
 主要解决两个问题：
 
 组件的拖拽；
 渲染组件 component 和样式修改组件 styleComponent 数据流转问题。
 
-组件的拖拽和克隆组件拖拽这里使用到的是这个基于 sortable.js，使用 Vue 进行封装的组件 Vue.Draggable
+组件的拖拽和克隆组件拖拽这里使用到的是这个基于 sortable.js，使用 Vue 进行封装的组件 Vue.Draggable。具体使用官方文档和相关例子
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -728,14 +729,14 @@
       
         
           
-          可视化搭建平台（一）- 流程做一个更加通用的可视化搭建平台，用户通过 npm 安装 h5-editor (包名)，就可以直接使用了。
+          做一个更加通用的可视化搭建平台，用户通过 npm 安装 h5-editor (包名)，就可以直接使用了。
 可以使用的功能有：
 
 拖拽组件、删除组件；
 修改页面基本信息，如：页面标题、页面背景色等；
 修改组件样式，如：组件大小、颜色等；
 可以使用基础组件（组件内提供）；
-可
+可以使用自定义组件（用户自己实
           ...
           <!--noindex-->
           <div class="post-button text-center">

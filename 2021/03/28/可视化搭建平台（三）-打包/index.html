@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方">
+<meta name="description" content="通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方法 |     └───w">
 <meta name="keywords" content="Vue,可视化搭建平台,webpack">
 <meta property="og:type" content="article">
 <meta property="og:title" content="可视化搭建平台（三）- 打包">
 <meta property="og:url" content="https://ertsul.github.io/2021/03/28/可视化搭建平台（三）-打包/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方">
+<meta property="og:description" content="通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方法 |     └───w">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-03-28T09:03:51.455Z">
+<meta property="og:updated_time" content="2021-03-28T09:09:22.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可视化搭建平台（三）- 打包">
-<meta name="twitter:description" content="可视化搭建平台（三）- 打包通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方">
+<meta name="twitter:description" content="通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：  通过 jsonData 数据实现页面渲染； 打包生成 html。  打包目录结构└───build 目录：主要存放 webpack 相关配置 |     └───static.js // 封装 webpack.run() 方法 |     └───w">
 
 
 
@@ -391,7 +391,7 @@
       
 
       
-        <h1 id="可视化搭建平台（三）-打包"><a href="#可视化搭建平台（三）-打包" class="headerlink" title="可视化搭建平台（三）- 打包"></a>可视化搭建平台（三）- 打包</h1><p>通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
+        <p> 通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
 <ul>
 <li>通过 jsonData 数据实现页面渲染；</li>
 <li>打包生成 html。</li>
@@ -916,7 +916,7 @@ const app = new Vue({
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#可视化搭建平台（三）-打包"><span class="nav-number">1.</span> <span class="nav-text">可视化搭建平台（三）- 打包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打包目录结构"><span class="nav-number">1.1.</span> <span class="nav-text">打包目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包相关"><span class="nav-number">1.2.</span> <span class="nav-text">打包相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-公共基本配置-webpack-base-config-js"><span class="nav-number">1.2.1.</span> <span class="nav-text">webpack 公共基本配置 - webpack.base.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#client-webpack-配置"><span class="nav-number">1.2.2.</span> <span class="nav-text">client webpack 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-webpack-配置"><span class="nav-number">1.2.3.</span> <span class="nav-text">server webpack 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-js-webpack-run-封装"><span class="nav-number">1.3.</span> <span class="nav-text">static.js - webpack.run 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server-入口-渲染生成页面"><span class="nav-number">1.4.</span> <span class="nav-text">server 入口 - 渲染生成页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#client-入口-注入全局数据-window-initData"><span class="nav-number">1.5.</span> <span class="nav-text">client 入口 - 注入全局数据 window.__initData__</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面-html-模板"><span class="nav-number">1.5.1.</span> <span class="nav-text">页面 html 模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#index-js-构建"><span class="nav-number">1.6.</span> <span class="nav-text">index.js - 构建</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#打包目录结构"><span class="nav-number">1.</span> <span class="nav-text">打包目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包相关"><span class="nav-number">2.</span> <span class="nav-text">打包相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack-公共基本配置-webpack-base-config-js"><span class="nav-number">2.1.</span> <span class="nav-text">webpack 公共基本配置 - webpack.base.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#client-webpack-配置"><span class="nav-number">2.2.</span> <span class="nav-text">client webpack 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-webpack-配置"><span class="nav-number">2.3.</span> <span class="nav-text">server webpack 配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#static-js-webpack-run-封装"><span class="nav-number">3.</span> <span class="nav-text">static.js - webpack.run 封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#server-入口-渲染生成页面"><span class="nav-number">4.</span> <span class="nav-text">server 入口 - 渲染生成页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#client-入口-注入全局数据-window-initData"><span class="nav-number">5.</span> <span class="nav-text">client 入口 - 注入全局数据 window.__initData__</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#页面-html-模板"><span class="nav-number">5.1.</span> <span class="nav-text">页面 html 模板</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#index-js-构建"><span class="nav-number">6.</span> <span class="nav-text">index.js - 构建</span></a></li></ol></div>
             
 
           </div>

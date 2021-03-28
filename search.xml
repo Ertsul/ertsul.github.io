@@ -3,7 +3,7 @@
   <entry>
     <title>可视化搭建平台（三）- 打包</title>
     <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%89%EF%BC%89-%E6%89%93%E5%8C%85/</url>
-    <content><![CDATA[<h1 id="可视化搭建平台（三）-打包"><a href="#可视化搭建平台（三）-打包" class="headerlink" title="可视化搭建平台（三）- 打包"></a>可视化搭建平台（三）- 打包</h1><p>通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
+    <content><![CDATA[<p> 通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
 <ul>
 <li>通过 jsonData 数据实现页面渲染；</li>
 <li>打包生成 html。</li>
@@ -322,7 +322,7 @@ const app = new Vue({
   <entry>
     <title>可视化搭建平台（二）- 实现</title>
     <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%BA%8C%EF%BC%89-%E5%AE%9E%E7%8E%B0/</url>
-    <content><![CDATA[<h1 id="可视化搭建平台（二）-实现"><a href="#可视化搭建平台（二）-实现" class="headerlink" title="可视化搭建平台（二）- 实现"></a>可视化搭建平台（二）- 实现</h1><p>页面效果：</p>
+    <content><![CDATA[<p>页面效果：</p>
 <p><img src="https://i.loli.net/2021/03/28/eZxB8cI6DSN25ly.gif" alt="h5_editor.gif"></p>
 <p>主要解决两个问题：</p>
 <ul>
@@ -416,6 +416,7 @@ export default {
 </ul>
 <h2 id="显示对应的样式修改组件"><a href="#显示对应的样式修改组件" class="headerlink" title="显示对应的样式修改组件"></a>显示对应的样式修改组件</h2><p>在中间预览区域点击一个组件后，右边样式修改区域会显示对应的组件。这个逻辑实现比较简单，因为每个组件都有对应的索引，通过对应索引显示对应组件即可，结合 Vue 动态组件 <code>&lt;component :is=&quot;&quot; /&gt;</code> 即可实现组件的展示。 </p>
 <h2 id="修改对应的渲染组件样式"><a href="#修改对应的渲染组件样式" class="headerlink" title="修改对应的渲染组件样式"></a>修改对应的渲染组件样式</h2><p>当样式修改组件向上派发事件 changeStyle，父组件 h5-editor 就可以监听到事件触发和携带新的样式对象，然后通过修改 layout 对应索引的 dynamicStyle 属性值（<code>$set()</code>触发），即可修改对应渲染组件样式。</p>
+<p><a href="https://ertsul.com/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%89%EF%BC%89-%E6%89%93%E5%8C%85/" target="_blank" rel="noopener">可视化搭建平台（三）-打包</a></p>
 ]]></content>
       <tags>
         <tag>Vue</tag>
@@ -426,7 +427,7 @@ export default {
   <entry>
     <title>可视化搭建平台（一）- 流程</title>
     <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%80%EF%BC%89-%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<h1 id="可视化搭建平台（一）-流程"><a href="#可视化搭建平台（一）-流程" class="headerlink" title="可视化搭建平台（一）- 流程"></a>可视化搭建平台（一）- 流程</h1><p>做一个更加通用的可视化搭建平台，用户通过 npm 安装 h5-editor (包名)，就可以直接使用了。</p>
+    <content><![CDATA[<p>做一个更加通用的可视化搭建平台，用户通过 npm 安装 h5-editor (包名)，就可以直接使用了。</p>
 <p>可以使用的功能有：</p>
 <ul>
 <li>拖拽组件、删除组件；</li>
@@ -491,6 +492,7 @@ export default {
 <h3 id="数据流转过程"><a href="#数据流转过程" class="headerlink" title="数据流转过程"></a>数据流转过程</h3><p>渲染组件 component 和 样式修改组件 styleComponent 都包含这个 props 对象，这样一旦样式修改组件 styleComponent 修改了样式，就通过向父级组件派发样式修改事件 changeStyle（通过 <code>this.$emit(&#39;changeStyle&#39;, newDynamicStyleObj)</code>派发），这样父级组件 h5-editor 就可以接收到样式修改事件和新的样式值，然后将新的样式值注入到渲染组件 component 的 dynamicStyle props 中，最后将页面样式进行更新。</p>
 <p><img src="https://i.loli.net/2021/03/27/X2rnp8xLQRBjlgb.png" alt="image.png"></p>
 <p>总结：h5-editor 在渲染组件 component 和样式修改组件 styleComponent 之间扮演的角色只是数据转发的作用。</p>
+<p><a href="https://ertsul.com/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%BA%8C%EF%BC%89-%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">可视化搭建平台（二）-实现</a></p>
 ]]></content>
       <tags>
         <tag>Vue</tag>
