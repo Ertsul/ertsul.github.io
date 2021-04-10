@@ -1,6 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>搭建组件库</title>
+    <url>/2021/04/10/%E6%90%AD%E5%BB%BA%E7%BB%84%E4%BB%B6%E5%BA%93/</url>
+    <content><![CDATA[<h1 id="搭建组件库"><a href="#搭建组件库" class="headerlink" title="搭建组件库"></a>搭建组件库</h1><p>利用 webpack，通过入口将所有的组件模块导入并且注册，然后通过生成一个 bundle.js 文件即可。</p>
+<h2 id="创建-vue-项目"><a href="#创建-vue-项目" class="headerlink" title="创建 vue 项目"></a>创建 vue 项目</h2><p>创建 vue 项目，除了 vue 项目自带的文件目录外，在根目录下添加以下目录结构：</p>
+<pre><code class="txt">└───build 目录：主要存放 webpack 相关配置
+|     └───webpack.biuld.config.js // 打包生成组件库 webpack 配置
+|───lib 目录：打包生成的 bundle.js 目录
+|     └───bundle.js // 打包生成的 bundle
+|───packages
+|   └───index.js // 注册所有组件脚本文件
+|     └───组件名称 1
+|         └───src
+|             └───index.vue // 组件源码
+|         └───index.js // 单个组件注册
+|     └───组件名称 2
+|         └───src
+|             └───index.vue // 组件源码
+|         └───index.js // 单个组件注册
+|     └───组件名称 n
+|     └───...
+</code></pre>
+<h2 id="添加生成组件库-webpack-配置"><a href="#添加生成组件库-webpack-配置" class="headerlink" title="添加生成组件库 webpack 配置"></a>添加生成组件库 webpack 配置</h2><p>配置目录：<code>build/webpack.biuld.config.js</code></p>
+<h3 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h3><p>入口作用：入口将所有的组件模块导入并且注册。</p>
+<pre><code class="javascript">entry: {
+    xx: path.resolve(__dirname, &#39;../packages/index.js&#39;),
+}
+</code></pre>
+<h3 id="output"><a href="#output" class="headerlink" title="output"></a>output</h3><pre><code class="javascript">output: {
+    path: path.resolve(__dirname, &#39;../lib&#39;),
+    publicPath: &#39;/lib/&#39;,
+    library: &#39;xx&#39;, // 包名
+    libraryTarget: &#39;umd&#39;,
+    umdNamedDefine: true,
+}
+</code></pre>
+<p>其中，<a href="https://webpack.docschina.org/configuration/output/#outputlibrarytarget" target="_blank" rel="noopener">libraryTarget</a> 采用 umd 格式。</p>
+<blockquote>
+<p>打包后的 library 暴露为所有的模块定义下都可运行的方式。它将在 CommonJS, AMD 环境下运行，或将模块导出到 global 下的变量。</p>
+</blockquote>
+<h3 id="loader"><a href="#loader" class="headerlink" title="loader"></a>loader</h3><p>babel-loader（@babel/preset-env、@babel/transform-runtime、dynamic-import-webpack）、vue-loader、css-loader、postcss-loader、sass-loader、url-loader。</p>
+<p>静态资源如图片等统一转化成 base64，后面统一使用 iconfont 的方式使用图标。</p>
+<pre><code class="javascript">module: {
+    rules: [
+        {
+            test: /\.(png|jpe?g|gif|svg|ttf|woff|woff2|eot)$/i,
+            use: [
+                {
+                    loader: &#39;url-loader&#39;,
+                    options: {
+                        limit: 10240000,
+                        name: &#39;static/[name].[hash:6].[ext]&#39;,
+                        esModule: false, // https://webpack.docschina.org/loaders/url-loader/#esmodule
+                    },
+                },
+            ],
+        },
+        {
+            test: /\.css$/i,
+            use: [
+                // 将 JS 字符串生成为 style 节点
+                &#39;style-loader&#39;,
+                // 将 CSS 转化成 CommonJS 模块
+                &#39;css-loader&#39;,
+            ],
+        },
+        {
+            test: /\.s[ac]ss$/i,
+            use: [
+                // 将 JS 字符串生成为 style 节点
+                &#39;style-loader&#39;,
+                // 将 CSS 转化成 CommonJS 模块
+                &#39;css-loader&#39;,
+                // 将 Sass 编译成 CSS
+                &#39;sass-loader&#39;,
+            ],
+        },
+        {
+            test: /\.js$/,
+            loader: &#39;babel-loader&#39;,
+            exclude: /node_modules/,
+        },
+        {
+            test: /\.vue$/,
+            loader: &#39;vue-loader&#39;,
+        },
+    ],
+}
+</code></pre>
+<h3 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h3><p>vue-loader</p>
+<pre><code class="javascript">plugins: [
+    new VueLoaderPlugin(),
+    new webpack.LoaderOptionsPlugin({
+        options: {
+            errorDetails: true,
+        },
+    }),
+],
+</code></pre>
+<h3 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h3><p><a href="https://webpack.docschina.org/configuration/externals/" target="_blank" rel="noopener">externals 文档链接</a></p>
+<blockquote>
+<p><strong>防止</strong>将某些 <code>import</code> 的包(package)<strong>打包</strong>到 bundle 中，而是在运行时(runtime)再去从外部获取这些<em>扩展依赖(external dependencies)</em>。</p>
+</blockquote>
+<p>由于是封装组件库，有使用到如 element-ui 等第三方依赖，所以不需要再对第三方依赖包进行打包。在安装私有库的时候，会自动安装第三方依赖。</p>
+<pre><code class="javascript">externals: [
+    {
+        vue: {
+            root: &#39;Vue&#39;,
+            commonjs: &#39;vue&#39;,
+            commonjs2: &#39;vue&#39;,
+            amd: &#39;vue&#39;,
+        },
+        lodash: {
+            root: &#39;lodash&#39;,
+            commonjs: &#39;lodash&#39;,
+            commonjs2: &#39;lodash&#39;,
+            amd: &#39;lodash&#39;,
+        },
+        // &#39;element-ui&#39;: &#39;element-ui&#39;,
+        vuedraggable: &#39;vuedraggable&#39;,
+    },
+    /element-ui[\s\S]+/ig,
+]
+</code></pre>
+<h2 id="修改-package-json-入口"><a href="#修改-package-json-入口" class="headerlink" title="修改 package.json 入口"></a>修改 package.json 入口</h2><p>package.json 入口指向打包好的 bundle.js</p>
+<pre><code class="txt">{
+    // ...
+    &quot;main&quot;: &quot;lib/xx.js&quot;
+}
+</code></pre>
+<h2 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h2><h3 id="npm-发布"><a href="#npm-发布" class="headerlink" title="npm 发布"></a>npm 发布</h3><p>通过 npm publish 发布到 npm 上，使用的时候通过 <code>npm i xx</code> 即可。</p>
+<h3 id="放到个人-gitlab-github"><a href="#放到个人-gitlab-github" class="headerlink" title="放到个人 gitlab / github"></a>放到个人 gitlab / github</h3><p>使用的时候，添加依赖到 package.json 中：</p>
+<pre><code class="txt">&quot;xxx&quot;: &quot;git+https://xxxxx.git&quot;,
+</code></pre>
+<p>删除 node_modules，重新安装依赖即可。</p>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>可视化搭建平台（四）- 优化</title>
+    <url>/2021/04/10/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E5%9B%9B%EF%BC%89-%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h2 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h2><p><img src="https://i.loli.net/2021/04/07/3bTfUoiZunrGFed.png" alt="image.png"></p>
+<p>痛点：右侧样式组件有很多相同的样式，如：margin、padding 等。这样每次都重复开发相同样式，不仅浪费时间和精力，而且代码量也会大大增多。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>解决方案：将多个样式抽离成单一样式组件。（一个组件对应一个样式）</p>
+<p>有两种使用方式：</p>
+<ul>
+<li>常规方式：将单一组件当作普通组件使用，需要用到该样式的组件独自 import。</li>
+<li>可配置方式：将用到的样式通过配置方式进行组装成包含多种样式的样式聚合组件。</li>
+</ul>
+<p>之前的流程：</p>
+<p><img src="https://i.loli.net/2021/03/27/X2rnp8xLQRBjlgb.png" alt="image.png"></p>
+<p>现在的流程：</p>
+<p><img src="https://i.loli.net/2021/04/07/lETSNrIJ5Hci8xk.png" alt="image.png"></p>
+<p>在页面预览区域点击组件后，右侧样式修改组件多加一层处理逻辑，添加一个 <code>&lt;styleCollection /&gt;</code> 组件对各个单一样式进行聚合和数据派发。</p>
+<p>当单一样式组件内部样式更改后，向样式聚合组件 <code>&lt;styleCollection /&gt;</code> 组件派发 <code>changeStyleItem</code> 事件，然后样式聚合组件 <code>&lt;styleCollection /&gt;</code> 组件再向上派发事件 <code>changeStyle</code> 事件。</p>
+<h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p>之前外部传入基本数据信息 data 格式：</p>
+<pre><code class="txt">[
+    {
+        component, // 渲染组件
+        styleComponent, // 渲染组件对应修改样式的组件
+        dynamicStyle, // 组件样式 props
+    },
+    {
+         // ...       
+    }
+]
+</code></pre>
+<p>更改为：</p>
+<pre><code>[
+    {
+        component, // 渲染组件
+        styleComponent, // 渲染组件对应修改样式的单一组件列表
+        dynamicStyle, // 组件样式 props
+        customSingleStyles, // 自定义单一组件 map
+    },
+    {
+         // ...       
+    }
+]
+</code></pre><ul>
+<li>更改 styleComponent 数据格式</li>
+<li>新增 customSingleStyles 属性</li>
+</ul>
+<h3 id="styleComponent"><a href="#styleComponent" class="headerlink" title="styleComponent"></a>styleComponent</h3><p>兼容旧的逻辑，仍然可以传入一整个样式修改组件。</p>
+<p>新的格式为：</p>
+<pre><code class="txt">styleComponent: {
+    component, // 单一样式组件名
+    label, // label 名
+    name, // dynamicStyle 中对应的对象属性名
+}
+</code></pre>
+<p>之所以这么设计，是考虑到单一组件复用的情况。如：一个 Color 组件，可能同时拥有背景色 backgroundColor 和文本颜色 Color。那么外部传入基本数据信息 data 格式为：</p>
+<pre><code class="txt">[
+    {
+        component: &#39;Color&#39;,
+        label: &#39;Background Color&#39;,
+        name: &#39;backgroundColor&#39;,
+    },
+    {
+        component: &#39;Color&#39;,
+        label: &#39;Text Color&#39;,
+        name: &#39;color&#39;,
+    }
+]
+</code></pre>
+<h3 id="customSingleStyles"><a href="#customSingleStyles" class="headerlink" title="customSingleStyles"></a>customSingleStyles</h3><p>该属性为拓展除了框架提供的单一样式组件，自定义的单一样式组件数据。</p>
+<p>数据格式为：</p>
+<pre><code class="txt">{
+    componentName: Component // 组件名： 样式组件
+}
+</code></pre>
+]]></content>
+      <tags>
+        <tag>Vue</tag>
+        <tag>可视化搭建平台</tag>
+        <tag>webpack</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>可视化搭建平台（三）- 打包</title>
     <url>/2021/03/28/%E5%8F%AF%E8%A7%86%E5%8C%96%E6%90%AD%E5%BB%BA%E5%B9%B3%E5%8F%B0%EF%BC%88%E4%B8%89%EF%BC%89-%E6%89%93%E5%8C%85/</url>
     <content><![CDATA[<p> 通过生成的 jsonData，可以拿到页面的基本信息 pageInfo，如：背景色、title等，还有页面布局 layout。主要处理两个问题：</p>
