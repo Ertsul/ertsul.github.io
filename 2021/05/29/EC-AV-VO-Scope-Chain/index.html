@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="frontEnd,js,">
+  <meta name="keywords" content="frontEnd,js,es6,">
 
 
 
@@ -86,24 +86,18 @@
 
 
 
-<meta name="description" content="Ajax（JavaScript实现）简介Ajax（Async Javascript And Xml）：异步Js和Xml，意思就是用Js执行异步网络请求。作用主要是在不重新加载全部网页的情况下，对部分页面进行更新。 创建XMLHttpRequest对象除了IE5和IE6不支持之外（支持ActiveXObject对象），几乎现在所有的有内建的XMLHttpRequest对象。所以在创建请求对象之前判断">
-<meta name="keywords" content="frontEnd,js">
+<meta name="description" content="js/es6">
+<meta name="keywords" content="frontEnd,js,es6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ajax和跨域总结">
-<meta property="og:url" content="https://ertsul.github.io/2019/02/17/Ajax和跨域总结/index.html">
+<meta property="og:title" content="EC+AV(VO)+Scope Chain">
+<meta property="og:url" content="https://ertsul.github.io/2021/05/29/EC-AV-VO-Scope-Chain/index.html">
 <meta property="og:site_name" content="Ertsul">
-<meta property="og:description" content="Ajax（JavaScript实现）简介Ajax（Async Javascript And Xml）：异步Js和Xml，意思就是用Js执行异步网络请求。作用主要是在不重新加载全部网页的情况下，对部分页面进行更新。 创建XMLHttpRequest对象除了IE5和IE6不支持之外（支持ActiveXObject对象），几乎现在所有的有内建的XMLHttpRequest对象。所以在创建请求对象之前判断">
+<meta property="og:description" content="js/es6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/659084-b5b344a3944ba224.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/659084-80411ea5e317ed19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/659084-df752a8458c616ff.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/659084-b1fcb9ed574a8a24.gif?imageMogr2/auto-orient/strip">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/659084-14e8fc745c21ab00.gif?imageMogr2/auto-orient/strip">
-<meta property="og:updated_time" content="2019-11-11T15:36:30.832Z">
+<meta property="og:updated_time" content="2021-05-29T12:02:03.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ajax和跨域总结">
-<meta name="twitter:description" content="Ajax（JavaScript实现）简介Ajax（Async Javascript And Xml）：异步Js和Xml，意思就是用Js执行异步网络请求。作用主要是在不重新加载全部网页的情况下，对部分页面进行更新。 创建XMLHttpRequest对象除了IE5和IE6不支持之外（支持ActiveXObject对象），几乎现在所有的有内建的XMLHttpRequest对象。所以在创建请求对象之前判断">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/659084-b5b344a3944ba224.gif?imageMogr2/auto-orient/strip">
+<meta name="twitter:title" content="EC+AV(VO)+Scope Chain">
+<meta name="twitter:description" content="js/es6">
 
 
 
@@ -133,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://ertsul.github.io/2019/02/17/Ajax和跨域总结/">
+  <link rel="canonical" href="https://ertsul.github.io/2021/05/29/EC-AV-VO-Scope-Chain/">
 
 
 
 
 
-  <title>Ajax和跨域总结 | Ertsul</title>
+  <title>EC+AV(VO)+Scope Chain | Ertsul</title>
   
 
 
@@ -299,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ertsul.github.io/2019/02/17/Ajax和跨域总结/">
+    <link itemprop="mainEntityOfPage" href="https://ertsul.github.io/2021/05/29/EC-AV-VO-Scope-Chain/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ertsul">
@@ -316,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Ajax和跨域总结</h1>
+          <h1 class="post-title" itemprop="name headline">EC+AV(VO)+Scope Chain</h1>
         
 
         <div class="post-meta">
@@ -328,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-17T00:00:28+08:00">
-                2019-02-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-29T20:00:58+08:00">
+                2021-05-29
               </time>
             
 
@@ -369,6 +363,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontEnd/js/es6/" itemprop="url" rel="index">
+                    <span itemprop="name">es6</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -393,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k
+                  867
                 </span>
               
 
@@ -409,12 +414,16 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  3
                 </span>
               
             </div>
           
 
+          
+              <div class="post-description">
+                  js/es6
+              </div>
           
 
         </div>
@@ -430,158 +439,165 @@
       
 
       
-        <h2 id="Ajax（JavaScript实现）"><a href="#Ajax（JavaScript实现）" class="headerlink" title="Ajax（JavaScript实现）"></a>Ajax（JavaScript实现）</h2><h4 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h4><p>Ajax（Async Javascript And Xml）：异步Js和Xml，意思就是用Js执行异步网络请求。作用主要是在不重新加载<strong>全部网页</strong>的情况下，对<strong>部分页面</strong>进行更新。</p>
-<h4 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h4><p>除了IE5和IE6不支持之外（支持ActiveXObject对象），几乎现在所有的有内建的XMLHttpRequest对象。所以在创建请求对象之前判断下就好了：</p>
-<pre><code>let xhr = null;
-xhr = window.XMLHttpRequest ? new xmlHttpRequest() : new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;)
-// 或者
-if(window.XMLHttpRequest){
-    xhr = new XMLHttpRequest()
-}else{
-    xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)
+        <h2 id="EC、ECS、VO、AO、Scope-Chain"><a href="#EC、ECS、VO、AO、Scope-Chain" class="headerlink" title="EC、ECS、VO、AO、Scope Chain"></a>EC、ECS、VO、AO、Scope Chain</h2><p>题目：</p>
+<pre><code class="javascript">var a = 1, b = 2;
+function fn() {
+    var a = 100, b = 200;
+    console.log(a + b)
 }
-</code></pre><h4 id="通过open-和send-向服务器发送请求"><a href="#通过open-和send-向服务器发送请求" class="headerlink" title="通过open()和send()向服务器发送请求"></a>通过open()和send()向服务器发送请求</h4><ul>
-<li>xhr.open(method, url, async)<br>这个方法的参数分别是：method请求的类型GET或者POST；URL请求的文件在服务器上的地址；async是否异步请求true或者false（一般不设置为false）。</li>
-<li>xhr.send()：发送请求。</li>
-<li>xhr.setRequestHeader(header, value)：如果是POST的话，要设置发送的HTTP头，然后通过send方法发送内容。参数分别是：发送的头部名称，头部的值。一般都是固定的。</li>
-</ul>
-<pre><code>// 向浏览器发送请求
-xhr.open(&#39;GET&#39;, &#39;./server.php&#39;, true)
-// 添加HTTP头（POST方法）
-xhr.setRequestHeader(&#39;Content-Text&#39;, &#39;application/x-www-form-urlencoded&#39;)   
-xhr.send()
-</code></pre><p>GET方法不需要参数，POST方法则需要把body参数；如果要想向服务器发送相关的参数，则通过open里面的第二个参数url进行发送，具体实现如下代码：</p>
-<pre><code>url = &quot;./filePath?paramName=&quot; + paramValue + ...;
-</code></pre><h4 id="判断准备状态"><a href="#判断准备状态" class="headerlink" title="判断准备状态"></a>判断准备状态</h4><pre><code>xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
-        ...
-    }
-}
-</code></pre><ul>
-<li>xhr.onreadystatechange方法中，每当readyState改变时，就会触发xhr.onreadystatechange事件。</li>
-<li>readyState属性：存有XMLHttpRequest的状态信息。0：请求未初始化；1：服务器链接已经建立；2：请求已经接受；3：请求处理中；4：请求已完成，且响应已就绪。一共有5个状态，所以onreadystatechange事件会被触发5次。</li>
-<li>实际上onreadystateschange是通过回调函数实现的，即：每当readyState的状态改变时，这个回调函数就会被执行。</li>
-<li>status属性：表示响应的结果。</li>
-</ul>
-<p>总的代码如下：</p>
-<pre><code>document.getElementById(&#39;btn&#39;).onclick = function () {
-// 创建请求对象（先判断浏览器类型）
-// var xhr = null;
-// if (window.XMLHttpRequest) {
-//     xhr = new XMLHttpRequest()
-// } else {
-//     xhr = new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;)
-// }
-xhr = (window.XMLHttpRequest) ? (new XMLHttpRequest()) : (new ActiveXObject(&#39;Microsoft.XMLHTTP&#39;))
-// 判断响应状态并执行相关的操作
-xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) {
-        let data = xhr.responseText
-        console.log(data);
-        document.getElementById(&#39;myDiv&#39;).innerText = data
-    }
-}
-// 向浏览器发送请求
-let url = &quot;./server.txt&quot;
-xhr.open(&#39;GET&#39;, url, true)
-// 添加HTTP头（POST方法）
-// xhr.setRequestHeader(&#39;Content-Text&#39;, &#39;application/x-www-form-urlencoded&#39;)
-xhr.send(null);
-}
-</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/659084-b5b344a3944ba224.gif?imageMogr2/auto-orient/strip" alt="异步1.gif"></p>
-<p>但是，由于在<strong>同源策略</strong>的作用下，浏览器只能同源的其他域的资源，先看看什么是同源策略～</p>
-<h2 id="同源策略-SOP（Same-origin-policy）"><a href="#同源策略-SOP（Same-origin-policy）" class="headerlink" title="同源策略/SOP（Same origin policy）"></a>同源策略/SOP（Same origin policy）</h2><p>来自百度的解释：</p>
+fn()
+</code></pre>
+<p>一道很常见的 javascript 题目，输出<code>300</code>。</p>
+<p>从这道题一出发，捋一遍 EC、ECS、VO、AO、Scope Chain 相关知识点。</p>
+<h3 id="EC"><a href="#EC" class="headerlink" title="EC"></a>EC</h3><p>执行上下文（Execution Context），也叫执行环境。</p>
+<p>在《javascript高级程序设计》中的定义：</p>
 <blockquote>
-<p>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能（防止CSRF/XSRF攻击：跨站请求伪造）。现在所有支持JavaScript 的浏览器都会使用这个策略。所谓同源是指，域名，协议，端口相同。</p>
+<p>定义了变量或函数有权访问的其他数据，决定了它们各自的行为。</p>
 </blockquote>
-<p>简单来说，就是浏览器只能请求同源的其他域的资源，即同源的网页才能相互获取资源，而不能访问其他域的资源；但是有一个例外，同源策略不会阻止动态脚本插入到文档中；其中，<strong><script>\</script></strong>是开放策略；当web网页执行一个脚本之前，会检查是否同源，只有同源才会被执行，非同源则会被拒绝访问。<br>截取网上的图片说明同源：<br><img src="http://upload-images.jianshu.io/upload_images/659084-80411ea5e317ed19.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="image.png"></p>
-<h2 id="跨域"><a href="#跨域" class="headerlink" title="跨域"></a>跨域</h2><p>跨域就是突破同源策略的限制，获取其他源的资源。<br>非同源主要有三种行为会受到限制：</p>
+<p>即：EC 决定了当前代码对其他变量或函数的访问权限。</p>
+<p>javascript 中会维护一个<code>执行上下文栈 ECS（Execution Context Stack）</code>。</p>
 <ul>
-<li>Cookie,LocalStorage和IndexDB无法读取。</li>
-<li>DOM无法获取。</li>
-<li>Ajax无法获取。</li>
+<li>栈底是全局上下文（Global Context）；</li>
+<li>当一个函数执行的时候，会将当前函数的 EC push 进 ECS，函数执行结束 pop 出 ECS。</li>
 </ul>
-<h4 id="JSONP"><a href="#JSONP" class="headerlink" title="JSONP"></a>JSONP</h4><p>JSONP是实现跨域的常用方法，但是JSONP只能实现GET方法。实际上是是利用了浏览器允许跨域引用JavaScript资源（script标签是开放策略）。</p>
-<p>下面举一个例子：我们从360浏览器首页的天气查询获取天气查询的异步请求地址；这里我们实现通过本地localhost服务器跨域请求360的天气查询，来说明JSONP怎么实现跨域。<br>我们请求资源的地址为：<br><a href="https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600" target="_blank" rel="noopener">https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600</a><br>在浏览器中打开这个地址，我们会得到这样的数据：__jsonp21__({…})。<br>解释：JSONP返回的通常是以函数的形式返回，前面这个__jsonp21__是函数名，所以我们需要在我们的代码中事先准备好名称为__jsonp21__的函数，我们对跨域请求到的数据就是放在这个函数中的，然后动态加载一个<strong>script</strong>节点，相当于动态读取外域的JavaScript资源，最后就等着接收回调了。</p>
-<p>具体代码如下：</p>
-<pre><code> // 请求的地址为：https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600
-
-function __jsonp21__(data) {   // 将要处理了的数据放在这个函数中
-    console.log(data);  // 得到的是跨域请求的数据
-    let myDiv = document.getElementById(&#39;myDiv&#39;)  
-    myDiv.innerHTML = data.area
-}
-window.onload = function () { 
-    let btn = document.getElementById(&#39;btn&#39;)
-    btn.addEventListener(&#39;click&#39;, function () {  
-        let url = &#39;https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600&#39;
-        let scriptTag = document.createElement(&#39;script&#39;)    // 动态创建script标签 
-        scriptTag.setAttribute(&#39;src&#39;, url)      // 将其他源的地址设置为动态script的src属性
-        // console.log(scriptTag);  // 得到的是script标签
-        document.getElementsByTagName(&#39;body&#39;)[0].appendChild(scriptTag)  // 将动态创建的script标签添加到html页面中
-    })
-}
-</code></pre><p>注意：数据处理的函数名要跟跨域返回的函数名一样，这样我们通过JSONP请求数据的时候，服务器才能返回数据。<br>最终结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-df752a8458c616ff.gif?imageMogr2/auto-orient/strip" alt="跨域1.gif"></p>
-<p>再句一个例子：<br>请求地址是<a href="http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice" target="_blank" rel="noopener">http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice</a></p>
-<pre><code>function refreshPrice(data) { 
-console.log(data);
-}
-window.onload = function () {  
-    let scriptTag = document.createElement(&#39;script&#39;)
-    let url = &#39;http://api.money.126.net/data/feed/0000001,1399001?callback=refreshPrice&#39;
-    scriptTag.setAttribute(&#39;src&#39;, url)
-    document.getElementsByTagName(&#39;body&#39;)[0].appendChild(scriptTag)
-}
-</code></pre><h2 id="Ajax（JQuery实现）"><a href="#Ajax（JQuery实现）" class="headerlink" title="Ajax（JQuery实现）"></a>Ajax（JQuery实现）</h2><p>在JQuery中，实现Ajax主要是由<strong>$.ajax({…})</strong>方法实现。方法的常用参数有：</p>
+<p><code>EC</code> 主要包含三个成员：</p>
 <ul>
-<li>async：是否实现异步加载，一般来说，是true。</li>
-<li>type：GET或者POST。</li>
-<li>url：发送请求的地址。</li>
-<li>timeout：设置请求的超时时间。</li>
-<li>success：请求成功后的回调函数。</li>
-<li>error：请求失败后的回调函数。</li>
-<li>jsonp：在一个JSONP请求中重写回调函数的名字，默认为callback，用来重新命名回调我们跨域请求时候的函数名字。这个值用来替代在 “callback=?” 这种 GET 或 POST 请求中 URL 参数里的 “callback” 部分，比如 {jsonp:’onJsonPLoad’} 会导致将 “onJsonPLoad=?” 传给服务器。</li>
-<li>jsonpCallback：为JSONP请求指定一个回调函数名。 </li>
-<li>dataType：预期服务器返回的数据类型。不指定的话，JQueryhi自动判断。”xml”: 返回 XML 文档，可用jQuery处理。</li>
+<li><code>VO</code>：变量对象</li>
+<li><code>Scope Chain</code>：作用域链</li>
+<li><code>this</code></li>
 </ul>
+<h3 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h3><p>变量对象（Variable Object）</p>
+<p>作用：</p>
+<ul>
+<li>保存 EC 的作用域链</li>
+<li>保存 EC 的 arguments 和变量</li>
+</ul>
+<p>可以理解为数据作用域。</p>
+<p>当函数执行的时候，进入函数的 EC，VO 激活为活动对象 AO。当函数开始执行前，VO 进行初始化，包括 arguments 和内部的变量；当函数真正执行代码会将修改 VO 中的 arguments 和内部的变量。</p>
+<p>比如上面的题目：</p>
+<pre><code class="javascript">var a = 1, b = 2;
+function fn() {
+    var a = 100, b = 200;
+    console.log(a + b)
+}
+fn()
+</code></pre>
+<p>函数 fn 在开始执行前，会初始化 VO 的 arguments 和内部的变量。如下：</p>
+<pre><code class="javascript">const fnVO = {
+    arguments: {
+        length: 0
+    },
+    a: undefined,
+    b: undefined
+}
+</code></pre>
+<p>当函数开始执行，修改 VO 的 arguments 和内部的变量。如下：</p>
+<pre><code class="javascript">const fnVO = {
+    arguments: {
+        length: 0
+    },
+    a: 100,
+    b: 200
+}
+</code></pre>
+<h3 id="Scope-Chain"><a href="#Scope-Chain" class="headerlink" title="Scope Chain"></a>Scope Chain</h3><p>作用域链。</p>
+<p>在《javascript高级程序设计》中的解释：</p>
 <blockquote>
-<p>“html”: 返回纯文本 HTML 信息；包含的 script 标签会在插入 dom 时执行；”script”: 返回纯文本JavaScript代码。不会自动缓存结果。除非设置了”cache”参数。注意：在远程请求时(不在同一个域下)，所有POST请求都将转为GET请求。（因为将使用DOM的 script标签来加载）；”json”: 返回JSON数据；”jsonp”: JSONP格式。使用 JSONP 形式调用函数时，如 “myurl?callback=?” jQuery 将自动替换 ? 为正确的函数名，以执行回调函数；”text”: 返回纯文本字符串。</p>
+<p>作用域链的用途，是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。</p>
 </blockquote>
-<p>用JQuery实现同源的Ajax请求：</p>
-<pre><code>$(function () {  
-    $(&#39;button&#39;).on(&#39;click&#39;, function () {  
-        $.ajax({
-            url: &#39;./server.txt&#39;,    // 请求地址
-            type: &#39;GET&#39;,    // 请求方式
-            async: true,    // 是否异步
-            success: function (data) {  
-                console.log(data);
-            }   // 请求成功后执行的函数
-        })
-    })
-})
-</code></pre><p>实现结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-b1fcb9ed574a8a24.gif?imageMogr2/auto-orient/strip" alt="异步2.gif"></p>
-<p>用JQuery实现非同源的JSONP跨域请求：</p>
-<pre><code>$(function () {  
-$(&#39;button&#39;).on(&#39;click&#39;, function () {  
-    $.ajax({
-        url: &#39;https://cdn.weather.hao.360.cn/sed_api_weather_info.php?code=101280501&amp;v=2&amp;param=weather&amp;app=hao360&amp;_jsonp=__jsonp21__&amp;t=2521600&#39;,
-        type: &#39;GET&#39;,
-        async: true,
-        dataType: &#39;jsonp&#39;,
-        jsonp: &#39;_jsonp&#39;,
-        jsonpCallback: &#39;__jsonp21__&#39;,
-        success: function (data) {  
-            console.log(data);
-            $(&#39;#myDiv&#39;).html(data.area)
+<p>当在 EC 中查找一个变量，会先在当前作用域中进行查找，查找不到就向父级作用域查找，如此循环，直到找到为止；如果找不到，就返回 undefined。</p>
+<p>在作用域链的最外级，是全局作用域 <code>Global Context</code>    。</p>
+<p>当函数创建的时候，函数内部有个属性 <code>[[scope]]</code>保存父级 EC 的作用域链；当函数开始执行，先创建函数的 EC，推入 ECS；然后将<code>[[scope]]</code>保存的作用域复制到 EC 中进行保存，接着初始化 VO 的 arguments 和变量，最后将当前 VO 添加到保存的作用域最前端，这样就形成了作用域链。</p>
+<h3 id="题目流程"><a href="#题目流程" class="headerlink" title="题目流程"></a>题目流程</h3><p>结合 EC、ECS、VO、AO、Scope Chain，解析题目。</p>
+<pre><code class="javascript">var a = 1, b = 2;
+function fn() {
+    var a = 100, b = 200;
+    console.log(a + b)
+}
+fn()
+</code></pre>
+<p>流程为：</p>
+<ul>
+<li>函数创建的时候，函数的内部属性<code>[[scope]]</code>会保存外部 EC 的作用域链；</li>
+</ul>
+<pre><code class="javascript">fn.[[scope]] = [
+    GlobalContext.VO
+]
+</code></pre>
+<ul>
+<li>函数开始执行前，先创建函数的 EC，推入 ECS；</li>
+</ul>
+<pre><code class="javascript">ECStack = [
+    fnContext,
+    globalContext
+];
+</code></pre>
+<ul>
+<li>将<code>[[scope]]</code>保存的作用域复制到函数执行上下文 EC 中进行保存；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: fn.[[scope]]
+}
+</code></pre>
+<ul>
+<li>初始化函数 VO 的 arguments 和变量；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: fn.[[scope]],
+    fnVO: {
+        arguments: {
+            length: 0
         },
-        error: function (err) {  
-            console.log(err);
-        }
-    })
-})
-})
-</code></pre><p>实现结果如下：<br><img src="http://upload-images.jianshu.io/upload_images/659084-14e8fc745c21ab00.gif?imageMogr2/auto-orient/strip" alt="跨域2.gif"></p>
+        a: undefined,
+        b: undefined
+    }
+}
+
+</code></pre>
+<ul>
+<li>将函数的 VO 添加到作用域的前端；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: [fnVO, [[Scope]]],
+    fnVO: {
+        arguments: {
+            length: 0
+        },
+        a: undefined,
+        b: undefined
+    }
+}
+
+</code></pre>
+<ul>
+<li>函数执行，修改 VO 对象；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: [fnVO, [[Scope]]],
+    fnVO: {
+        arguments: {
+            length: 0
+        },
+        a: 100,
+        b: 200
+    }
+}
+
+</code></pre>
+<ul>
+<li>函数执行结束， EC 出 ECS。</li>
+</ul>
+<pre><code class="javascript">ECStack = [
+    globalContext
+];
+
+</code></pre>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/7</a></li>
+<li><a href="https://javascript.info/reference-type" target="_blank" rel="noopener">https://javascript.info/reference-type</a></li>
+</ul>
 
       
     </div>
@@ -608,7 +624,7 @@ $(&#39;button&#39;).on(&#39;click&#39;, function () {
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://ertsul.github.io/2019/02/17/Ajax和跨域总结/" title="Ajax和跨域总结">https://ertsul.github.io/2019/02/17/Ajax和跨域总结/</a>
+    <a href="https://ertsul.github.io/2021/05/29/EC-AV-VO-Scope-Chain/" title="EC+AV(VO)+Scope Chain">https://ertsul.github.io/2021/05/29/EC-AV-VO-Scope-Chain/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -627,6 +643,8 @@ $(&#39;button&#39;).on(&#39;click&#39;, function () {
           
             <a href="/tags/js/" rel="tag"># js</a>
           
+            <a href="/tags/es6/" rel="tag"># es6</a>
+          
         </div>
       
 
@@ -638,8 +656,8 @@ $(&#39;button&#39;).on(&#39;click&#39;, function () {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/16/3D立体骰子/" rel="next" title="3D立体骰子">
-                <i class="fa fa-chevron-left"></i> 3D立体骰子
+              <a href="/2021/04/10/搭建组件库/" rel="next" title="搭建组件库">
+                <i class="fa fa-chevron-left"></i> 搭建组件库
               </a>
             
           </div>
@@ -647,10 +665,6 @@ $(&#39;button&#39;).on(&#39;click&#39;, function () {
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/17/web-safe/" rel="prev" title="web safe">
-                web safe <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -800,7 +814,7 @@ $(&#39;button&#39;).on(&#39;click&#39;, function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax（JavaScript实现）"><span class="nav-number">1.</span> <span class="nav-text">Ajax（JavaScript实现）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简介"><span class="nav-number">1.0.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建XMLHttpRequest对象"><span class="nav-number">1.0.2.</span> <span class="nav-text">创建XMLHttpRequest对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过open-和send-向服务器发送请求"><span class="nav-number">1.0.3.</span> <span class="nav-text">通过open()和send()向服务器发送请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判断准备状态"><span class="nav-number">1.0.4.</span> <span class="nav-text">判断准备状态</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#同源策略-SOP（Same-origin-policy）"><span class="nav-number">2.</span> <span class="nav-text">同源策略/SOP（Same origin policy）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域"><span class="nav-number">3.</span> <span class="nav-text">跨域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JSONP"><span class="nav-number">3.0.1.</span> <span class="nav-text">JSONP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax（JQuery实现）"><span class="nav-number">4.</span> <span class="nav-text">Ajax（JQuery实现）</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#EC、ECS、VO、AO、Scope-Chain"><span class="nav-number">1.</span> <span class="nav-text">EC、ECS、VO、AO、Scope Chain</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#EC"><span class="nav-number">1.1.</span> <span class="nav-text">EC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VO"><span class="nav-number">1.2.</span> <span class="nav-text">VO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scope-Chain"><span class="nav-number">1.3.</span> <span class="nav-text">Scope Chain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#题目流程"><span class="nav-number">1.4.</span> <span class="nav-text">题目流程</span></a></li></ol></li></ol></div>
             
 
           </div>

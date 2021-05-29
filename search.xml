@@ -1,6 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>EC+AV(VO)+Scope Chain</title>
+    <url>/2021/05/29/EC-AV-VO-Scope-Chain/</url>
+    <content><![CDATA[<h2 id="EC、ECS、VO、AO、Scope-Chain"><a href="#EC、ECS、VO、AO、Scope-Chain" class="headerlink" title="EC、ECS、VO、AO、Scope Chain"></a>EC、ECS、VO、AO、Scope Chain</h2><p>题目：</p>
+<pre><code class="javascript">var a = 1, b = 2;
+function fn() {
+    var a = 100, b = 200;
+    console.log(a + b)
+}
+fn()
+</code></pre>
+<p>一道很常见的 javascript 题目，输出<code>300</code>。</p>
+<p>从这道题一出发，捋一遍 EC、ECS、VO、AO、Scope Chain 相关知识点。</p>
+<h3 id="EC"><a href="#EC" class="headerlink" title="EC"></a>EC</h3><p>执行上下文（Execution Context），也叫执行环境。</p>
+<p>在《javascript高级程序设计》中的定义：</p>
+<blockquote>
+<p>定义了变量或函数有权访问的其他数据，决定了它们各自的行为。</p>
+</blockquote>
+<p>即：EC 决定了当前代码对其他变量或函数的访问权限。</p>
+<p>javascript 中会维护一个<code>执行上下文栈 ECS（Execution Context Stack）</code>。</p>
+<ul>
+<li>栈底是全局上下文（Global Context）；</li>
+<li>当一个函数执行的时候，会将当前函数的 EC push 进 ECS，函数执行结束 pop 出 ECS。</li>
+</ul>
+<p><code>EC</code> 主要包含三个成员：</p>
+<ul>
+<li><code>VO</code>：变量对象</li>
+<li><code>Scope Chain</code>：作用域链</li>
+<li><code>this</code></li>
+</ul>
+<h3 id="VO"><a href="#VO" class="headerlink" title="VO"></a>VO</h3><p>变量对象（Variable Object）</p>
+<p>作用：</p>
+<ul>
+<li>保存 EC 的作用域链</li>
+<li>保存 EC 的 arguments 和变量</li>
+</ul>
+<p>可以理解为数据作用域。</p>
+<p>当函数执行的时候，进入函数的 EC，VO 激活为活动对象 AO。当函数开始执行前，VO 进行初始化，包括 arguments 和内部的变量；当函数真正执行代码会将修改 VO 中的 arguments 和内部的变量。</p>
+<p>比如上面的题目：</p>
+<pre><code class="javascript">var a = 1, b = 2;
+function fn() {
+    var a = 100, b = 200;
+    console.log(a + b)
+}
+fn()
+</code></pre>
+<p>函数 fn 在开始执行前，会初始化 VO 的 arguments 和内部的变量。如下：</p>
+<pre><code class="javascript">const fnVO = {
+    arguments: {
+        length: 0
+    },
+    a: undefined,
+    b: undefined
+}
+</code></pre>
+<p>当函数开始执行，修改 VO 的 arguments 和内部的变量。如下：</p>
+<pre><code class="javascript">const fnVO = {
+    arguments: {
+        length: 0
+    },
+    a: 100,
+    b: 200
+}
+</code></pre>
+<h3 id="Scope-Chain"><a href="#Scope-Chain" class="headerlink" title="Scope Chain"></a>Scope Chain</h3><p>作用域链。</p>
+<p>在《javascript高级程序设计》中的解释：</p>
+<blockquote>
+<p>作用域链的用途，是保证对执行环境有权访问的所有变量和函数的有序访问。作用域链的前端，始终都是当前执行的代码所在环境的变量对象。</p>
+</blockquote>
+<p>当在 EC 中查找一个变量，会先在当前作用域中进行查找，查找不到就向父级作用域查找，如此循环，直到找到为止；如果找不到，就返回 undefined。</p>
+<p>在作用域链的最外级，是全局作用域 <code>Global Context</code>    。</p>
+<p>当函数创建的时候，函数内部有个属性 <code>[[scope]]</code>保存父级 EC 的作用域链；当函数开始执行，先创建函数的 EC，推入 ECS；然后将<code>[[scope]]</code>保存的作用域复制到 EC 中进行保存，接着初始化 VO 的 arguments 和变量，最后将当前 VO 添加到保存的作用域最前端，这样就形成了作用域链。</p>
+<h3 id="题目流程"><a href="#题目流程" class="headerlink" title="题目流程"></a>题目流程</h3><p>结合 EC、ECS、VO、AO、Scope Chain，解析题目。</p>
+<pre><code class="javascript">var a = 1, b = 2;
+function fn() {
+    var a = 100, b = 200;
+    console.log(a + b)
+}
+fn()
+</code></pre>
+<p>流程为：</p>
+<ul>
+<li>函数创建的时候，函数的内部属性<code>[[scope]]</code>会保存外部 EC 的作用域链；</li>
+</ul>
+<pre><code class="javascript">fn.[[scope]] = [
+    GlobalContext.VO
+]
+</code></pre>
+<ul>
+<li>函数开始执行前，先创建函数的 EC，推入 ECS；</li>
+</ul>
+<pre><code class="javascript">ECStack = [
+    fnContext,
+    globalContext
+];
+</code></pre>
+<ul>
+<li>将<code>[[scope]]</code>保存的作用域复制到函数执行上下文 EC 中进行保存；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: fn.[[scope]]
+}
+</code></pre>
+<ul>
+<li>初始化函数 VO 的 arguments 和变量；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: fn.[[scope]],
+    fnVO: {
+        arguments: {
+            length: 0
+        },
+        a: undefined,
+        b: undefined
+    }
+}
+
+</code></pre>
+<ul>
+<li>将函数的 VO 添加到作用域的前端；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: [fnVO, [[Scope]]],
+    fnVO: {
+        arguments: {
+            length: 0
+        },
+        a: undefined,
+        b: undefined
+    }
+}
+
+</code></pre>
+<ul>
+<li>函数执行，修改 VO 对象；</li>
+</ul>
+<pre><code class="javascript">const fnContext = {
+    Scope: [fnVO, [[Scope]]],
+    fnVO: {
+        arguments: {
+            length: 0
+        },
+        a: 100,
+        b: 200
+    }
+}
+
+</code></pre>
+<ul>
+<li>函数执行结束， EC 出 ECS。</li>
+</ul>
+<pre><code class="javascript">ECStack = [
+    globalContext
+];
+
+</code></pre>
+<hr>
+<p>参考链接：</p>
+<ul>
+<li><a href="https://github.com/mqyqingfeng/Blog/issues/7" target="_blank" rel="noopener">https://github.com/mqyqingfeng/Blog/issues/7</a></li>
+<li><a href="https://javascript.info/reference-type" target="_blank" rel="noopener">https://javascript.info/reference-type</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>frontEnd</category>
+        <category>js</category>
+        <category>es6</category>
+      </categories>
+      <tags>
+        <tag>frontEnd</tag>
+        <tag>js</tag>
+        <tag>es6</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建组件库</title>
     <url>/2021/04/10/%E6%90%AD%E5%BB%BA%E7%BB%84%E4%BB%B6%E5%BA%93/</url>
     <content><![CDATA[<h1 id="搭建组件库"><a href="#搭建组件库" class="headerlink" title="搭建组件库"></a>搭建组件库</h1><p>利用 webpack，通过入口将所有的组件模块导入并且注册，然后通过生成一个 bundle.js 文件即可。</p>
