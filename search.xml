@@ -6,7 +6,7 @@
     <content><![CDATA[<h2 id="EC、ECS、VO、AO、Scope-Chain"><a href="#EC、ECS、VO、AO、Scope-Chain" class="headerlink" title="EC、ECS、VO、AO、Scope Chain"></a>EC、ECS、VO、AO、Scope Chain</h2><p>题目：</p>
 <pre><code class="javascript">var a = 1, b = 2;
 function fn() {
-    var a = 100, b = 200;
+    var a = 100, b = 200
     console.log(a + b)
 }
 fn()
