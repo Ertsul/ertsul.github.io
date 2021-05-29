@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>EC+AV(VO)+Scope Chain</title>
-    <url>/2021/05/29/EC-AV-VO-Scope-Chain/</url>
+    <title>EC+AO(VO)+Scope Chain</title>
+    <url>/2021/05/29/EC-AO-VO-Scope-Chain/</url>
     <content><![CDATA[<h2 id="EC、ECS、VO、AO、Scope-Chain"><a href="#EC、ECS、VO、AO、Scope-Chain" class="headerlink" title="EC、ECS、VO、AO、Scope Chain"></a>EC、ECS、VO、AO、Scope Chain</h2><p>题目：</p>
 <pre><code class="javascript">var a = 1, b = 2;
 function fn() {
