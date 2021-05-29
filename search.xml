@@ -41,7 +41,7 @@ fn()
 <p>比如上面的题目：</p>
 <pre><code class="javascript">var a = 1, b = 2;
 function fn() {
-    var a = 100, b = 200;
+    var a = 100, b = 200
     console.log(a + b)
 }
 fn()
